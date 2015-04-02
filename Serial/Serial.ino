@@ -1,5 +1,8 @@
-//Based on sketch from http://arduino.cc/en/reference/random
-//and sketch from http://arduino.cc/en/Tutorial/BlinkWithoutDelay
+//Based on sketches from http://arduino.cc/en/reference/random,
+//http://arduino.cc/en/Tutorial/BlinkWithoutDelay and http://arduino.cc/en/Serial/read
+
+// for incoming serial data
+String incomingSerial;
 
 //Delay
 bool sendState = LOW;
@@ -20,6 +23,13 @@ void setup(){
 }
 
 void loop() {
+  // send data only when you receive data:
+  if (Serial.available() > 0) {
+    incomingSerial = Serial.readStringUntil('#');
+  
+    Serial.print("I received: ");
+    Serial.println(incomingSerial);
+  }
  
 
   // delay without delay
