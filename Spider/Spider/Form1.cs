@@ -156,5 +156,10 @@ namespace Spider
                 MessageBox.Show(ex.Message, "Could not send data to the Arduino");
             }
         }
+
+        private void Exit_btn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

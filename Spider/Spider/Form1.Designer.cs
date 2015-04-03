@@ -43,11 +43,12 @@
             this.ReadingProgressBar = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.Exit_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // On_btn
             // 
-            this.On_btn.Location = new System.Drawing.Point(244, 96);
+            this.On_btn.Location = new System.Drawing.Point(244, 89);
             this.On_btn.Name = "On_btn";
             this.On_btn.Size = new System.Drawing.Size(75, 23);
             this.On_btn.TabIndex = 0;
@@ -57,7 +58,7 @@
             // 
             // Off_btn
             // 
-            this.Off_btn.Location = new System.Drawing.Point(244, 125);
+            this.Off_btn.Location = new System.Drawing.Point(244, 118);
             this.Off_btn.Name = "Off_btn";
             this.Off_btn.Size = new System.Drawing.Size(75, 23);
             this.Off_btn.TabIndex = 0;
@@ -87,7 +88,7 @@
             // 
             // PortTextBox
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(244, 202);
+            this.PortTextBox.Location = new System.Drawing.Point(244, 172);
             this.PortTextBox.Name = "PortTextBox";
             this.PortTextBox.Size = new System.Drawing.Size(72, 20);
             this.PortTextBox.TabIndex = 2;
@@ -95,7 +96,7 @@
             // 
             // BaudrateTextBox
             // 
-            this.BaudrateTextBox.Location = new System.Drawing.Point(244, 238);
+            this.BaudrateTextBox.Location = new System.Drawing.Point(244, 208);
             this.BaudrateTextBox.Name = "BaudrateTextBox";
             this.BaudrateTextBox.Size = new System.Drawing.Size(75, 20);
             this.BaudrateTextBox.TabIndex = 2;
@@ -112,7 +113,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(241, 183);
+            this.label1.Location = new System.Drawing.Point(241, 156);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 4;
@@ -121,7 +122,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(241, 222);
+            this.label2.Location = new System.Drawing.Point(241, 192);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 4;
@@ -148,7 +149,7 @@
             // 
             // Reset_btn
             // 
-            this.Reset_btn.Location = new System.Drawing.Point(244, 265);
+            this.Reset_btn.Location = new System.Drawing.Point(244, 235);
             this.Reset_btn.Name = "Reset_btn";
             this.Reset_btn.Size = new System.Drawing.Size(75, 23);
             this.Reset_btn.TabIndex = 1;
@@ -183,11 +184,26 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "30";
             // 
+            // Exit_btn
+            // 
+            this.Exit_btn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Exit_btn.Location = new System.Drawing.Point(244, 274);
+            this.Exit_btn.Name = "Exit_btn";
+            this.Exit_btn.Size = new System.Drawing.Size(75, 23);
+            this.Exit_btn.TabIndex = 8;
+            this.Exit_btn.Text = "Exit";
+            this.Exit_btn.UseVisualStyleBackColor = true;
+            this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click);
+            // 
             // Form1
             // 
+            this.AcceptButton = this.Start_btn;
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.Exit_btn;
             this.ClientSize = new System.Drawing.Size(338, 317);
+            this.Controls.Add(this.Exit_btn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ReadingProgressBar);
@@ -203,6 +219,8 @@
             this.Controls.Add(this.Start_btn);
             this.Controls.Add(this.Off_btn);
             this.Controls.Add(this.On_btn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "SerialDBSpider";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -228,6 +246,7 @@
         private System.Windows.Forms.ProgressBar ReadingProgressBar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button Exit_btn;
     }
 }
 
