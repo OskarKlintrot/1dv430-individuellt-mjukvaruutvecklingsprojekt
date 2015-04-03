@@ -40,31 +40,34 @@
             this.PortLabel = new System.Windows.Forms.Label();
             this.BaudrateLabel = new System.Windows.Forms.Label();
             this.Reset_btn = new System.Windows.Forms.Button();
+            this.ReadingProgressBar = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // On_btn
             // 
-            this.On_btn.Location = new System.Drawing.Point(185, 20);
+            this.On_btn.Location = new System.Drawing.Point(244, 96);
             this.On_btn.Name = "On_btn";
             this.On_btn.Size = new System.Drawing.Size(75, 23);
             this.On_btn.TabIndex = 0;
-            this.On_btn.Text = "On";
+            this.On_btn.Text = "Light on";
             this.On_btn.UseVisualStyleBackColor = true;
             this.On_btn.Click += new System.EventHandler(this.On_btn_Click);
             // 
             // Off_btn
             // 
-            this.Off_btn.Location = new System.Drawing.Point(185, 49);
+            this.Off_btn.Location = new System.Drawing.Point(244, 125);
             this.Off_btn.Name = "Off_btn";
             this.Off_btn.Size = new System.Drawing.Size(75, 23);
             this.Off_btn.TabIndex = 0;
-            this.Off_btn.Text = "Off";
+            this.Off_btn.Text = "Light off";
             this.Off_btn.UseVisualStyleBackColor = true;
             this.Off_btn.Click += new System.EventHandler(this.Off_btn_Click);
             // 
             // Start_btn
             // 
-            this.Start_btn.Location = new System.Drawing.Point(185, 96);
+            this.Start_btn.Location = new System.Drawing.Point(244, 20);
             this.Start_btn.Name = "Start_btn";
             this.Start_btn.Size = new System.Drawing.Size(75, 23);
             this.Start_btn.TabIndex = 1;
@@ -74,7 +77,7 @@
             // 
             // Stop_btn
             // 
-            this.Stop_btn.Location = new System.Drawing.Point(185, 125);
+            this.Stop_btn.Location = new System.Drawing.Point(244, 49);
             this.Stop_btn.Name = "Stop_btn";
             this.Stop_btn.Size = new System.Drawing.Size(75, 23);
             this.Stop_btn.TabIndex = 1;
@@ -84,15 +87,15 @@
             // 
             // PortTextBox
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(185, 202);
+            this.PortTextBox.Location = new System.Drawing.Point(244, 202);
             this.PortTextBox.Name = "PortTextBox";
-            this.PortTextBox.Size = new System.Drawing.Size(75, 20);
+            this.PortTextBox.Size = new System.Drawing.Size(72, 20);
             this.PortTextBox.TabIndex = 2;
             this.PortTextBox.Text = "COM4";
             // 
             // BaudrateTextBox
             // 
-            this.BaudrateTextBox.Location = new System.Drawing.Point(185, 238);
+            this.BaudrateTextBox.Location = new System.Drawing.Point(244, 238);
             this.BaudrateTextBox.Name = "BaudrateTextBox";
             this.BaudrateTextBox.Size = new System.Drawing.Size(75, 20);
             this.BaudrateTextBox.TabIndex = 2;
@@ -100,16 +103,16 @@
             // 
             // DataTextBox
             // 
-            this.DataTextBox.Location = new System.Drawing.Point(23, 20);
+            this.DataTextBox.Location = new System.Drawing.Point(23, 36);
             this.DataTextBox.Multiline = true;
             this.DataTextBox.Name = "DataTextBox";
-            this.DataTextBox.Size = new System.Drawing.Size(131, 235);
+            this.DataTextBox.Size = new System.Drawing.Size(194, 219);
             this.DataTextBox.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(185, 183);
+            this.label1.Location = new System.Drawing.Point(241, 183);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 4;
@@ -118,7 +121,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(185, 222);
+            this.label2.Location = new System.Drawing.Point(241, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 4;
@@ -127,7 +130,7 @@
             // PortLabel
             // 
             this.PortLabel.AutoSize = true;
-            this.PortLabel.Location = new System.Drawing.Point(20, 265);
+            this.PortLabel.Location = new System.Drawing.Point(20, 20);
             this.PortLabel.Name = "PortLabel";
             this.PortLabel.Size = new System.Drawing.Size(26, 13);
             this.PortLabel.TabIndex = 4;
@@ -136,7 +139,7 @@
             // BaudrateLabel
             // 
             this.BaudrateLabel.AutoSize = true;
-            this.BaudrateLabel.Location = new System.Drawing.Point(94, 265);
+            this.BaudrateLabel.Location = new System.Drawing.Point(167, 20);
             this.BaudrateLabel.Name = "BaudrateLabel";
             this.BaudrateLabel.Size = new System.Drawing.Size(50, 13);
             this.BaudrateLabel.TabIndex = 4;
@@ -145,7 +148,7 @@
             // 
             // Reset_btn
             // 
-            this.Reset_btn.Location = new System.Drawing.Point(188, 265);
+            this.Reset_btn.Location = new System.Drawing.Point(244, 265);
             this.Reset_btn.Name = "Reset_btn";
             this.Reset_btn.Size = new System.Drawing.Size(75, 23);
             this.Reset_btn.TabIndex = 1;
@@ -153,11 +156,41 @@
             this.Reset_btn.UseVisualStyleBackColor = true;
             this.Reset_btn.Click += new System.EventHandler(this.Reset_btn_Click);
             // 
+            // ReadingProgressBar
+            // 
+            this.ReadingProgressBar.Location = new System.Drawing.Point(23, 265);
+            this.ReadingProgressBar.Maximum = 30;
+            this.ReadingProgressBar.Name = "ReadingProgressBar";
+            this.ReadingProgressBar.Size = new System.Drawing.Size(194, 23);
+            this.ReadingProgressBar.Step = 1;
+            this.ReadingProgressBar.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 295);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(198, 295);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(19, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "30";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 304);
+            this.ClientSize = new System.Drawing.Size(349, 317);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ReadingProgressBar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BaudrateLabel);
             this.Controls.Add(this.PortLabel);
@@ -192,6 +225,9 @@
         private System.Windows.Forms.Label PortLabel;
         private System.Windows.Forms.Label BaudrateLabel;
         private System.Windows.Forms.Button Reset_btn;
+        private System.Windows.Forms.ProgressBar ReadingProgressBar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
