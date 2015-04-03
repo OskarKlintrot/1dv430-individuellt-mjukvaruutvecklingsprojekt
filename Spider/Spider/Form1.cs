@@ -57,14 +57,16 @@ namespace Spider
                     myport.BaudRate = Convert.ToInt32(BaudrateTextBox.Text);
                     myport.PortName = PortTextBox.Text;
                     myport.Parity = Parity.None;
+                    myport.DataBits = 8;
+                    myport.StopBits = StopBits.One;
                     myport.Open();
 
                     Start_btn.Enabled = false;
                     Stop_btn.Enabled = true;
                     On_btn.Enabled = true;
 
-                    PortLabel.Text = PortTextBox.Text;
-                    BaudrateLabel.Text = BaudrateTextBox.Text;
+                    PortLabel.Text = myport.PortName;
+                    BaudrateLabel.Text = myport.BaudRate.ToString();
                 }
                 catch (Exception)
                 {
@@ -73,6 +75,22 @@ namespace Spider
             }
 
             private void Stop_btn_Click(object sender, EventArgs e)
+            {
+                Stop_Connection();
+            }
+
+            private void Reset_btn_Click(object sender, EventArgs e)
+            {
+                PortLabel.Text = "Port";
+                BaudrateLabel.Text = "Baudrate";
+
+                PortTextBox.Text = "COM4";
+                BaudrateTextBox.Text = "9600";
+
+                Stop_Connection();
+            }
+
+            private void Stop_Connection()
             {
                 try
                 {

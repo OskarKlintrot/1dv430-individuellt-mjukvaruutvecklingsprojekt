@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.PortLabel = new System.Windows.Forms.Label();
             this.BaudrateLabel = new System.Windows.Forms.Label();
+            this.Reset_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // On_btn
@@ -91,7 +92,7 @@
             // 
             // BaudrateTextBox
             // 
-            this.BaudrateTextBox.Location = new System.Drawing.Point(185, 258);
+            this.BaudrateTextBox.Location = new System.Drawing.Point(185, 238);
             this.BaudrateTextBox.Name = "BaudrateTextBox";
             this.BaudrateTextBox.Size = new System.Drawing.Size(75, 20);
             this.BaudrateTextBox.TabIndex = 2;
@@ -117,7 +118,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(185, 242);
+            this.label2.Location = new System.Drawing.Point(185, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 4;
@@ -142,6 +143,16 @@
             this.BaudrateLabel.Text = "Baudrate";
             this.BaudrateLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // Reset_btn
+            // 
+            this.Reset_btn.Location = new System.Drawing.Point(188, 265);
+            this.Reset_btn.Name = "Reset_btn";
+            this.Reset_btn.Size = new System.Drawing.Size(75, 23);
+            this.Reset_btn.TabIndex = 1;
+            this.Reset_btn.Text = "Reset";
+            this.Reset_btn.UseVisualStyleBackColor = true;
+            this.Reset_btn.Click += new System.EventHandler(this.Reset_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +165,7 @@
             this.Controls.Add(this.DataTextBox);
             this.Controls.Add(this.BaudrateTextBox);
             this.Controls.Add(this.PortTextBox);
+            this.Controls.Add(this.Reset_btn);
             this.Controls.Add(this.Stop_btn);
             this.Controls.Add(this.Start_btn);
             this.Controls.Add(this.Off_btn);
@@ -179,6 +191,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label PortLabel;
         private System.Windows.Forms.Label BaudrateLabel;
+        private System.Windows.Forms.Button Reset_btn;
     }
 }
 
