@@ -52,6 +52,7 @@ namespace Spider
             Off_btn.Enabled = false;
             Start_btn.Enabled = true;
             Stop_btn.Enabled = false;
+            DataTextBox.ScrollBars = ScrollBars.Vertical;
         }
 
         private void Start_btn_Click(object sender, EventArgs e)

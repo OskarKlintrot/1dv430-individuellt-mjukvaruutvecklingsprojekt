@@ -34,7 +34,6 @@
             this.Stop_btn = new System.Windows.Forms.Button();
             this.PortTextBox = new System.Windows.Forms.TextBox();
             this.BaudrateTextBox = new System.Windows.Forms.TextBox();
-            this.DataTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.PortLabel = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Exit_btn = new System.Windows.Forms.Button();
+            this.DataTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // On_btn
@@ -102,14 +102,6 @@
             this.BaudrateTextBox.TabIndex = 2;
             this.BaudrateTextBox.Text = "9600";
             // 
-            // DataTextBox
-            // 
-            this.DataTextBox.Location = new System.Drawing.Point(23, 36);
-            this.DataTextBox.Multiline = true;
-            this.DataTextBox.Name = "DataTextBox";
-            this.DataTextBox.Size = new System.Drawing.Size(194, 219);
-            this.DataTextBox.TabIndex = 3;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -131,7 +123,7 @@
             // PortLabel
             // 
             this.PortLabel.AutoSize = true;
-            this.PortLabel.Location = new System.Drawing.Point(20, 20);
+            this.PortLabel.Location = new System.Drawing.Point(15, 20);
             this.PortLabel.Name = "PortLabel";
             this.PortLabel.Size = new System.Drawing.Size(26, 13);
             this.PortLabel.TabIndex = 4;
@@ -159,17 +151,17 @@
             // 
             // ReadingProgressBar
             // 
-            this.ReadingProgressBar.Location = new System.Drawing.Point(23, 265);
+            this.ReadingProgressBar.Location = new System.Drawing.Point(18, 265);
             this.ReadingProgressBar.Maximum = 30;
             this.ReadingProgressBar.Name = "ReadingProgressBar";
-            this.ReadingProgressBar.Size = new System.Drawing.Size(194, 23);
+            this.ReadingProgressBar.Size = new System.Drawing.Size(205, 23);
             this.ReadingProgressBar.Step = 1;
             this.ReadingProgressBar.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 295);
+            this.label3.Location = new System.Drawing.Point(15, 295);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 6;
@@ -194,6 +186,14 @@
             this.Exit_btn.Text = "Exit";
             this.Exit_btn.UseVisualStyleBackColor = true;
             this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click);
+            // 
+            // DataTextBox
+            // 
+            this.DataTextBox.Location = new System.Drawing.Point(18, 36);
+            this.DataTextBox.Multiline = true;
+            this.DataTextBox.Name = "DataTextBox";
+            this.DataTextBox.Size = new System.Drawing.Size(205, 219);
+            this.DataTextBox.TabIndex = 3;
             // 
             // Form1
             // 
@@ -237,7 +237,6 @@
         private System.Windows.Forms.Button Stop_btn;
         private System.Windows.Forms.TextBox PortTextBox;
         private System.Windows.Forms.TextBox BaudrateTextBox;
-        private System.Windows.Forms.TextBox DataTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label PortLabel;
@@ -247,6 +246,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button Exit_btn;
+        private System.Windows.Forms.TextBox DataTextBox;
     }
 }
 
