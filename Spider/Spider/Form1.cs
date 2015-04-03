@@ -1,4 +1,7 @@
-﻿using System;
+﻿//This application builds upon the examples Chatchai Buekban published
+//on his youtube-channel; https://www.youtube.com/user/Buekban/videos
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +24,6 @@ namespace Spider
             InitializeComponent();
             init();
         }
-
 
 
         private void Form1_Load(object sender, EventArgs e)
