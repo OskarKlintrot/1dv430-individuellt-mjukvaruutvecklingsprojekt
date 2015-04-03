@@ -112,7 +112,7 @@ namespace Spider
                 Start_btn.Enabled = false;
                 Stop_btn.Enabled = true;
                 On_btn.Enabled = true;
-                DataTextBox.Text = "";
+                DataTextBox.Clear();
 
                 PortLabel.Text = myport.PortName;
                 BaudrateLabel.Text = myport.BaudRate.ToString();
