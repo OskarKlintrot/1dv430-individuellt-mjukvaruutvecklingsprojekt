@@ -43,21 +43,51 @@ namespace Spider
         }
             private void init()
         {
-            try
+            On_btn.Enabled = false;
+            Off_btn.Enabled = false;
+            Start_btn.Enabled = true;
+            Stop_btn.Enabled = false;
+        }
+
+            private void Start_btn_Click(object sender, EventArgs e)
             {
-                myport = new SerialPort();
-                myport.BaudRate = 9600;
-                myport.PortName = "COM4";
-                myport.Open();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Something went wrong when trying to connect to the Arduino");
+                try
+                {
+                    myport = new SerialPort();
+                    myport.BaudRate = Convert.ToInt32(BaudrateTextBox.Text);
+                    myport.PortName = PortTextBox.Text;
+                    myport.Parity = Parity.None;
+                    myport.Open();
+
+                    Start_btn.Enabled = false;
+                    Stop_btn.Enabled = true;
+                    On_btn.Enabled = true;
+
+                    PortLabel.Text = PortTextBox.Text;
+                    BaudrateLabel.Text = BaudrateTextBox.Text;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong when trying to connect to the Arduino");
+                }
             }
 
-                On_btn.Enabled = true;
-                Off_btn.Enabled = false;
-        }
+            private void Stop_btn_Click(object sender, EventArgs e)
+            {
+                try
+                {
+                    myport.Close();
+
+                    Start_btn.Enabled = true;
+                    Stop_btn.Enabled = false;
+                    On_btn.Enabled = false;
+                    Off_btn.Enabled = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Could not stop the connection.");
+                }
+            }
 
     }
 }
