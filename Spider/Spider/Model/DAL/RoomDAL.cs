@@ -57,7 +57,7 @@ namespace Spider.Model.DAL
                 throw new ApplicationException("Ett fel inträffade då rummen hämtades från databasen.");
             }
         }
-        public void UpdateMember(Room room)
+        public void UpdateRoom(Room room)
         {
             try
             {
