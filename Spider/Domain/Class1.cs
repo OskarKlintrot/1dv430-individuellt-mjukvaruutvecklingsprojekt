@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spider
+namespace Domain
 {
-    class dbCommunication
+    public class Class1
     {
-        //string con = new con
     }
 }

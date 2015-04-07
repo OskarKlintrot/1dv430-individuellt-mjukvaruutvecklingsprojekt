@@ -8,7 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider", "Spider\Spider.csp
 		{645A894B-BDA8-4086-98E0-6C221E24968F} = {645A894B-BDA8-4086-98E0-6C221E24968F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{645A894B-BDA8-4086-98E0-6C221E24968F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLibrary", "Domain\DomainLibrary.csproj", "{645A894B-BDA8-4086-98E0-6C221E24968F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiderServerSideWPFApp", "SpiderServerSideWPFApp\SpiderServerSideWPFApp.csproj", "{895EF4E6-3230-4F34-B114-4C2815F3621D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,16 @@ Global
 		{645A894B-BDA8-4086-98E0-6C221E24968F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{645A894B-BDA8-4086-98E0-6C221E24968F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{645A894B-BDA8-4086-98E0-6C221E24968F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{895EF4E6-3230-4F34-B114-4C2815F3621D}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
