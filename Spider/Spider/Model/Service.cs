@@ -2,6 +2,7 @@
 using Spider.Model.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace Spider.Model
 
         public void InsertTemperature(Temperature temperature)
         {
+            ICollection<ValidationResult> validationResults;
+            if (!temperature.Validate(out validationResults))
+            {
+                throw new AggregateException("Objektet klarade inte valideringen.",
+                    validationResults.Select(vr => new ValidationException(vr.ErrorMessage)).ToList().AsReadOnly());
+            }
+
             TemperatureDAL.InsertTemperature(temperature);
         }
 
@@ -47,6 +55,13 @@ namespace Spider.Model
 
         public void UpdateRoom(Room room)
         {
+            ICollection<ValidationResult> validationResults;
+            if (!room.Validate(out validationResults))
+            {
+                throw new AggregateException("Objektet klarade inte valideringen.",
+                    validationResults.Select(vr => new ValidationException(vr.ErrorMessage)).ToList().AsReadOnly());
+            }
+
             RoomDAL.UpdateRoom(room);
         }
 
