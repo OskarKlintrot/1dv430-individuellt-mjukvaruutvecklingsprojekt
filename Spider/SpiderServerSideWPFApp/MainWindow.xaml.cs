@@ -173,6 +173,8 @@ namespace SpiderServerSideWPFApp
             StopButton.IsEnabled = false;
             LightOnButton.IsEnabled = false;
             LightOffButton.IsEnabled = false;
+            PortTextBox.IsEnabled = true;
+            BaudrateTextBox.IsEnabled = true;
         }
 
         private void ButtonSetToStop()
@@ -181,6 +183,8 @@ namespace SpiderServerSideWPFApp
             StopButton.IsEnabled = true;
             LightOnButton.IsEnabled = true;
             LightOffButton.IsEnabled = false;
+            PortTextBox.IsEnabled = false;
+            BaudrateTextBox.IsEnabled = false;
         }
 
         private void TurnHeatingOn()
