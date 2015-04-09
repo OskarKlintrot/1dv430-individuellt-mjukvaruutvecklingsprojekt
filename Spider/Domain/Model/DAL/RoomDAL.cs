@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace Domain.Model.DAL
 {
@@ -15,7 +16,7 @@ namespace Domain.Model.DAL
         private static readonly string ConnectionString;
         static RoomDAL()
         {
-            ConnectionString = ConfigurationManager.ConnectionStrings["TemperatureControlConnectionString"].ConnectionString;
+            ConnectionString = WebConfigurationManager.ConnectionStrings["TemperatureControlConnectionString"].ConnectionString;
         }
         public IEnumerable<Room> GetRooms()
         {
