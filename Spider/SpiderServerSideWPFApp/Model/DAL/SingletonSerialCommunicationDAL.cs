@@ -1,23 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Windows;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace SpiderServerSideWPFApp.Model
+namespace SpiderServerSideWPFApp.Model.DAL
 {
-    class SerialCommunication : INotifyPropertyChanged
+    public sealed class SingletonSerialCommunicationDAL : INotifyPropertyChanged
     {
+        // Singleton pattern - thread-safe without using locks
+        // http://csharpindepth.com/Articles/General/Singleton.aspx
+        private static readonly SingletonSerialCommunicationDAL instance = new SingletonSerialCommunicationDAL();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static SingletonSerialCommunicationDAL()
+        {
+        }
+
+        private SingletonSerialCommunicationDAL()
+        {
+        }
+
+        public static SingletonSerialCommunicationDAL Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
+        // Serial communication
         private string _receivedData;
         private SerialPort MyPort;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string ReceivedData 
-        { 
+        public string ReceivedData
+        {
             get
             {
                 return _receivedData;
@@ -40,7 +64,7 @@ namespace SpiderServerSideWPFApp.Model
             }
         }
 
-        public void Start_Connection(string port, int baudrate )
+        public void StartConnection(string port, int baudrate)
         {
             try
             {
@@ -61,7 +85,7 @@ namespace SpiderServerSideWPFApp.Model
             }
         }
 
-        public void Stop_Connection()
+        public void StopConnection()
         {
             try
             {
