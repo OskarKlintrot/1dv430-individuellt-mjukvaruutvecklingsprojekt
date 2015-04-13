@@ -91,6 +91,14 @@ namespace SpiderServerSideWPFApp.Model
             SingletonSerialCommunicationDAL.StopConnection();
         }
 
+        public bool SC_ConnectionOpen
+        {
+            get
+            {
+                return SingletonSerialCommunicationDAL.ConnectionOpen;
+            }
+        }
+
         public void SC_SendData(string data)
         {
             SingletonSerialCommunicationDAL.SendDataOverSerial(data);

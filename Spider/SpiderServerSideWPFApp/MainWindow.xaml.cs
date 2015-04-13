@@ -39,14 +39,11 @@ namespace SpiderServerSideWPFApp
             get { return _service ?? (_service = new Service()); }
         }
 
-        private bool ConnectionOpenOnSerialPort { get; set; } 
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-
-            ConnectionOpenOnSerialPort = false;
 
             StartButton.IsEnabled = true;
             StopButton.IsEnabled = false;
@@ -74,18 +71,19 @@ namespace SpiderServerSideWPFApp
                 }
 
                 Service.SC_StartConnection(port, baudrate);
+                
+                if (Service.SC_ConnectionOpen)
+                {
+                    ButtonSetToStop();
 
-                ButtonSetToStop();
+                    DataTextBox.Clear();
 
-                DataTextBox.Clear();
+                    PortLabel.Content = PortTextBox.Text;
+                    BaudrateLabel.Content = BaudrateTextBox.Text;
 
-                PortLabel.Content = PortTextBox.Text;
-                BaudrateLabel.Content = BaudrateTextBox.Text;
-
-                ConnectionOpenOnSerialPort = true;
-
-                Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
-                Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
+                    Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
+                    Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
+                }
             }
             catch (Exception ex)
             {
@@ -133,7 +131,7 @@ namespace SpiderServerSideWPFApp
 
             try
             {
-                if (ConnectionOpenOnSerialPort)
+                if (Service.SC_ConnectionOpen)
                 {
                     EndConnection();
                 }
@@ -146,7 +144,7 @@ namespace SpiderServerSideWPFApp
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ConnectionOpenOnSerialPort)
+            if (Service.SC_ConnectionOpen)
             {
                 EndConnection();
             }
@@ -163,7 +161,6 @@ namespace SpiderServerSideWPFApp
 
             ButtonSetToStart();
 
-            ConnectionOpenOnSerialPort = false;
             oldHeating = false;
         }
 

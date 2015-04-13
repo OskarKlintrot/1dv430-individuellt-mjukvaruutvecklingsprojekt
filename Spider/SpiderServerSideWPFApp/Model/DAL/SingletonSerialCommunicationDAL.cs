@@ -37,8 +37,11 @@ namespace SpiderServerSideWPFApp.Model.DAL
         // Serial communication
         private string _receivedData;
         private SerialPort MyPort;
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //True if the connection is open, false if not
+        public bool ConnectionOpen { get; private set; }
 
         public string ReceivedData
         {
@@ -78,6 +81,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
                 // TODO: Implement error message
                 //myport.ErrorReceived += myport_ErrorReceived;
                 MyPort.Open();
+                ConnectionOpen = true;
             }
             catch (Exception ex)
             {
@@ -90,6 +94,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
             try
             {
                 MyPort.Close();
+                ConnectionOpen = false;
             }
             catch (Exception ex)
             {
