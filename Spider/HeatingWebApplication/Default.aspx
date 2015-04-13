@@ -1,42 +1,53 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HeatingWebApplication._Default" %>
+﻿<%@ Page Title="Värmereglering" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HeatingWebApplication._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div>
+        <h1>Värmereglering av kyrkan</h1>
+    </div>
+    <div>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
+        <asp:ListView ID="HeatingListView" runat="server"
+            ItemType="Domain.Model.BLL.Room"
+            SelectMethod="HeatingListView_GetData"
+            UpdateMethod="HeatingListView_UpdateItem"
+            DataKeyNames="RoomID">
+            <LayoutTemplate>
+                <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
+            </LayoutTemplate>
+            <ItemTemplate>
+                <div class="col-xs-6 col-sm-4 col-md-3 text-center">
+                    <div>
+                        <h2>
+                            <asp:Label ID="RoomLabel" runat="server" Text='<%# Item.RoomDescription %>'></asp:Label>
+                        </h2>
+                    </div>
+                    <div>
+                        <asp:PlaceHolder ID="HeatingOnPlaceHolder" Visible='<%# Item.Heating %>' runat="server">
+                            <h3>
+                                <asp:Label ID="HeatingOnLabel" CssClass="label label-success" runat="server" Text="Värme på"></asp:Label>
+                            </h3>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="HeatingOffPlaceHolder" Visible='<%# !Item.Heating %>' runat="server">
+                            <h3>
+                                <asp:Label ID="HeatingOffLabel" CssClass="label label-danger" runat="server" Text="Värme av"></asp:Label>
+                            </h3>
+                        </asp:PlaceHolder>
+                    </div>
+                    <div>
+                        <p>
+                            <asp:LinkButton ID="HeatOnLinkButton" OnClick="HeatOnLinkButton_Click" 
+                                CssClass="btn btn-success" Text="Värme på &raquo;" runat="server" />
+                        </p>
+                        <p>
+                            <asp:LinkButton ID="HeatOffLinkButton" OnClick="HeatOffLinkButton_Click" 
+                                CssClass="btn btn-danger" Text="Värme av &raquo;" runat="server" />
+                        </p>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:ListView>
     </div>
-
 </asp:Content>

@@ -41,7 +41,7 @@ namespace Domain.Model.DAL
                         {
                             rooms.Add(new Room
                             {
-                                RoomID = reader.GetInt32(roomIDIndex),
+                                RoomID = reader.GetByte(roomIDIndex),
                                 RoomDescription = reader.GetString(roomDescriptionIndex),
                                 Heating = reader.GetBoolean(heatingIndex)
                             });
