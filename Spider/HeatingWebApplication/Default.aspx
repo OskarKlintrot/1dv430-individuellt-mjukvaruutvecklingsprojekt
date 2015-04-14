@@ -4,6 +4,12 @@
     <div>
         <h1>Värmereglering av kyrkan</h1>
     </div>
+    <asp:Panel runat="server" ID="SuccessMessagePanel" Visible="false">
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <asp:Literal runat="server" ID="SuccessMessageLiteral" />
+            </div>
+    </asp:Panel>
     <div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     </div>
@@ -40,13 +46,13 @@
                         <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOnLinkButton" CommandName="Update"
-                                    CssClass="btn btn-success" Text="Värme på &raquo;" runat="server" />
+                                    CssClass="btn btn-success" Text="Sätt på värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="PlaceHolder2" Visible='<%# Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOffLinkButton" CommandName="Update"
-                                    CssClass="btn btn-danger" Text="Värme av &raquo;" runat="server" />
+                                    CssClass="btn btn-danger" Text="Stäng av värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                     </div>

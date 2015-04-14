@@ -19,7 +19,8 @@ namespace HeatingWebApplication
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
+            SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
         }
 
         // The return type can be changed to IEnumerable, however to support
@@ -30,15 +31,15 @@ namespace HeatingWebApplication
         //     string sortByExpression
         public IEnumerable<Domain.Model.BLL.Room> HeatingListView_GetData()
         {
-            //try
-            //{
-            return Service.GetRooms();
-            //}
-            //catch (Exception)
-            //{
-            //    ModelState.AddModelError(String.Empty, "Ett fel inträffande vid hämtning av medlemmarna.");
-            //    return null;
-            //}
+            try
+            {
+                return Service.GetRooms();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett fel inträffande vid hämtning av rummen från databasen.");
+                return null;
+            }
         }
 
         // The id parameter name should match the DataKeyNames value set on the control
@@ -47,23 +48,24 @@ namespace HeatingWebApplication
             try
             {
                 var room = Service.GetRoomByID(RoomID);
-                room.Heating = !room.Heating;
 
                 if (room == null)
                 {
                     Response.Clear();
                     Response.StatusCode = 404;
-                    Response.StatusDescription = "Payment not found.";
+                    Response.StatusDescription = "Room not found.";
                     Response.End();
                 }
+
+                room.Heating = !room.Heating;
 
                 if (TryUpdateModel(room))
                 {
                     Service.UpdateRoom(room);
 
-                    //Page.SetTempData("SuccessMessage", "Betalningen uppdaterades.");
-                    //Response.RedirectToRoute("VisaMedlem", new { id = room.MemberID });
-                    //Context.ApplicationInstance.CompleteRequest();
+                    Page.SetTempData("SuccessMessage", "Värmen i " + room.RoomDescription  + " ändrades.");
+                    Response.Redirect("~/Default.aspx");
+                    Context.ApplicationInstance.CompleteRequest();
                 }
             }
             catch (Exception)
