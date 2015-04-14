@@ -32,7 +32,7 @@ namespace HeatingWebApplication
         {
             //try
             //{
-                return Service.GetRooms();
+            return Service.GetRooms();
             //}
             //catch (Exception)
             //{
@@ -71,17 +71,5 @@ namespace HeatingWebApplication
                 ModelState.AddModelError(String.Empty, "Fel inträffade då värmen på rummet skulle uppdateras.");
             }
         }
-
-        protected void HeatOnLinkButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void HeatOffLinkButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }
