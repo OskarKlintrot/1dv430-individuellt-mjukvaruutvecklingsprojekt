@@ -15,5 +15,6 @@ namespace Domain.Model.BLL
         public string RoomDescription { get; set; }
         [Required(ErrorMessage = "Värme till eller från måste anges.")]
         public bool Heating { get; set; }
+        public int LastTemperature { get; set; }
     }
 }

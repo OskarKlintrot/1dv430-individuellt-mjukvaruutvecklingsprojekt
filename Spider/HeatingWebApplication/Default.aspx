@@ -23,13 +23,19 @@
             <LayoutTemplate>
                 <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
             </LayoutTemplate>
+            <EmptyDataTemplate>
+                <p>
+                    Det fanns ingen data att hämta från databasen.
+                </p>
+            </EmptyDataTemplate>
             <ItemTemplate>
-                <div class="col-xs-6 col-sm-4 col-md-3 text-center">
-                    <div>
-                        <h2>
+                <div class="col-xs-6 col-sm-4 col-md-3 text-center panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
                             <asp:Label ID="RoomLabel" runat="server" Text='<%# Item.RoomDescription %>'></asp:Label>
                         </h2>
                     </div>
+                    <%--Heating on or off label--%>
                     <div>
                         <asp:PlaceHolder ID="HeatingOnPlaceHolder" Visible='<%# Item.Heating %>' runat="server">
                             <h3>
@@ -42,6 +48,11 @@
                             </h3>
                         </asp:PlaceHolder>
                     </div>
+                    <%--Temperature--%>
+                    <div>
+                        <asp:Label ID="TemperatureLabel" runat="server" ><%# Item.LastTemperature %>&deg;C</asp:Label>
+                    </div>
+                    <%--Turn heating on or off--%>
                     <div>
                         <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
                             <p>

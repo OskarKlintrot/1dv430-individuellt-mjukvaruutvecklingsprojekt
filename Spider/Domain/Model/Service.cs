@@ -25,6 +25,16 @@ namespace Domain.Model
             return TemperatureDAL.GetTemperatures();
         }
 
+        public IEnumerable<Temperature> GetTemperaturesByRoomID(int roomID)
+        {
+            return TemperatureDAL.GetTemperaturesByRoomID(roomID);
+        }
+
+        public Temperature GetLatestTemperatureByID(int roomID)
+        {
+            return TemperatureDAL.GetLatestTemperatureByID(roomID);
+        }
+
         public void InsertTemperature(Temperature temperature)
         {
             ICollection<ValidationResult> validationResults;

@@ -36,6 +36,7 @@ namespace Domain.Model.DAL
                         var roomIDIndex = reader.GetOrdinal("RoomID");
                         var roomDescriptionIndex = reader.GetOrdinal("RoomDescription");
                         var heatingIndex = reader.GetOrdinal("Heating");
+                        var lastTemperatureIndex = reader.GetOrdinal("LastTemperature");
 
                         while (reader.Read())
                         {
@@ -43,7 +44,8 @@ namespace Domain.Model.DAL
                             {
                                 RoomID = reader.GetByte(roomIDIndex),
                                 RoomDescription = reader.GetString(roomDescriptionIndex),
-                                Heating = reader.GetBoolean(heatingIndex)
+                                Heating = reader.GetBoolean(heatingIndex),
+                                LastTemperature = reader.GetInt32(lastTemperatureIndex)
                             });
                         }
                     }
@@ -77,6 +79,7 @@ namespace Domain.Model.DAL
                         var roomIDIndex = reader.GetOrdinal("RoomID");
                         var roomDescriptionIndex = reader.GetOrdinal("RoomDescription");
                         var heatingIndex = reader.GetOrdinal("Heating");
+                        var lastTemperatureIndex = reader.GetOrdinal("LastTemperature");
 
                         if (reader.Read())
                         {
@@ -84,7 +87,8 @@ namespace Domain.Model.DAL
                             {
                                 RoomID = reader.GetByte(roomIDIndex),
                                 RoomDescription = reader.GetString(roomDescriptionIndex),
-                                Heating = reader.GetBoolean(heatingIndex)
+                                Heating = reader.GetBoolean(heatingIndex),
+                                LastTemperature = reader.GetInt32(lastTemperatureIndex)
                             };
                         }
                     }
@@ -109,6 +113,7 @@ namespace Domain.Model.DAL
                     cmd.Parameters.Add("@RoomID", SqlDbType.TinyInt, 1).Value = room.RoomID;
                     cmd.Parameters.Add("@Heating", SqlDbType.Bit, 1).Value = room.Heating;
                     cmd.Parameters.Add("@RoomDescription", SqlDbType.VarChar, 50).Value = room.RoomDescription;
+                    cmd.Parameters.Add("@LastTemperature", SqlDbType.Int, 4).Value = room.LastTemperature;
 
                     conn.Open();
 
