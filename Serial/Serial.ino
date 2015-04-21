@@ -7,10 +7,17 @@ String incomingSerial;
 //Delay
 bool sendState = LOW;
 unsigned long previousMillis = 0;
-const long interval = 60000;           // interval at which to blink (milliseconds)
+const long interval = 1000;           // interval at which to blink (milliseconds)
 
 //Random
-long randNumber;
+long randNumber1;
+long randNumber2;
+long randNumber3;
+long randNumber4;
+long randNumber5;
+long randNumber6;
+String temp;
+
 
 void setup(){
   
@@ -97,10 +104,43 @@ void loop() {
     else
       sendState = LOW;
 
-    // print a random number from 17 to 24
-     randNumber = random(17, 25);
+    // set random numbers
+    if (digitalRead(2))
+      randNumber1 = random(20, 24);
+    else 
+      randNumber1 = random(7, 10);
+      
+    if (digitalRead(3))
+      randNumber2 = random(20, 24);
+    else 
+      randNumber2 = random(7, 10);
+      
+    if (digitalRead(4))
+      randNumber3 = random(20, 24);
+    else 
+      randNumber3 = random(7, 10);
+      
+    if (digitalRead(5))
+      randNumber4 = random(20, 24);
+    else 
+      randNumber4 = random(7, 10);
+      
+    if (digitalRead(6))
+      randNumber5 = random(20, 24);
+    else 
+      randNumber5 = random(7, 10);
+      
+    if (digitalRead(7))
+      randNumber6 = random(20, 24);
+    else 
+      randNumber6 = random(7, 10);
+      
+    temp = "1" + String(randNumber1, DEC) + "#2" + String(randNumber2, DEC) + "#3" + String(randNumber3, DEC)
+      + "#4" + String(randNumber4, DEC) + "#5" + String(randNumber5, DEC) + "#6" + String(randNumber6, DEC);
+      
+//    temp.concat(temp, String(randNumber2, DEC));
      
      //Send the number via serial to pc
-     Serial.println(randNumber);
+     Serial.println(temp);
   }
 }
