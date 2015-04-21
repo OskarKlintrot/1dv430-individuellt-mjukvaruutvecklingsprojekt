@@ -93,6 +93,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
         {
             try
             {
+                MyPort.DataReceived -= myport_DataReceived;
                 MyPort.Close();
                 ConnectionOpen = false;
             }
