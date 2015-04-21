@@ -135,8 +135,8 @@ void loop() {
     else 
       randNumber6 = random(7, 10);
       
-    temp = String(randNumber1, DEC) + "#" + String(randNumber2, DEC) + "#" + String(randNumber3, DEC)
-      + "#" + String(randNumber4, DEC) + "#" + String(randNumber5, DEC) + "#" + String(randNumber6, DEC);
+    temp = "1" + String(randNumber1, DEC) + "#2" + String(randNumber2, DEC) + "#3" + String(randNumber3, DEC)
+      + "#4" + String(randNumber4, DEC) + "#5" + String(randNumber5, DEC) + "#6" + String(randNumber6, DEC);
       
 //    temp.concat(temp, String(randNumber2, DEC));
      
