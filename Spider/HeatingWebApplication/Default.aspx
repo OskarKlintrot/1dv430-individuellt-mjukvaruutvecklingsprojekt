@@ -29,7 +29,7 @@
                 </p>
             </EmptyDataTemplate>
             <ItemTemplate>
-                <div class="col-xs-6 col-sm-4 col-md-3 text-center panel-default">
+                <div class="col-md-4 text-center panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
                             <asp:Label ID="RoomLabel" runat="server" Text='<%# Item.RoomDescription %>'></asp:Label>
