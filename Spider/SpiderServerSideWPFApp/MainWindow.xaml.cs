@@ -243,6 +243,7 @@ namespace SpiderServerSideWPFApp
         
         private void UpdateData(object sender, PropertyChangedEventArgs e)
         {
+            // TODO: Most of this code should be in BLL
             string ReceivedData = Service.SC_ReceivedData;
 
             // Update the DataTextBox
