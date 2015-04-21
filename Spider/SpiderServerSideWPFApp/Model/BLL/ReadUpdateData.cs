@@ -11,6 +11,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
 {
     class ReadUpdateData
     {
+        private bool startUp = true;
         private bool[] oldHeating = new bool[6];
         private Service _service;
         private Service Service
@@ -80,7 +81,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
 
             for (int i = 0; i < newHeating.Length; i++)
             {
-                if (newHeating[i] != oldHeating[i])
+                if ((newHeating[i] != oldHeating[i]) || startUp)
                 {
                     switch (newHeating[i])
                     {
@@ -96,7 +97,10 @@ namespace SpiderServerSideWPFApp.Model.BLL
                     oldHeating[i] = newHeating[i];
                 }
             }
-
+            if (startUp)
+            {
+                startUp = false;
+            }
             return room;
         }
     }

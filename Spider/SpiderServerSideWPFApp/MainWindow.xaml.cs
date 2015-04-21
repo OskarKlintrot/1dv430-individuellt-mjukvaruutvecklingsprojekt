@@ -33,7 +33,7 @@ namespace SpiderServerSideWPFApp
         private DateTime dateTime;
         private Service _service;
         private ReadUpdateData _readUpdateData;
-        private bool[] oldHeating = new bool[6];
+        //private bool[] oldHeating = new bool[6];
         #endregion
 
         #region Properties
@@ -169,10 +169,10 @@ namespace SpiderServerSideWPFApp
 
             ButtonSetToStart();
 
-            for (int i = 0; i < oldHeating.Length; i++)
-            {
-                oldHeating[i] = false; 
-            }
+            //for (int i = 0; i < oldHeating.Length; i++)
+            //{
+            //    oldHeating[i] = false;
+            //}
         }
 
         private void ButtonSetToStart()
