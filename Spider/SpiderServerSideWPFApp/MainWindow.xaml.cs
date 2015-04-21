@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using SpiderServerSideWPFApp.Model.DAL;
 using Domain.Model.BLL;
+using System.Text.RegularExpressions;
 
 namespace SpiderServerSideWPFApp
 {
@@ -188,7 +189,7 @@ namespace SpiderServerSideWPFApp
         {
             try
             {
-                Service.SC_SendData("HIGH#");
+                Service.SC_SendData("1H#");
 
                 LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = false), DispatcherPriority.Normal, null);
                 LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = true), DispatcherPriority.Normal, null);
@@ -203,7 +204,7 @@ namespace SpiderServerSideWPFApp
         {
             try
             {
-                Service.SC_SendData("LOW#");
+                Service.SC_SendData("1L#");
 
                 LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = true), DispatcherPriority.Normal, null);
                 LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
@@ -251,25 +252,64 @@ namespace SpiderServerSideWPFApp
             DataTextBox.Dispatcher.Invoke(new Action(() => DataTextBox.AppendText(stringToInsert)), DispatcherPriority.Normal, null);
             DataTextBox.Dispatcher.Invoke(new Action(() => DataTextBox.ScrollToEnd()), DispatcherPriority.Normal, null);
 
-            // Insert recived item to databas
-            int temp;
-            if (Int32.TryParse(ReceivedData, out temp))
+            // Split recived item into array and "clean" it
+            string[] tempStringArray = ReceivedData.Split('#');
+            string[] cleanedTempString = new String[tempStringArray.Length];
+
+            for (int i = 0; i < tempStringArray.Length; i++)
             {
-                Temperature temperature = new Temperature
-                {
-                    TempID = 0,
-                    RoomID = 1,
-                    Temp = Convert.ToInt32(ReceivedData)
-                };
                 try
                 {
-                    Service.InsertTemperature(temperature);
+                    Regex regexObj = new Regex(@"[^\d]");
+                    cleanedTempString[i] = regexObj.Replace(tempStringArray[i], "");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
+
+            // Insert recived item to databas
+            for (int i = 0; i < cleanedTempString.Length; i++)
+            {
+                int temp;
+                if (Int32.TryParse(tempStringArray[i], out temp))
+                {
+                    Temperature temperature = new Temperature
+                    {
+                        TempID = 0,
+                        RoomID = Convert.ToInt32(cleanedTempString[i][0].ToString()),
+                        Temp = Convert.ToInt32(cleanedTempString[i].Substring(1))
+                    };
+                    try
+                    {
+                        Service.InsertTemperature(temperature);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    } 
+                }
+            }
+
+            //int temp;
+            //if (Int32.TryParse(ReceivedData, out temp))
+            //{
+            //    Temperature temperature = new Temperature
+            //    {
+            //        TempID = 0,
+            //        RoomID = 1,
+            //        Temp = Convert.ToInt32(ReceivedData)
+            //    };
+            //    try
+            //    {
+            //        Service.InsertTemperature(temperature);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
         }
         #endregion
     }
