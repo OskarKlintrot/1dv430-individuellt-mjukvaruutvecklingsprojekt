@@ -31,7 +31,7 @@ namespace SpiderServerSideWPFApp
         #region Fields
         private DateTime dateTime;
         private Service _service;
-        private bool oldHeating = false;
+        private bool[] oldHeating = new bool[6];
         #endregion
 
         #region Properties
@@ -106,7 +106,7 @@ namespace SpiderServerSideWPFApp
 
         private void LightOnButton_Click(object sender, RoutedEventArgs e)
         {
-            TurnHeatingOn();
+            TurnHeatingOn(1);
 
             Room room = Service.GetRoomByID(1);
             room.Heating = true;
@@ -115,7 +115,7 @@ namespace SpiderServerSideWPFApp
 
         private void LightOffButton_Click(object sender, RoutedEventArgs e)
         {
-            TurnHeatingOff();
+            TurnHeatingOff(1);
 
             Room room = Service.GetRoomByID(1);
             room.Heating = false;
@@ -162,7 +162,10 @@ namespace SpiderServerSideWPFApp
 
             ButtonSetToStart();
 
-            oldHeating = false;
+            for (int i = 0; i < oldHeating.Length; i++)
+            {
+                oldHeating[i] = false; 
+            }
         }
 
         private void ButtonSetToStart()
@@ -185,11 +188,11 @@ namespace SpiderServerSideWPFApp
             BaudrateTextBox.IsEnabled = false;
         }
 
-        private void TurnHeatingOn()
+        private void TurnHeatingOn(int roomID)
         {
             try
             {
-                Service.SC_SendData("1H#");
+                Service.SC_SendData(roomID + "H#");
 
                 LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = false), DispatcherPriority.Normal, null);
                 LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = true), DispatcherPriority.Normal, null);
@@ -200,11 +203,11 @@ namespace SpiderServerSideWPFApp
             }
         }
 
-        private void TurnHeatingOff()
+        private void TurnHeatingOff(int roomID)
         {
             try
             {
-                Service.SC_SendData("1L#");
+                Service.SC_SendData(roomID + "L#");
 
                 LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = true), DispatcherPriority.Normal, null);
                 LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
@@ -219,25 +222,32 @@ namespace SpiderServerSideWPFApp
         #region Events
         private void ReadData(object sender, PropertyChangedEventArgs e)
         {
-            bool newHeating = false;
+            Room[] room = new Room[6];
+            bool[] newHeating = new bool[room.Length];
 
-            Room room = Service.GetRoomByID(1);
-            newHeating = room.Heating;
-
-            if (newHeating != oldHeating)
+            for (int i = 0; i < room.Length; i++)
             {
-                switch (newHeating)
+                room[i] = Service.GetRoomByID(i+1);
+                newHeating[i] = room[i].Heating;
+            }
+
+            for (int i = 0; i < newHeating.Length; i++)
+            {
+                if (newHeating[i] != oldHeating[i])
                 {
-                    case true:
-                        TurnHeatingOn();
-                        break;
-                    case false:
-                        TurnHeatingOff();
-                        break;
-                    default:
-                        break;
+                    switch (newHeating[i])
+                    {
+                        case true:
+                            TurnHeatingOn(i+1);
+                            break;
+                        case false:
+                            TurnHeatingOff(i+1);
+                            break;
+                        default:
+                            break;
+                    }
+                    oldHeating[i] = newHeating[i];
                 }
-                oldHeating = newHeating;
             }
         }
         
@@ -273,44 +283,32 @@ namespace SpiderServerSideWPFApp
             // Insert recived item to databas
             for (int i = 0; i < cleanedTempString.Length; i++)
             {
+                int roomID;
                 int temp;
-                if (Int32.TryParse(tempStringArray[i], out temp))
+
+                if (cleanedTempString[i].Length > 0)
                 {
-                    Temperature temperature = new Temperature
+                    if ((Int32.TryParse(cleanedTempString[i][0].ToString(), out roomID))
+                    && (Int32.TryParse(cleanedTempString[i].Substring(1), out temp)))
                     {
-                        TempID = 0,
-                        RoomID = Convert.ToInt32(cleanedTempString[i][0].ToString()),
-                        Temp = Convert.ToInt32(cleanedTempString[i].Substring(1))
-                    };
-                    try
-                    {
-                        Service.InsertTemperature(temperature);
+                        Temperature temperature = new Temperature
+                        {
+                            TempID = 0,
+                            RoomID = roomID,
+                            Temp = temp
+                        };
+
+                        try
+                        {
+                            Service.InsertTemperature(temperature);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), "Ett fel inträffande vid sparande i databasen");
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    } 
                 }
             }
-
-            //int temp;
-            //if (Int32.TryParse(ReceivedData, out temp))
-            //{
-            //    Temperature temperature = new Temperature
-            //    {
-            //        TempID = 0,
-            //        RoomID = 1,
-            //        Temp = Convert.ToInt32(ReceivedData)
-            //    };
-            //    try
-            //    {
-            //        Service.InsertTemperature(temperature);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
         }
         #endregion
     }
