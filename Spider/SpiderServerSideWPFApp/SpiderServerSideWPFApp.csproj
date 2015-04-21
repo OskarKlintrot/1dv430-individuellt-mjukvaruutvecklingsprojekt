@@ -83,6 +83,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BLL\ReadUpdateData.cs" />
     <Compile Include="Model\DAL\SingletonSerialCommunicationDAL.cs" />
     <Compile Include="Model\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
