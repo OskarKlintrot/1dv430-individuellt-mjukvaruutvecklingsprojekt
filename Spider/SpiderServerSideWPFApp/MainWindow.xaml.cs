@@ -19,7 +19,6 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using SpiderServerSideWPFApp.Model.DAL;
 using Domain.Model.BLL;
-using System.Text.RegularExpressions;
 using SpiderServerSideWPFApp.Model.BLL;
 
 namespace SpiderServerSideWPFApp
@@ -33,7 +32,6 @@ namespace SpiderServerSideWPFApp
         private DateTime dateTime;
         private Service _service;
         private ReadUpdateData _readUpdateData;
-        //private bool[] oldHeating = new bool[6];
         #endregion
 
         #region Properties
@@ -168,11 +166,6 @@ namespace SpiderServerSideWPFApp
             Service.PropertyChanged -= UpdateData;
 
             ButtonSetToStart();
-
-            //for (int i = 0; i < oldHeating.Length; i++)
-            //{
-            //    oldHeating[i] = false;
-            //}
         }
 
         private void ButtonSetToStart()
