@@ -16,60 +16,6 @@ namespace SpiderServerSideWPFApp.Model
 {
     class Service : Domain.Model.Service, INotifyPropertyChanged
     {
-        //#region Temperature
-
-        //private TemperatureDAL _temperatureDAL;
-
-        //private TemperatureDAL TemperatureDAL
-        //{
-        //    get { return _temperatureDAL ?? (_temperatureDAL = new TemperatureDAL()); }
-        //}
-
-        //public IEnumerable<Temperature> GetTemperatures()
-        //{
-        //    return TemperatureDAL.GetTemperatures();
-        //}
-
-        //public void InsertTemperature(Temperature temperature)
-        //{
-        //    ICollection<ValidationResult> validationResults;
-        //    if (!temperature.Validate(out validationResults))
-        //    {
-        //        throw new Exception("Objektet klarade inte valideringen.");
-        //    }
-
-        //    TemperatureDAL.InsertTemperature(temperature);
-        //}
-
-        //#endregion
-
-        //#region Room
-
-        //private RoomDAL _roomDAL;
-
-        //private RoomDAL RoomDAL
-        //{
-        //    get { return _roomDAL ?? (_roomDAL = new RoomDAL()); }
-        //}
-
-        //public IEnumerable<Room> GetRooms()
-        //{
-        //    return RoomDAL.GetRooms();
-        //}
-
-        //public void UpdateRoom(Room room)
-        //{
-        //    ICollection<ValidationResult> validationResults;
-        //    if (!room.Validate(out validationResults))
-        //    {
-        //        throw new Exception("Objektet klarade inte valideringen.");
-        //    }
-
-        //    RoomDAL.UpdateRoom(room);
-        //}
-
-        //#endregion
-
         #region Serial Communication
 
         private SingletonSerialCommunicationDAL SingletonSerialCommunicationDAL = SingletonSerialCommunicationDAL.Instance;
