@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -107,7 +108,6 @@ namespace SpiderServerSideWPFApp.Model.DAL
         {
             try
             {
-                MyPort.DataReceived -= myport_DataReceived;
                 MyPort.Close();
                 ConnectionOpen = false;
             }
@@ -132,7 +132,15 @@ namespace SpiderServerSideWPFApp.Model.DAL
         #region Events
         private void myport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            ReceivedData = MyPort.ReadLine();
+            try
+            {
+                ReceivedData = MyPort.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                StopConnection();
+            }
         }
         #endregion
     }
