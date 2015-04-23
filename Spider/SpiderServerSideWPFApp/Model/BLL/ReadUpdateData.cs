@@ -20,7 +20,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
         }
         public void UpdateData(string ReceivedData)
         {
-            // Split recived item into array and "clean" it
+            // Split recived port into array and "clean" it
             string[] tempStringArray = ReceivedData.Split('#');
             string[] cleanedTempString = new String[tempStringArray.Length];
 
@@ -37,7 +37,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
                 }
             }
 
-            // Insert recived item to databas
+            // Insert recived port to databas
             for (int i = 0; i < cleanedTempString.Length; i++)
             {
                 int roomID;

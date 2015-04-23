@@ -14,6 +14,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
     {
         // Singleton pattern - thread-safe without using locks
         // http://csharpindepth.com/Articles/General/Singleton.aspx
+        #region Singleton Pattern
         private static readonly SingletonSerialCommunicationDAL instance = new SingletonSerialCommunicationDAL();
 
         // Explicit static constructor to tell C# compiler
@@ -32,17 +33,18 @@ namespace SpiderServerSideWPFApp.Model.DAL
             {
                 return instance;
             }
-        }
+        } 
+        #endregion
 
         // Serial communication
+        #region Fields
         private string _receivedData;
         private SerialPort MyPort;
-        
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Properties
         //True if the connection is open, false if not
         public bool ConnectionOpen { get; private set; }
-
         public string ReceivedData
         {
             get
@@ -58,15 +60,28 @@ namespace SpiderServerSideWPFApp.Model.DAL
                 }
             }
         }
+        public static List<string> AvailableSerialPorts
+        {
+            get
+            {
+                List<string> list = new List<string>(SerialPort.GetPortNames());
+                return list;
+            }
+        }
+        #endregion
 
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (!string.IsNullOrWhiteSpace(propertyName) && PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
+        } 
+        #endregion
 
+        #region Methods
         public void StartConnection(string port, int baudrate)
         {
             try
@@ -88,7 +103,6 @@ namespace SpiderServerSideWPFApp.Model.DAL
                 MessageBox.Show(ex.Message, "Something went wrong when trying to connect to the Arduino");
             }
         }
-
         public void StopConnection()
         {
             try
@@ -102,12 +116,6 @@ namespace SpiderServerSideWPFApp.Model.DAL
                 MessageBox.Show(ex.Message, "Could not stop the connection.");
             }
         }
-
-        private void myport_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            ReceivedData = MyPort.ReadLine();
-        }
-
         public void SendDataOverSerial(string dataToSend)
         {
             try
@@ -118,6 +126,14 @@ namespace SpiderServerSideWPFApp.Model.DAL
             {
                 MessageBox.Show(ex.Message, "Could not send data to the Arduino");
             }
+        } 
+        #endregion
+
+        #region Events
+        private void myport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            ReceivedData = MyPort.ReadLine();
         }
+        #endregion
     }
 }

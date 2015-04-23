@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Model.DAL;
 using Domain.Model.BLL;
-//using System.Windows.Controls;
-
 using System.ComponentModel.DataAnnotations;
 using SpiderServerSideWPFApp.Model.DAL;
 using System.ComponentModel;
@@ -42,6 +40,14 @@ namespace SpiderServerSideWPFApp.Model
             get
             {
                 return SingletonSerialCommunicationDAL.ConnectionOpen;
+            }
+        }
+
+        public List<string> SC_AvailableSerialPorts
+        {
+            get
+            {
+                return SingletonSerialCommunicationDAL.AvailableSerialPorts;
             }
         }
 

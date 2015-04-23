@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.IO.Ports;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ using System.Windows.Threading;
 using SpiderServerSideWPFApp.Model.DAL;
 using Domain.Model.BLL;
 using SpiderServerSideWPFApp.Model.BLL;
+using System.Collections.ObjectModel;
 
 namespace SpiderServerSideWPFApp
 {
@@ -39,17 +41,23 @@ namespace SpiderServerSideWPFApp
         {
             get { return _service ?? (_service = new Service()); }
         }
-
         private ReadUpdateData ReadUpdateData
         {
             get { return _readUpdateData ?? (_readUpdateData = new ReadUpdateData()); }
         }
-
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
+
+            List<string> baudRateList = new List<string> { "300", "600", "1200", "2400", "4800", "9600", 
+                "14400", "19200", "28800", "38400", "57600", "115200"};
+
+            foreach (var baudRate in baudRateList)
+            {
+                BaudRateComboBox.Items.Add(baudRate);
+            }
 
             StartButton.IsEnabled = true;
             StopButton.IsEnabled = false;
@@ -61,15 +69,15 @@ namespace SpiderServerSideWPFApp
         #region Actions
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            string port = PortTextBox.Text;
+            string port = PortComboBox.Text;
             int intBaudrate;
             int baudrate;
 
             try
             {
-                if (int.TryParse(BaudrateTextBox.Text, out intBaudrate))
+                if (int.TryParse(BaudRateComboBox.Text, out intBaudrate))
                 {
-                    baudrate = Convert.ToInt32(BaudrateTextBox.Text);
+                    baudrate = Convert.ToInt32(BaudRateComboBox.Text);
                 }
                 else
                 {
@@ -84,8 +92,8 @@ namespace SpiderServerSideWPFApp
 
                     DataTextBox.Clear();
 
-                    PortLabel.Content = PortTextBox.Text;
-                    BaudrateLabel.Content = BaudrateTextBox.Text;
+                    PortLabel.Content = PortComboBox.Text;
+                    BaudrateLabel.Content = BaudRateComboBox.Text;
 
                     Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
                     Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
@@ -132,8 +140,8 @@ namespace SpiderServerSideWPFApp
             PortLabel.Content = "Port";
             BaudrateLabel.Content = "Baudrate";
 
-            PortTextBox.Text = "COM4";
-            BaudrateTextBox.Text = "9600";
+            PortComboBox.SelectedIndex = -1;
+            BaudRateComboBox.Text = "9600";
 
             try
             {
@@ -155,7 +163,23 @@ namespace SpiderServerSideWPFApp
                 EndConnection();
             }
             this.Close();
-        } 
+        }
+
+        private void PortComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            PortComboBox.Items.Clear();
+            try
+            {
+                foreach (var port in Service.SC_AvailableSerialPorts)
+                {
+                    PortComboBox.Items.Add(port);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Could not find COM ports");
+            }
+        }
         #endregion
 
         #region Methods
@@ -174,8 +198,8 @@ namespace SpiderServerSideWPFApp
             StopButton.IsEnabled = false;
             LightOnButton.IsEnabled = false;
             LightOffButton.IsEnabled = false;
-            PortTextBox.IsEnabled = true;
-            BaudrateTextBox.IsEnabled = true;
+            PortComboBox.IsEnabled = true;
+            BaudRateComboBox.IsEnabled = true;
         }
 
         private void ButtonSetToStop()
@@ -184,8 +208,8 @@ namespace SpiderServerSideWPFApp
             StopButton.IsEnabled = true;
             LightOnButton.IsEnabled = true;
             LightOffButton.IsEnabled = false;
-            PortTextBox.IsEnabled = false;
-            BaudrateTextBox.IsEnabled = false;
+            PortComboBox.IsEnabled = false;
+            BaudRateComboBox.IsEnabled = false;
         }
 
         private void TurnHeatingOn()
