@@ -106,14 +106,18 @@ namespace SpiderServerSideWPFApp.Model.DAL
         }
         public void StopConnection()
         {
-            try
+            if (ConnectionOpen)
             {
-                MyPort.Close();
-                ConnectionOpen = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Could not stop the connection.");
+                try
+                {
+                    MyPort.DataReceived -= myport_DataReceived;
+                    MyPort.Close();
+                    ConnectionOpen = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Could not stop the connection.");
+                } 
             }
         }
         public void SendDataOverSerial(string dataToSend)
@@ -138,8 +142,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
-                StopConnection();
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
