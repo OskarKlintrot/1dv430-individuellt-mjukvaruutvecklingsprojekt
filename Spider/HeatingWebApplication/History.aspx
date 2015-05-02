@@ -7,9 +7,32 @@
         <%: Scripts.Render("~/Scripts/renderChart.js") %>
     </asp:PlaceHolder>
 
-    <div>
+    <asp:ListView ID="AvailableRoomsListView" runat="server"
+        ItemType="Domain.Model.BLL.Room"
+        SelectMethod="AvailableRoomsListView_GetData">
+        <LayoutTemplate>
+            <div id="ChartsToDisplay">
+                <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
+                <input id="ChartButton" type="button" value="Visa grafer" />
+            </div>
+        </LayoutTemplate>
+        <EmptyDataTemplate>
+            <p>
+                Det fanns ingen data att hämta från databasen.
+            </p>
+        </EmptyDataTemplate>
+        <ItemTemplate>
+            <label>
+                <input type="checkbox" runat="server" id="CheckBox" value='<%# Item.RoomID %>' />
+                <%# Item.RoomDescription %>
+            </label>
+            <br />
+        </ItemTemplate>
+    </asp:ListView>
+
+    <%--<div>
         Your Name : 
     <asp:TextBox ID="UserNameTextBox" runat="server"></asp:TextBox>
         <input id="ChartButton" type="button" value="Test" />
-    </div>
+    </div>--%>
 </asp:Content>

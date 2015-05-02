@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeatingWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,12 @@ namespace HeatingWebApplication
 {
     public partial class History : System.Web.UI.Page
     {
+        private Service _service;
+
+        private Service Service
+        {
+            get { return _service ?? (_service = new Service()); }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,6 +27,25 @@ namespace HeatingWebApplication
         {
             return "Hello " + name + "!" + Environment.NewLine + "The Current Time is: "
                 + DateTime.Now.ToString();
+        }
+
+        // The return type can be changed to IEnumerable, however to support
+        // paging and sorting, the following parameters must be added:
+        //     int maximumRows
+        //     int startRowIndex
+        //     out int totalRowCount
+        //     string sortByExpression
+        public IEnumerable<Domain.Model.BLL.Room> AvailableRoomsListView_GetData()
+        {
+            try
+            {
+                return Service.GetRooms();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett fel inträffande vid hämtning av rummen från databasen.");
+                return null;
+            }
         }
     }
 }

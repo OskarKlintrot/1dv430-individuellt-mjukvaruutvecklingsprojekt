@@ -41,9 +41,11 @@
 "use strict";
 
 $(document).ready(function () {
+
     console.log("It's alive!");
     $("#ChartButton").click(function () {
         ShowCurrentTime();
+        CheckedBoxex();
     });
 
     function ShowCurrentTime() {
@@ -63,5 +65,14 @@ $(document).ready(function () {
     function OnSuccess(response) {
         console.log(response);
         console.log(response.d);
+    };
+
+    function CheckedBoxex() {
+        var selected = [];
+        $('#ChartsToDisplay input:checked').each(function () {
+            selected.push($(this).attr('value'));
+        });
+        console.log(selected);
+        return selected;
     };
 });
