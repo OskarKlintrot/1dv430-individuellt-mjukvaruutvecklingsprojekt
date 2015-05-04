@@ -22,11 +22,17 @@ namespace HeatingWebApplication
 
         }
 
+        //[WebMethod]
+        //public static string GetCurrentTime(string firstname, string lastname)
+        //{
+        //    return "Hello " + firstname + " " + lastname + "!" + Environment.NewLine + "The Current Time is: "
+        //        + DateTime.Now.ToString();
+        //}
+
         [WebMethod]
-        public static string GetCurrentTime(string name)
+        public static int[] GetChartData(int[] roomID)
         {
-            return "Hello " + name + "!" + Environment.NewLine + "The Current Time is: "
-                + DateTime.Now.ToString();
+            return roomID;
         }
 
         // The return type can be changed to IEnumerable, however to support

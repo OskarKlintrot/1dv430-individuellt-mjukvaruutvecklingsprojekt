@@ -44,35 +44,59 @@ $(document).ready(function () {
 
     console.log("It's alive!");
     $("#ChartButton").click(function () {
-        ShowCurrentTime();
-        CheckedBoxex();
+        GetChartData();
+        //CheckedBoxex();
     });
 
-    function ShowCurrentTime() {
+    //function ShowCurrentTime() {
+    //    //var dataToSend = '{name: "' + $("[id$=UserNameTextBox]").val() + '" }';
+    //    var dataToSend = {
+    //        firstname: "Oskar",
+    //        lastname: "Klintrot"
+    //    };
+    //    dataToSend = JSON.stringify(dataToSend);
+    //    console.log(dataToSend);
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "History.aspx/GetCurrentTime",
+    //        data: dataToSend,
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        success: OnSuccess,
+    //        //failure: function(response) {
+    //        //    alert("response.d");
+    //        //}
+    //    });
+    //};
+
+    function GetChartData() {
+        var dataToSend = {
+            roomID: CheckedBoxex()
+        };
+
         $.ajax({
             type: "POST",
-            url: "History.aspx/GetCurrentTime",
-            data: '{name: "' + $("[id$=UserNameTextBox]").val() + '" }',
+            url: "History.aspx/GetChartData",
+            data: JSON.stringify(dataToSend),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: OnSuccess,
-            //failure: function(response) {
-            //    alert("response.d");
-            //}
+            failure: function(response) {
+                alert("response.d");
+            }
         });
     };
 
     function OnSuccess(response) {
         console.log(response);
-        console.log(response.d);
+        //console.log(response.d);
     };
 
     function CheckedBoxex() {
         var selected = [];
         $('#ChartsToDisplay input:checked').each(function () {
-            selected.push($(this).attr('value'));
+            selected.push(parseInt($(this).attr('value')));
         });
-        console.log(selected);
         return selected;
     };
 });
