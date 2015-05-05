@@ -45,8 +45,8 @@ namespace Domain.Model.DAL
                             {
                                 TempID = reader.GetInt32(tempIDIndex),
                                 Timestamp = reader.GetDateTime(timestampIndex),
-                                RoomID = reader.GetInt16(roomIDIndex),
-                                Temp = reader.GetInt32(tempIndex)
+                                RoomID = reader.GetByte(roomIDIndex),
+                                Temp = reader.GetInt16(tempIndex)
                             });
                         }
                     }
@@ -72,7 +72,7 @@ namespace Domain.Model.DAL
                     var cmd = new SqlCommand("app.ups_ReadTemperature", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@RoomID", SqlDbType.Int, 4).Value = roomID;
+                    cmd.Parameters.Add("@RoomID", SqlDbType.TinyInt, 1).Value = roomID;
 
                     conn.Open();
 
@@ -89,8 +89,8 @@ namespace Domain.Model.DAL
                             {
                                 TempID = reader.GetInt32(tempIDIndex),
                                 Timestamp = reader.GetDateTime(timestampIndex),
-                                RoomID = reader.GetInt16(roomIDIndex),
-                                Temp = reader.GetInt32(tempIndex)
+                                RoomID = reader.GetByte(roomIDIndex),
+                                Temp = reader.GetInt16(tempIndex)
                             });
                         }
                     }
@@ -131,8 +131,8 @@ namespace Domain.Model.DAL
                             {
                                 TempID = reader.GetInt32(tempIDIndex),
                                 Timestamp = reader.GetDateTime(timestampIndex),
-                                RoomID = reader.GetInt16(roomIDIndex),
-                                Temp = reader.GetInt32(tempIndex)
+                                RoomID = reader.GetByte(roomIDIndex),
+                                Temp = reader.GetInt16(tempIndex)
                             };
                         }
                     }

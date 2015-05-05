@@ -1,4 +1,6 @@
 ﻿using HeatingWebApplication.Models;
+using HeatingWebApplication.Models.BLL;
+using Domain.Model.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +8,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Script.Serialization;
 
 namespace HeatingWebApplication
 {
@@ -19,20 +22,51 @@ namespace HeatingWebApplication
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
-        //[WebMethod]
-        //public static string GetCurrentTime(string firstname, string lastname)
-        //{
-        //    return "Hello " + firstname + " " + lastname + "!" + Environment.NewLine + "The Current Time is: "
-        //        + DateTime.Now.ToString();
-        //}
-
         [WebMethod]
-        public static int[] GetChartData(int[] roomID)
+        public static string GetChartData(int[] roomID)
         {
-            return roomID;
+            var Service = new Service();
+            var dataToParse = new HistoricalData[roomID.Length];
+            for (int i = 0; i < dataToParse.Length; i++)
+            {
+                dataToParse[i] = new HistoricalData();
+            }
+
+            for (int i = 0; i < roomID.Length; i++)
+            {
+                try
+                {
+                    // Add room description
+                    var tempRoomDescription = new Room();
+                    tempRoomDescription = Service.GetRoomByID(roomID[i]);
+                    dataToParse[i].RoomDescription = tempRoomDescription.RoomDescription;
+
+                    // Add timestamp and temperatures
+                    IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
+
+                    var tempHistoryArray = tempHistory.ToArray();
+                
+                    dataToParse[i].Temperatures = new int[tempHistoryArray.Length];
+                    dataToParse[i].Timestamp = new string[tempHistoryArray.Length];
+
+                    for (int j = 0; j < tempHistoryArray.Length; j++)
+			        {
+                        dataToParse[i].Temperatures[j] = tempHistoryArray[j].Temp;
+                        dataToParse[i].Timestamp[j] = tempHistoryArray[j].Timestamp.ToString();
+			        }
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+
+            var context = new JavaScriptSerializer().Serialize(dataToParse);
+
+            return context;
         }
 
         // The return type can be changed to IEnumerable, however to support

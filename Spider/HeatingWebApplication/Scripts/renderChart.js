@@ -45,29 +45,7 @@ $(document).ready(function () {
     console.log("It's alive!");
     $("#ChartButton").click(function () {
         GetChartData();
-        //CheckedBoxex();
     });
-
-    //function ShowCurrentTime() {
-    //    //var dataToSend = '{name: "' + $("[id$=UserNameTextBox]").val() + '" }';
-    //    var dataToSend = {
-    //        firstname: "Oskar",
-    //        lastname: "Klintrot"
-    //    };
-    //    dataToSend = JSON.stringify(dataToSend);
-    //    console.log(dataToSend);
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "History.aspx/GetCurrentTime",
-    //        data: dataToSend,
-    //        contentType: "application/json; charset=utf-8",
-    //        dataType: "json",
-    //        success: OnSuccess,
-    //        //failure: function(response) {
-    //        //    alert("response.d");
-    //        //}
-    //    });
-    //};
 
     function GetChartData() {
         var dataToSend = {
