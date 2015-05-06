@@ -30,6 +30,11 @@ namespace Domain.Model
             return TemperatureDAL.GetTemperaturesByRoomID(roomID);
         }
 
+        public IEnumerable<Temperature> GetTemperaturesByRoomIDAndDate(int roomID, DateTime startDate, DateTime endDate)
+        {
+            return TemperatureDAL.GetTemperaturesByRoomIDAndDate(roomID, startDate, endDate);
+        }
+
         public Temperature GetLatestTemperatureByID(int roomID)
         {
             return TemperatureDAL.GetLatestTemperatureByID(roomID);

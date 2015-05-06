@@ -105,6 +105,52 @@ namespace Domain.Model.DAL
                 throw new ApplicationException("Ett fel inträffade då temperaturerna hämtades från databasen.");
             }
         }
+        public IEnumerable<Temperature> GetTemperaturesByRoomIDAndDate(int roomID, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var temperatures = new List<Temperature>(50);
+
+                using (var conn = new SqlConnection(ConnectionString))
+                {
+                    var cmd = new SqlCommand("app.ups_ReadTemperature", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@RoomID", SqlDbType.TinyInt, 1).Value = roomID;
+                    cmd.Parameters.Add("@StartDate", SqlDbType.Date, 8).Value = startDate;
+                    cmd.Parameters.Add("@EndDate", SqlDbType.Date, 8).Value = endDate;
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var tempIDIndex = reader.GetOrdinal("TempID");
+                        var timestampIndex = reader.GetOrdinal("Timestamp");
+                        var roomIDIndex = reader.GetOrdinal("RoomID");
+                        var tempIndex = reader.GetOrdinal("Temp");
+
+                        while (reader.Read())
+                        {
+                            temperatures.Add(new Temperature
+                            {
+                                TempID = reader.GetInt32(tempIDIndex),
+                                Timestamp = reader.GetDateTime(timestampIndex),
+                                RoomID = reader.GetByte(roomIDIndex),
+                                Temp = reader.GetInt16(tempIndex)
+                            });
+                        }
+                    }
+                }
+
+                temperatures.TrimExcess();
+
+                return temperatures;
+            }
+            catch
+            {
+                throw new ApplicationException("Ett fel inträffade då temperaturerna hämtades från databasen.");
+            }
+        }
         public Temperature GetLatestTemperatureByID(int roomID)
         {
             try

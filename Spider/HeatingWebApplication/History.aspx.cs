@@ -46,7 +46,8 @@ namespace HeatingWebApplication
                     historicalReadings[i].RoomDescription = tempRoomDescription.RoomDescription;
 
                     // Add timestamp and temperatures
-                    IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
+                    //IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
+                    IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomIDAndDate(roomID[i], startDate, endDate);
 
                     var tempHistoryArray = tempHistory.ToArray();
                     var lengthOfArray = tempHistoryArray.Length / scale;
