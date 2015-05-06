@@ -49,8 +49,13 @@ $(document).ready(function () {
 
     function GetChartData() {
         var dataToSend = {
-            roomID: CheckedBoxex()
+            roomID: CheckedBoxex(),
+            startDate: $("input[id$='StartDateTextBox']").val(),
+            endDate: $("input[id$='EndDateTextBox']").val(),
+            scale: $("input[id$='ScaleTextBox']").val(),
         };
+
+        console.log(dataToSend);
 
         $.ajax({
             type: "POST",
