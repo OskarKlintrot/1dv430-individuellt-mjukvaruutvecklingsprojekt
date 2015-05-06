@@ -27,7 +27,7 @@ namespace HeatingWebApplication
         }
 
         [WebMethod]
-        public static HistoricalData[] GetChartData(int[] roomID)
+        public static HistoricalData[] GetChartData(int[] roomID, DateTime startDate, DateTime endDate, int scale)
         {
             var Service = new Service();
             var historicalReadings = new HistoricalData[roomID.Length];
@@ -49,19 +49,22 @@ namespace HeatingWebApplication
                     IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
 
                     var tempHistoryArray = tempHistory.ToArray();
-                
-                    historicalReadings[i].Temperatures = new int[tempHistoryArray.Length];
-                    historicalReadings[i].Timestamp = new string[tempHistoryArray.Length];
+                    var lengthOfArray = tempHistoryArray.Length / scale;
 
-                    for (int j = 0; j < tempHistoryArray.Length; j++)
+                    historicalReadings[i].Temperatures = new int[lengthOfArray];
+                    historicalReadings[i].Timestamp = new string[lengthOfArray];
+
+                    for (int j = 0; j < lengthOfArray; j++)
 			        {
-                        historicalReadings[i].Temperatures[j] = tempHistoryArray[j].Temp;
-                        historicalReadings[i].Timestamp[j] = tempHistoryArray[j].Timestamp.ToString();
+                        historicalReadings[i].Temperatures[j] = tempHistoryArray[j * scale].Temp;
+                        historicalReadings[i].Timestamp[j] = tempHistoryArray[j * scale].Timestamp.ToString();
 			        }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return null;
+                    // TODO: Send back better error message
+                    historicalReadings[0].RoomDescription = ex.Message.ToString();
+                    return historicalReadings;
                 }
             }
             

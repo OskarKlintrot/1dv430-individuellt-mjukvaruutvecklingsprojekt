@@ -55,8 +55,6 @@ $(document).ready(function () {
             scale: $("input[id$='ScaleTextBox']").val(),
         };
 
-        console.log(dataToSend);
-
         $.ajax({
             type: "POST",
             url: "History.aspx/GetChartData",
@@ -64,9 +62,9 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: OnSuccess,
-            failure: function(response) {
-                alert("response.d");
-            }
+            //failure: function(response) {
+            //    alert("response.d");
+            //}
         });
     };
 
