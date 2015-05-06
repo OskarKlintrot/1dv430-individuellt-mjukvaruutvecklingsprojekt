@@ -13,7 +13,6 @@ using System.Web.Script.Services;
 
 namespace HeatingWebApplication
 {
-    [ScriptService]
     public partial class History : System.Web.UI.Page
     {
         private Service _service;
