@@ -66,6 +66,7 @@ $(document).ready(function () {
     };
 
     function OnSuccess(response) {
+        var chartData = response.d;
         console.log(response);
         //console.log(response.d);
     };

@@ -9,9 +9,11 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 
 namespace HeatingWebApplication
 {
+    [ScriptService]
     public partial class History : System.Web.UI.Page
     {
         private Service _service;
@@ -26,13 +28,13 @@ namespace HeatingWebApplication
         }
 
         [WebMethod]
-        public static string GetChartData(int[] roomID)
+        public static HistoricalData[] GetChartData(int[] roomID)
         {
             var Service = new Service();
-            var dataToParse = new HistoricalData[roomID.Length];
-            for (int i = 0; i < dataToParse.Length; i++)
+            var historicalReadings = new HistoricalData[roomID.Length];
+            for (int i = 0; i < historicalReadings.Length; i++)
             {
-                dataToParse[i] = new HistoricalData();
+                historicalReadings[i] = new HistoricalData();
             }
 
             for (int i = 0; i < roomID.Length; i++)
@@ -42,20 +44,20 @@ namespace HeatingWebApplication
                     // Add room description
                     var tempRoomDescription = new Room();
                     tempRoomDescription = Service.GetRoomByID(roomID[i]);
-                    dataToParse[i].RoomDescription = tempRoomDescription.RoomDescription;
+                    historicalReadings[i].RoomDescription = tempRoomDescription.RoomDescription;
 
                     // Add timestamp and temperatures
                     IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
 
                     var tempHistoryArray = tempHistory.ToArray();
                 
-                    dataToParse[i].Temperatures = new int[tempHistoryArray.Length];
-                    dataToParse[i].Timestamp = new string[tempHistoryArray.Length];
+                    historicalReadings[i].Temperatures = new int[tempHistoryArray.Length];
+                    historicalReadings[i].Timestamp = new string[tempHistoryArray.Length];
 
                     for (int j = 0; j < tempHistoryArray.Length; j++)
 			        {
-                        dataToParse[i].Temperatures[j] = tempHistoryArray[j].Temp;
-                        dataToParse[i].Timestamp[j] = tempHistoryArray[j].Timestamp.ToString();
+                        historicalReadings[i].Temperatures[j] = tempHistoryArray[j].Temp;
+                        historicalReadings[i].Timestamp[j] = tempHistoryArray[j].Timestamp.ToString();
 			        }
                 }
                 catch (Exception)
@@ -63,10 +65,8 @@ namespace HeatingWebApplication
                     return null;
                 }
             }
-
-            var context = new JavaScriptSerializer().Serialize(dataToParse);
-
-            return context;
+            
+            return historicalReadings;
         }
 
         // The return type can be changed to IEnumerable, however to support
