@@ -86,5 +86,17 @@ namespace HeatingWebApplication
                 return null;
             }
         }
+
+        protected void StartDateTextBox_Load(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            tbx.Text = DateTime.Now.AddMonths(-1).ToShortDateString();
+        }
+
+        protected void EndDateTextBox_Load(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            tbx.Text = DateTime.Now.ToShortDateString();
+        }
     }
 }

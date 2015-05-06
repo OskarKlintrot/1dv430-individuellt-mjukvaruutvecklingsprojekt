@@ -7,12 +7,26 @@
         <%: Scripts.Render("~/Scripts/renderChart.js") %>
     </asp:PlaceHolder>
 
+    <h2><%: Title %></h2>
+
     <asp:ListView ID="AvailableRoomsListView" runat="server"
         ItemType="Domain.Model.BLL.Room"
         SelectMethod="AvailableRoomsListView_GetData">
         <LayoutTemplate>
             <div id="ChartsToDisplay">
                 <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
+                <label>
+                    Startdatum:
+                    <asp:TextBox ID="StartDateTextBox" type="date" OnLoad="StartDateTextBox_Load" runat="server" />
+                </label>
+                <label>
+                    Slutdatum:
+                    <asp:TextBox ID="EndDateTextBox" type="date" OnLoad="EndDateTextBox_Load" runat="server" />
+                </label>
+                <label>
+                    Skala:
+                    <asp:TextBox ID="ScaleTextBox" runat="server" Text="10" />
+                </label>
                 <input id="ChartButton" type="button" value="Visa grafer" />
             </div>
         </LayoutTemplate>

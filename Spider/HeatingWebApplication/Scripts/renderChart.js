@@ -67,7 +67,11 @@ $(document).ready(function () {
 
     function OnSuccess(response) {
         var chartData = response.d;
-        console.log(response);
+        console.log(chartData);
+        $.each(chartData, function (index) {
+            console.log(chartData[index].RoomDescription);
+        })
+        //console.log(chartData[0].RoomDescription);
         //console.log(response.d);
     };
 
