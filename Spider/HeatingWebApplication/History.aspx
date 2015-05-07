@@ -3,7 +3,6 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/chart") %>
         <%: Scripts.Render("~/Scripts/renderChart.js") %>
     </asp:PlaceHolder>
 
@@ -14,20 +13,26 @@
         SelectMethod="AvailableRoomsListView_GetData">
         <LayoutTemplate>
             <div id="ChartsToDisplay">
-                <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
-                <label>
-                    Startdatum:
+                <div class="col-md-8">
+                    <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="">
+                    <label>
+                        Startdatum:
                     <asp:TextBox ID="StartDateTextBox" type="date" OnLoad="StartDateTextBox_Load" runat="server" />
-                </label>
-                <label>
-                    Slutdatum:
+                    </label>
+                    <label>
+                        Slutdatum:
                     <asp:TextBox ID="EndDateTextBox" type="date" OnLoad="EndDateTextBox_Load" runat="server" />
-                </label>
-                <label>
-                    Skala:
+                    </label>
+                    <label>
+                        Skala:
                     <asp:TextBox ID="ScaleTextBox" runat="server" Text="10" />
-                </label>
-                <input id="ChartButton" type="button" value="Visa grafer" />
+                    </label>
+                    <input id="ChartButton" type="button" value="Visa grafer" />
+                </div>
             </div>
         </LayoutTemplate>
         <EmptyDataTemplate>
@@ -36,13 +41,22 @@
             </p>
         </EmptyDataTemplate>
         <ItemTemplate>
-            <label>
+            <label class="col-md-4">
                 <input type="checkbox" runat="server" id="CheckBox" value='<%# Item.RoomID %>' />
                 <%# Item.RoomDescription %>
             </label>
-            <br />
         </ItemTemplate>
     </asp:ListView>
+
+    <div id="chart_div"></div>
+      
+
+    <%--Canvas for the charts--%>
+<%--    <div style="width: 100%">
+      <div>
+        <canvas id="canvas" height="250" width="400"></canvas>
+      </div>
+    </div>--%>
 
     <%--<div>
         Your Name : 
