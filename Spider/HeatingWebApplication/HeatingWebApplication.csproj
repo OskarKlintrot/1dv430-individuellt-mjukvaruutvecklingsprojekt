@@ -329,7 +329,12 @@
     <Compile Include="History.aspx.designer.cs">
       <DependentUpon>History.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BLL\HistoricalData.cs" />
+    <Compile Include="Models\BLL\HistoricalDataLong.cs" />
+    <Compile Include="Models\BLL\HistoricalDataShort.cs" />
+    <Compile Include="Models\BLL\ProcessedHistoricalData.cs" />
+    <Compile Include="Models\BLL\RawData.cs" />
+    <Compile Include="Models\BLL\RawHistory.cs" />
+    <Compile Include="Models\BLL\UtilityLibrary.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

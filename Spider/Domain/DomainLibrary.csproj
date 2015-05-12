@@ -46,6 +46,7 @@
     <Compile Include="Model\BLL\BusinessObjectBase.cs" />
     <Compile Include="Model\BLL\Room.cs" />
     <Compile Include="Model\BLL\Temperature.cs" />
+    <Compile Include="Model\BLL\UtilityLibrary.cs" />
     <Compile Include="Model\DAL\RoomDAL.cs" />
     <Compile Include="Model\DAL\TemperatureDAL.cs" />
     <Compile Include="Model\Service.cs" />
