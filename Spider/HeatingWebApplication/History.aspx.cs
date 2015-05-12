@@ -32,17 +32,17 @@ namespace HeatingWebApplication
         }
 
         [WebMethod]
-        public static HistoricalDataLong[] GetChartData(int[] roomID, DateTime startDate, DateTime endDate, int scale)
+        public static ProcessedHistoricalData GetChartData(int[] roomID, DateTime startDate, DateTime endDate, int scale)
         {
             var Service = new Service();
             var UtilityLibrary = new UtilityLibrary();
             // EXPERIMENTAL
             var rawHistory = new RawHistory[roomID.Length];
-            var historicalReadings = new HistoricalDataLong[roomID.Length];
-            for (int i = 0; i < historicalReadings.Length; i++)
-            {
-                historicalReadings[i] = new HistoricalDataLong();
-            }
+            //var historicalReadings = new HistoricalDataLong[roomID.Length];
+            //for (int i = 0; i < historicalReadings.Length; i++)
+            //{
+            //    historicalReadings[i] = new HistoricalDataLong();
+            //}
 
             // EXPERIMENTAL
             for (int i = 0; i < rawHistory.Length; i++)
@@ -61,7 +61,7 @@ namespace HeatingWebApplication
                     // Add room description
                     var tempRoomDescription = new Domain.Model.BLL.Room();
                     tempRoomDescription = Service.GetRoomByID(roomID[i]);
-                    historicalReadings[i].RoomDescription = tempRoomDescription.RoomDescription;
+                    //historicalReadings[i].RoomDescription = tempRoomDescription.RoomDescription;
                     
                     // EXPERIMENTAL
                     rawHistory[i].RoomDescription = tempRoomDescription.RoomDescription;
@@ -73,8 +73,8 @@ namespace HeatingWebApplication
                     var tempHistoryArray = tempHistory.ToArray();
                     var lengthOfArray = tempHistoryArray.Length / scale;
 
-                    historicalReadings[i].Temperatures = new int[lengthOfArray];
-                    historicalReadings[i].Timestamp = new string[lengthOfArray];
+                    //historicalReadings[i].Temperatures = new int[lengthOfArray];
+                    //historicalReadings[i].Timestamp = new string[lengthOfArray];
 
                     // EXPERIMENTAL
                     var rawData = new RawData[tempHistoryArray.Length];
@@ -93,21 +93,21 @@ namespace HeatingWebApplication
                         rawHistory[i].TemperatureAndTimestamp.Add(rawData[j]);
                     }
 
-                    for (int j = 0; j < lengthOfArray; j++)
-			        {
-                        historicalReadings[i].Temperatures[j] = tempHistoryArray[j * scale].Temp;
-                        historicalReadings[i].Timestamp[j] = tempHistoryArray[j * scale].Timestamp.ToString();
-			        }
+                    //for (int j = 0; j < lengthOfArray; j++)
+                    //{
+                    //    historicalReadings[i].Temperatures[j] = tempHistoryArray[j * scale].Temp;
+                    //    historicalReadings[i].Timestamp[j] = tempHistoryArray[j * scale].Timestamp.ToString();
+                    //}
                 }
                 catch (Exception ex)
                 {
                     // TODO: Send back better error message
-                    historicalReadings[0].RoomDescription = ex.Message.ToString();
-                    return historicalReadings;
+                    //historicalReadings[0].RoomDescription = ex.Message.ToString();
+                    //return historicalReadings;
                 }
             }
 
-            var test = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory);
+            var historicalReadings = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory);
             
             return historicalReadings;
         }
