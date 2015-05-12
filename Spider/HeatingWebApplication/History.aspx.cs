@@ -107,7 +107,7 @@ namespace HeatingWebApplication
                 }
             }
 
-            var historicalReadings = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory);
+            var historicalReadings = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory, scale);
             
             return historicalReadings;
         }

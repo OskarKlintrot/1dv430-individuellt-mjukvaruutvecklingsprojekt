@@ -8,7 +8,7 @@ namespace HeatingWebApplication.Models.BLL
 {
     public class UtilityLibrary : Domain.Model.BLL.UtilityLibrary
     {
-        public ProcessedHistoricalData BreakOutTimestampFromRawHistory(RawHistory[] rh)
+        public ProcessedHistoricalData BreakOutTimestampFromRawHistory(RawHistory[] rh, int scale)
         {
             // Prepeare a ProcessedHistoricalData object
             var history = new ProcessedHistoricalData();
@@ -19,14 +19,13 @@ namespace HeatingWebApplication.Models.BLL
             }
 
             var rawHistory = new RawHistory[rh.Length];
-            var roundUpTo = 10;
 
             // Round every timestamp up to nearest 10 minutes
             for (int i = 0; i < rh.Length; i++)
             {
                 for (int j = 0; j < rh[i].TemperatureAndTimestamp.Count; j++)
                 {
-                    rh[i].TemperatureAndTimestamp[j].TimeStamp = RoundUpDateTime(rh[i].TemperatureAndTimestamp[j].TimeStamp, roundUpTo);
+                    rh[i].TemperatureAndTimestamp[j].TimeStamp = RoundUpDateTime(rh[i].TemperatureAndTimestamp[j].TimeStamp, scale);
                 }
                 // Remove all duplicates
                 rh[i].TemperatureAndTimestamp = rh[i].TemperatureAndTimestamp.Distinct(new RawDataEqualityComparer()).ToList();
