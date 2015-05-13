@@ -6,6 +6,6 @@
     <p>Denna sidan är skapad av <a href="https://www.linkedin.com/profile/view?id=335055893">Oskar Klintrot</a> i kursen 
         <a href="https://coursepress.lnu.se/kurs/individuellt-mjukvaruutvecklingsprojekt/">Individuellt mjukvaruutvecklingsprojekt</a> 
         som ingår i utbildning till <a href="http://www.webbprogrammerare.se">webbprogrammerare</a>. Sidan är publicerad på Windows Azure 
-        och kommunicerar med en Arduino ihopkopplad med en stationär PC hemma hos Oskar. Fungerar inte sidan är Antagligen Oskars dator 
-        avstängd. Tanken är att när Windows 10 släpps så ska en Raspberry PI 2 sköta kommunikationen med Arduino och agera MSSQL Server.</p>
+        och kommunicerar med en Arduino ihopkopplad med en stationär PC hemma hos Oskar. Fungerar inte sidan är antagligen Oskars dator 
+        avstängd. Tanken är att när Windows 10 släpps så ska en Raspberry PI 2 sköta kommunikationen med Arduino och om möjligt agera MSSQL Server.</p>
 </asp:Content>
