@@ -17,6 +17,12 @@ $(document).ready(function () {
             return false;
         }
     });
+    $(document).ajaxStart(function () {
+        $("#loadingAJAX").removeClass("hide");
+    });
+    $(document).ajaxStop(function () {
+        $("#loadingAJAX").addClass("hide");
+    });
 
     function GetChartData() {
         var dataToSend = {
@@ -26,7 +32,7 @@ $(document).ready(function () {
             scale: $("input[id$='ScaleTextBox']").val(),
         };
 
-        $.ajax({
+        var xhr = $.ajax({
             type: "POST",
             url: "History.aspx/GetChartData",
             data: JSON.stringify(dataToSend),
