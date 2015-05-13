@@ -48,19 +48,6 @@
         </ItemTemplate>
     </asp:ListView>
 
-    <div id="chart_div"></div>
-      
-
-    <%--Canvas for the charts--%>
-<%--    <div style="width: 100%">
-      <div>
-        <canvas id="canvas" height="250" width="400"></canvas>
-      </div>
-    </div>--%>
-
-    <%--<div>
-        Your Name : 
-    <asp:TextBox ID="UserNameTextBox" runat="server"></asp:TextBox>
-        <input id="ChartButton" type="button" value="Test" />
-    </div>--%>
+    <div id="chartDiv"></div>
+    <div id="helpTextDiv"><p><em></em></p></div>
 </asp:Content>
