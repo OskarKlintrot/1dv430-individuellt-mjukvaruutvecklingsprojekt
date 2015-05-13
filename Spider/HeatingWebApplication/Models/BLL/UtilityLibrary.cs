@@ -45,6 +45,7 @@ namespace HeatingWebApplication.Models.BLL
 
             // Remove all duplicates
             tempTimeStamp = tempTimeStamp.Distinct().ToList();
+            tempTimeStamp.Sort();
             tempTimeStamp.TrimExcess();
 
             // Add a new array with the correct number of timestamps
@@ -55,7 +56,6 @@ namespace HeatingWebApplication.Models.BLL
                 stringTimeStamp.Add(item.ToString());
             }
 
-            stringTimeStamp = stringTimeStamp.OrderByDescending(i => i).ToList();
             stringTimeStamp.TrimExcess();
             
             history.Timestamp = stringTimeStamp.ToArray();
