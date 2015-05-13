@@ -35,7 +35,6 @@ $(document).ready(function () {
             success: function (response) {
                 $("#errorDiv").empty();
                 $("#errorDiv").removeClass("alert alert-danger");
-                console.log(response.d);
                 drawBasic(response.d);
             },
             error: function (response, status, error) {
@@ -77,10 +76,9 @@ $(document).ready(function () {
         };
 
         data.addRows(rows);
-        console.log(rows);
-        console.log(data);
 
         var options = {
+            height: 400,
             curveType: 'function', // Smoothes out the lines
             explorer: { 
                 axis: 'horizontal',
