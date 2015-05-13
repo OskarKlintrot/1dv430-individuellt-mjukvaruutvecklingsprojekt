@@ -115,13 +115,13 @@ namespace HeatingWebApplication
         protected void StartDateTextBox_Load(object sender, EventArgs e)
         {
             TextBox tbx = (TextBox)sender;
-            tbx.Text = DateTime.Now.AddMonths(-1).ToShortDateString();
+            tbx.Text = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
         }
 
         protected void EndDateTextBox_Load(object sender, EventArgs e)
         {
             TextBox tbx = (TextBox)sender;
-            tbx.Text = DateTime.Now.ToShortDateString();
+            tbx.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
     }
 }

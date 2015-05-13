@@ -7,8 +7,15 @@ $.getScript("https://www.google.com/jsapi", function () {
 $(document).ready(function () {
 
     console.log("It's alive!");
+    // Listen to either a click on the button or enter
     $("#ChartButton").click(function () {
         GetChartData();
+    });
+    $('input').on("keypress", function (e) {
+        if (e.keyCode == 13) {
+            GetChartData();
+            return false;
+        }
     });
 
     function GetChartData() {
@@ -25,19 +32,20 @@ $(document).ready(function () {
             data: JSON.stringify(dataToSend),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: OnSuccess,
-            //failure: function(response) {
-            //    alert("response.d");
-            //}
+            success: function (response) {
+                $("#errorDiv").empty();
+                $("#errorDiv").removeClass("alert alert-danger");
+                drawBasic(response.d);
+            },
+            error: function (response, status, error) {
+                $("#errorDiv").addClass("alert alert-danger");
+                var err = JSON.parse(response.responseText);
+                var closeErrorMessage = "<a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>";
+                $("#errorDiv").empty();
+                //$("#errorDiv").append(closeErrorMessage);
+                $("#errorDiv").append(err.Message);
+            }
         });
-    };
-
-    function OnSuccess(response) {
-        var chartData = response.d;
-        //$.each(chartData.Room, function (index) {
-        //    console.log(chartData.Room[index].RoomDescription);
-        //});
-        drawBasic(chartData);
     };
 
     function CheckedBoxex() {
