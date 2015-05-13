@@ -36,15 +36,9 @@ namespace HeatingWebApplication
         {
             var Service = new Service();
             var UtilityLibrary = new UtilityLibrary();
-            // EXPERIMENTAL
-            var rawHistory = new RawHistory[roomID.Length];
-            //var historicalReadings = new HistoricalDataLong[roomID.Length];
-            //for (int i = 0; i < historicalReadings.Length; i++)
-            //{
-            //    historicalReadings[i] = new HistoricalDataLong();
-            //}
 
-            // EXPERIMENTAL
+            // Prepare an object to contain the data from database
+            var rawHistory = new RawHistory[roomID.Length];
             for (int i = 0; i < rawHistory.Length; i++)
             {
                 rawHistory[i] = new RawHistory();
@@ -54,6 +48,7 @@ namespace HeatingWebApplication
                 rawHistory[i].TemperatureAndTimestamp = new List<RawData>();
             }
 
+            // Get all data from database and store it in the previously created object
             for (int i = 0; i < roomID.Length; i++)
             {
                 try
@@ -61,23 +56,14 @@ namespace HeatingWebApplication
                     // Add room description
                     var tempRoomDescription = new Domain.Model.BLL.Room();
                     tempRoomDescription = Service.GetRoomByID(roomID[i]);
-                    //historicalReadings[i].RoomDescription = tempRoomDescription.RoomDescription;
-                    
-                    // EXPERIMENTAL
                     rawHistory[i].RoomDescription = tempRoomDescription.RoomDescription;
 
                     // Add timestamp and temperatures
-                    //IEnumerable<Temperature> tempHistory = Service.GetTemperaturesByRoomID(roomID[i]);
                     IEnumerable<Domain.Model.BLL.Temperature> tempHistory = Service.GetTemperaturesByRoomIDAndDate(roomID[i], startDate, endDate);
-
                     var tempHistoryArray = tempHistory.ToArray();
                     var lengthOfArray = tempHistoryArray.Length / scale;
-
-                    //historicalReadings[i].Temperatures = new int[lengthOfArray];
-                    //historicalReadings[i].Timestamp = new string[lengthOfArray];
-
-                    // EXPERIMENTAL
                     var rawData = new RawData[tempHistoryArray.Length];
+
                     for (int j = 0; j < rawData.Length; j++)
                     {
                         rawData[j] = new RawData();
@@ -92,12 +78,6 @@ namespace HeatingWebApplication
                     {
                         rawHistory[i].TemperatureAndTimestamp.Add(rawData[j]);
                     }
-
-                    //for (int j = 0; j < lengthOfArray; j++)
-                    //{
-                    //    historicalReadings[i].Temperatures[j] = tempHistoryArray[j * scale].Temp;
-                    //    historicalReadings[i].Timestamp[j] = tempHistoryArray[j * scale].Timestamp.ToString();
-                    //}
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +87,7 @@ namespace HeatingWebApplication
                 }
             }
 
+            // Refactor the object to remove unnecessary data and duplicates and make it JSON-friendly
             var historicalReadings = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory, scale);
             
             return historicalReadings;
