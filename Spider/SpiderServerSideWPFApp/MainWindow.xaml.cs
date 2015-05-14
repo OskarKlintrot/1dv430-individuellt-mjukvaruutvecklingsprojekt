@@ -59,50 +59,33 @@ namespace SpiderServerSideWPFApp
                 BaudRateComboBox.Items.Add(baudRate);
             }
 
+            addSerialPorts();
+
+            // Set settings
+            runAtStartupCheckBox.IsChecked = Properties.Settings.Default.runAtStartupSetting;
+            BaudRateComboBox.Text = Properties.Settings.Default.baudRateSetting;
+            if (Service.SC_IsThisSerialPortAvailable(Properties.Settings.Default.portSetting))
+            {
+                PortComboBox.Text = Properties.Settings.Default.portSetting;
+            }
+
             StartButton.IsEnabled = true;
             StopButton.IsEnabled = false;
             LightOnButton.IsEnabled = false;
             LightOffButton.IsEnabled = false;
             DataTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+            // Run application, if run at start up enabled
+            if (Properties.Settings.Default.runAtStartupSetting)
+            {
+                RunApplication();
+            }
         }
 
         #region Actions
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            string port = PortComboBox.Text;
-            int intBaudrate;
-            int baudrate;
-
-            try
-            {
-                if (int.TryParse(BaudRateComboBox.Text, out intBaudrate))
-                {
-                    baudrate = Convert.ToInt32(BaudRateComboBox.Text);
-                }
-                else
-                {
-                    throw new Exception("The baudrate must be a number.");
-                }
-
-                Service.SC_StartConnection(port, baudrate);
-                
-                if (Service.SC_ConnectionOpen)
-                {
-                    ButtonSetToStop();
-
-                    DataTextBox.Clear();
-
-                    PortLabel.Content = PortComboBox.Text;
-                    BaudrateLabel.Content = BaudRateComboBox.Text;
-
-                    Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
-                    Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Something went wrong when trying to connect to the Arduino");
-            }
+            RunApplication();
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
@@ -168,6 +151,72 @@ namespace SpiderServerSideWPFApp
         private void PortComboBox_DropDownOpened(object sender, EventArgs e)
         {
             PortComboBox.Items.Clear();
+            addSerialPorts();
+        }
+
+        private void runAtStartupCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            bool value;
+            if (bool.TryParse(checkBox.IsChecked.ToString(), out value))
+                Properties.Settings.Default.runAtStartupSetting = value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void BaudRateComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void PortComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.portSetting = PortComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
+        #endregion
+
+        #region Methods
+        private void RunApplication()
+        {
+            string port = PortComboBox.Text;
+            int intBaudrate;
+            int baudrate;
+
+            try
+            {
+                if (int.TryParse(BaudRateComboBox.Text, out intBaudrate))
+                {
+                    baudrate = Convert.ToInt32(BaudRateComboBox.Text);
+                }
+                else
+                {
+                    throw new Exception("The baudrate must be a number.");
+                }
+
+                Service.SC_StartConnection(port, baudrate);
+
+                if (Service.SC_ConnectionOpen)
+                {
+                    ButtonSetToStop();
+
+                    DataTextBox.Clear();
+
+                    PortLabel.Content = PortComboBox.Text;
+                    BaudrateLabel.Content = BaudRateComboBox.Text;
+
+                    Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
+                    Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong when trying to connect to the Arduino");
+            }
+        }
+
+        private void addSerialPorts()
+        {
             try
             {
                 foreach (var port in Service.SC_AvailableSerialPorts)
@@ -180,9 +229,7 @@ namespace SpiderServerSideWPFApp
                 MessageBox.Show(ex.Message, "Could not find COM ports");
             }
         }
-        #endregion
 
-        #region Methods
         private void EndConnection()
         {
             Service.SC_StopConnection();

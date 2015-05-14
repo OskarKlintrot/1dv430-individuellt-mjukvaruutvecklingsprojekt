@@ -51,6 +51,12 @@ namespace SpiderServerSideWPFApp.Model
             }
         }
 
+        public bool SC_IsThisSerialPortAvailable(string serialPort)
+        {
+            List<string> avalibleSerialPorts = SingletonSerialCommunicationDAL.AvailableSerialPorts;
+            return avalibleSerialPorts.Exists(x => x == serialPort);
+        }
+
         public void SC_SendData(string data)
         {
             SingletonSerialCommunicationDAL.SendDataOverSerial(data);

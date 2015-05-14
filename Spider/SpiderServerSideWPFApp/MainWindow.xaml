@@ -14,8 +14,9 @@
         <TextBox x:Name="DataTextBox" HorizontalAlignment="Left" Height="219" Margin="19,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" IsReadOnly="True"/>
         <Label x:Name="PortLabel" Content="Port" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top"/>
         <Label x:Name="BaudrateLabel" Content="Baudrate" Margin="0,20,117,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        <ComboBox x:Name="PortComboBox" HorizontalAlignment="Left" Margin="253,172,0,0" VerticalAlignment="Top" Width="75" DropDownOpened="PortComboBox_DropDownOpened"/>
-        <ComboBox x:Name="BaudRateComboBox" HorizontalAlignment="Left" Margin="253,211,0,0" VerticalAlignment="Top" Width="75" SelectedIndex="5"/>
+        <ComboBox x:Name="PortComboBox" HorizontalAlignment="Left" Margin="253,172,0,0" VerticalAlignment="Top" Width="75" DropDownOpened="PortComboBox_DropDownOpened" DropDownClosed="PortComboBox_DropDownClosed"/>
+        <ComboBox x:Name="BaudRateComboBox" HorizontalAlignment="Left" Margin="253,211,0,0" VerticalAlignment="Top" Width="75" SelectedIndex="5" DropDownClosed="BaudRateComboBox_DropDownClosed"/>
+        <CheckBox x:Name="runAtStartupCheckBox" Content="Starta automatiskt" HorizontalAlignment="Left" Margin="19,284,0,0" VerticalAlignment="Top" ToolTip="Starta applikationen automatiskt vid start av Windows" Click="runAtStartupCheckBox_Click"/>
 
     </Grid>
 </Window>
