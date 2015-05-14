@@ -22,6 +22,7 @@ using SpiderServerSideWPFApp.Model.DAL;
 using Domain.Model.BLL;
 using SpiderServerSideWPFApp.Model.BLL;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace SpiderServerSideWPFApp
 {
@@ -159,8 +160,28 @@ namespace SpiderServerSideWPFApp
             var checkBox = (CheckBox)sender;
             bool value;
             if (bool.TryParse(checkBox.IsChecked.ToString(), out value))
+            {
+                // Save the value of the checkbox
                 Properties.Settings.Default.runAtStartupSetting = value;
-            Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
+            }
+
+            // Register in startup; http://stackoverflow.com/questions/11065139/launch-window-on-windows-startup
+            string applicationPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+            string applicationName = "HeatingSpiderApp";
+            if (bool.TryParse(checkBox.IsChecked.ToString(), out value))
+            {
+                if (value)
+                {
+                    key.SetValue(applicationName, applicationPath);
+                }
+                else
+                {
+                    key.DeleteValue(applicationName, false);
+                }
+            }
         }
 
         private void BaudRateComboBox_DropDownClosed(object sender, EventArgs e)
