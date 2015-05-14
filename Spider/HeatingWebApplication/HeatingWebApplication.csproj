@@ -171,6 +171,7 @@
     <None Include="Properties\PublishProfiles\heating - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\heating - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Pics\ajax-loader.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />

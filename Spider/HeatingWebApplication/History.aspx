@@ -31,7 +31,7 @@
                         Skala i minuter: <br />
                     <asp:TextBox ID="ScaleTextBox" runat="server" Text="10" />
                     </label>
-                    <input id="ChartButton" type="button" value="Visa grafer"><span id="loadingAJAX" class="hide">  Laddar...</span></input>
+                    <input id="ChartButton" type="button" value="Visa grafer" /><span id="loadingAJAX" class="hide"> <img src="Pics/ajax-loader.gif" /></span>
                 </div
             </div>
         </LayoutTemplate>

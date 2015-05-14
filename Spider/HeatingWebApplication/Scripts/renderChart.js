@@ -5,8 +5,8 @@ $.getScript("https://www.google.com/jsapi", function () {
 });
 
 $(document).ready(function () {
-
     console.log("It's alive!");
+
     // Listen to either a click on the button or enter
     $("#ChartButton").click(function () {
         GetChartData();
@@ -17,6 +17,8 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    // Show/hide AJAX loading
     $(document).ajaxStart(function () {
         $("#loadingAJAX").removeClass("hide");
     });
