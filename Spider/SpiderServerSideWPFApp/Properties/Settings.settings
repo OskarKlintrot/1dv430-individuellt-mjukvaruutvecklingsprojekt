@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="runAtStartupSetting" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="baudRateSetting" Type="System.String" Scope="User">
       <Value Profile="(Default)">9600</Value>
