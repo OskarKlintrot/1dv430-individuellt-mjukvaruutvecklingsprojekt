@@ -81,15 +81,13 @@ namespace HeatingWebApplication
                 }
                 catch (Exception ex)
                 {
-                    // TODO: Send back better error message
-                    //historicalReadings[0].RoomDescription = ex.Message.ToString();
-                    //return historicalReadings;
+                    throw new Exception("Ett fel uppstod vid hämtning av historiken; " + ex.Message);
                 }
             }
 
             // Refactor the object to remove unnecessary data and duplicates and make it JSON-friendly
             var historicalReadings = UtilityLibrary.BreakOutTimestampFromRawHistory(rawHistory, scale);
-            
+
             return historicalReadings;
         }
 
