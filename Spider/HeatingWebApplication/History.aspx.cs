@@ -34,6 +34,11 @@ namespace HeatingWebApplication
         [WebMethod]
         public static ProcessedHistoricalData GetChartData(int[] roomID, DateTime startDate, DateTime endDate, int scale)
         {
+            if (roomID.Length == 0)
+            {
+                throw new Exception("Minst ett rum måste anges!");
+            }
+
             var Service = new Service();
             var UtilityLibrary = new UtilityLibrary();
 
