@@ -48,10 +48,15 @@ $(document).ready(function () {
             error: function (response, status, error) {
                 $("#errorDiv").addClass("alert alert-danger");
                 var err = JSON.parse(response.responseText);
-                var closeErrorMessage = "<a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>";
+                var closeErrorMessage = "<a href=\"#\" class=\"close\" id=\"closeErrorDiv\">&times;</a>";
                 $("#errorDiv").empty();
-                //$("#errorDiv").append(closeErrorMessage);
+                $("#errorDiv").append(closeErrorMessage);
                 $("#errorDiv").append(err.Message);
+                $('#closeErrorDiv').click(function () {
+                    $("#errorDiv").removeClass("alert alert-danger");
+                    $("#errorDiv").empty();
+                    return false;
+                });
             }
         });
     };
