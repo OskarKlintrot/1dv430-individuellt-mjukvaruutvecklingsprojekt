@@ -15,6 +15,16 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
+                        <div class="col-md-7">
+                                <asp:Panel runat="server" ID="WarningMessagePanel" Visible="false" CssClass="icon-ok">
+                                    <div class="alert alert-danger">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <asp:Literal runat="server" ID="WarningMessageLiteral" />
+                                    </div>
+                                </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="UsernameTextBox" CssClass="col-md-2 control-label">Användarnamn</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="UsernameTextBox" CssClass="form-control" TextMode="SingleLine" />
@@ -27,16 +37,6 @@
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="PasswordTextBox" TextMode="Password" CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordTextBox" CssClass="text-danger" ErrorMessage="Du måste ange ett lösenord." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-5">
-                                <asp:Panel runat="server" ID="WarningMessagePanel" Visible="false" CssClass="icon-ok">
-                                    <div class="alert alert-danger">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        <asp:Literal runat="server" ID="WarningMessageLiteral" />
-                                    </div>
-                                </asp:Panel>
                         </div>
                     </div>
                     <div class="form-group">

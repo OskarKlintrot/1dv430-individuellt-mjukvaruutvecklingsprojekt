@@ -18,17 +18,26 @@ namespace HeatingWebApplication
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loginSuccess"] != null)
+            try
             {
-                
+                if (!bool.Parse(Session["loginSuccess"].ToString()) == true)
+                {
+                    throw new Exception();
+                }
             }
-            else
+            catch (Exception)
             {
-                Response.Redirect("~/Login.aspx/?ReturnURL=" + HttpContext.Current.Request.Url.AbsoluteUri);
+                NotLoggedIn();
             }
 
             SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
             SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
+        }
+
+        private void NotLoggedIn()
+        {
+            Page.SetTempData("WarningMessage", "Du är inte inloggad.");
+            Response.Redirect("~/Login.aspx/?ReturnURL=" + HttpContext.Current.Request.Url.AbsoluteUri);
         }
 
         // The return type can be changed to IEnumerable, however to support
