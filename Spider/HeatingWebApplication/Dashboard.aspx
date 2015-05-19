@@ -50,7 +50,7 @@
                     </div>
                     <%--Temperature--%>
                     <div>
-                        <asp:Label ID="TemperatureLabel" runat="server" ><%# Item.LastTemperature %>&deg;C</asp:Label>
+                        <asp:Label ID="TemperatureLabel" runat="server" >Aktuell temperatur: <%# Item.LastTemperature %>&deg;C</asp:Label>
                     </div>
                     <%--Turn heating on or off--%>
                     <div>
