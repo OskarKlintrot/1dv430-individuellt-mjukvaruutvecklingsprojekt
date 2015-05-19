@@ -18,6 +18,15 @@ namespace HeatingWebApplication
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loginSuccess"] != null)
+            {
+                
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx/?ReturnURL=" + HttpContext.Current.Request.Url.AbsoluteUri);
+            }
+
             SuccessMessageLiteral.Text = Page.GetTempData("SuccessMessage") as string;
             SuccessMessagePanel.Visible = !String.IsNullOrWhiteSpace(SuccessMessageLiteral.Text);
         }

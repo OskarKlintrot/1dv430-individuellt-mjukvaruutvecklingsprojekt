@@ -86,7 +86,7 @@ namespace HeatingWebApplication.Account
         {
             if (IsValid)
             {
-                // Create the local login info and link the local account to the user
+                // Create the local login info and link the local account to the username
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 IdentityResult result = manager.AddPassword(User.Identity.GetUserId(), password.Text);
                 if (result.Succeeded)

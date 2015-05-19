@@ -10,7 +10,7 @@ using HeatingWebApplication.Models;
 
 namespace HeatingWebApplication.Models
 {
-    // You can add User data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    // You can add User data for the username by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
         public Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
@@ -22,7 +22,7 @@ namespace HeatingWebApplication.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
+            // Add custom username claims here
             return userIdentity;
         }
     }

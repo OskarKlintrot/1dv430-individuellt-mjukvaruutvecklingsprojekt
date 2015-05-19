@@ -16,12 +16,12 @@ namespace HeatingWebApplication
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301883
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Configure the db chartData and user manager to use a single instance per request
+            // Configure the db chartData and username manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            // Enable the application to use a cookie to store information for the signed in user
-            // and to use a cookie to temporarily store information about a user logging in with a third party login provider
+            // Enable the application to use a cookie to store information for the signed in username
+            // and to use a cookie to temporarily store information about a username logging in with a third party login provider
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -34,7 +34,7 @@ namespace HeatingWebApplication
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });
-            // Use a cookie to temporarily store information about a user logging in with a third party login provider
+            // Use a cookie to temporarily store information about a username logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
@@ -50,11 +50,11 @@ namespace HeatingWebApplication
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "638433775504-ahi5i20nmtsrsffqa4703j8bfnt00ifm.apps.googleusercontent.com",
+                ClientSecret = "S8o8PPFHEQmtOnmVCvdFdPsC"
+            });
         }
     }
 }

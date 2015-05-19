@@ -7,7 +7,7 @@ using HeatingWebApplication.Models;
 
 namespace HeatingWebApplication
 {
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    // Configure the application username manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
@@ -33,7 +33,7 @@ namespace HeatingWebApplication
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user. 
+            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the username. 
             // For more information on using two-factor authentication please see http://go.microsoft.com/fwlink/?LinkID=391935
             // You can write your own provider and plug in here.
             manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>

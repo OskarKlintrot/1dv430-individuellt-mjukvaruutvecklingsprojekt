@@ -18,7 +18,7 @@ namespace HeatingWebApplication.Account
         {
             if (IsValid)
             {
-                // Validate the user password
+                // Validate the username password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 ApplicationUser user = manager.FindByName(Email.Text);
                 if (user == null || !manager.IsEmailConfirmed(user.Id))
@@ -29,9 +29,9 @@ namespace HeatingWebApplication.Account
                 }
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send email with the code and the redirect to reset password page
-                //string code = manager.GeneratePasswordResetToken(user.Id);
+                //string code = manager.GeneratePasswordResetToken(username.Id);
                 //string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code);
-                //manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+                //manager.SendEmail(username.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
             }
         }
     }

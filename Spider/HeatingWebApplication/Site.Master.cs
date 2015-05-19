@@ -68,13 +68,31 @@ namespace HeatingWebApplication
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["loginSuccess"] != null)
+            {
+                logInLinkButton.Visible = false;
+            }
+            else
+	        {
+                logOutLinkButton.Visible = false;    
+	        }
         }
 
-        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        protected void logInLinkButton_Click(object sender, EventArgs e)
         {
-            Context.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("~/Login.aspx/?ReturnURL=" + HttpContext.Current.Request.Url.AbsoluteUri);
         }
+
+        protected void logOutLinkButton_Click(object sender, EventArgs e)
+        {
+            Session.Remove("loginSuccess");
+            Response.Redirect(Request.RawUrl);
+        }
+
+        //protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        //{
+        //    Context.GetOwinContext().Authentication.SignOut();
+        //}
     }
 
 }

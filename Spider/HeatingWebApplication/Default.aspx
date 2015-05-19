@@ -16,14 +16,14 @@
         <div class="col-md-4">
             <h2>Logga in</h2>
             <p>
-                För att kunna ändra värmen i kyrkan behöver du logga in. Tänk på att om du sitter vid din privata dator kan du kryssa i rutan "Kom ihåg mig?" så behöver du inte logga in nästa gång.
+                För att kunna ändra värmen i kyrkan behöver du logga in. Tänk på att logga ut om du sitter vid en allmän dator.
             </p>
             <p>
-                <asp:HyperLink ID="HyperLink2" class="btn btn-default" runat="server" NavigateUrl="Account/Login">Till inloggningen &raquo;</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink2" class="btn btn-default" runat="server" NavigateUrl="Login">Till inloggningen &raquo;</asp:HyperLink>
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Historiska temperaturer</h2>
+            <h2>Historik</h2>
             <p>
                 Här kan du hämta historiska temperaturer. Du väljer själv i vilket tidsspan, upplösning och vilka rum du vill se.
             </p>
@@ -34,7 +34,7 @@
         <div class="col-md-4">
             <h2>Kontakt</h2>
             <p>
-                Har du frågor eller funderingar kring den här webbapplikationen? Tveka i så fall inte att ta kontakt med någon av oss som ligger bakom den!
+                Har du frågor eller funderingar kring den här webbapplikationen? Kontakta oss i så fall!
             </p>
             <p>
                 <asp:HyperLink ID="HyperLink4" class="btn btn-default" runat="server" NavigateUrl="Contact">Kontakta oss &raquo;</asp:HyperLink>

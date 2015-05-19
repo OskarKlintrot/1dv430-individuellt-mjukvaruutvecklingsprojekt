@@ -55,11 +55,17 @@
                         <li><a runat="server" href="~/About">Om sidan</a></li>
                         <li><a runat="server" href="~/Contact">Kontakt</a></li>
                     </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <asp:LinkButton ID="logInLinkButton" OnClick="logInLinkButton_Click" runat="server" Text="Logga in" />
+                            <asp:LinkButton ID="logOutLinkButton" OnClick="logOutLinkButton_Click" runat="server" Text="Logga ut" />
+                        </li>
+                    </ul>
+                    <%--<%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-right">--%>
                                 <%--<li><a runat="server" href="~/Account/Register">Register</a></li>--%>
-                                <li><a runat="server" href="~/Account/Login">Logga in</a></li>
+                                <%--<li><a ID="logInOrOut" runat="server" href="~/Login.aspx">Logga in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
@@ -70,7 +76,7 @@
                                 </li>
                             </ul>
                         </LoggedInTemplate>
-                    </asp:LoginView>
+                    </asp:LoginView>--%>--%>
                 </div>
             </div>
         </div>
