@@ -49,6 +49,24 @@ namespace HeatingWebApplication {
         protected global::System.Web.UI.WebControls.TextBox PasswordTextBox;
         
         /// <summary>
+        /// WarningMessagePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel WarningMessagePanel;
+        
+        /// <summary>
+        /// WarningMessageLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal WarningMessageLiteral;
+        
+        /// <summary>
         /// LogInButton control.
         /// </summary>
         /// <remarks>

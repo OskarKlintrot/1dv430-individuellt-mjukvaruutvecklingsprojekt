@@ -86,7 +86,14 @@ namespace HeatingWebApplication
         protected void logOutLinkButton_Click(object sender, EventArgs e)
         {
             Session.Remove("loginSuccess");
-            Response.Redirect(Request.RawUrl);
+            if (Request.RawUrl.Contains("Dashboard"))
+            {
+                Response.Redirect("~/");
+            }
+            else
+            {
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         //protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

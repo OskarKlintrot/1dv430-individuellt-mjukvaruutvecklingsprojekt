@@ -30,6 +30,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                                <asp:Panel runat="server" ID="WarningMessagePanel" Visible="false" CssClass="icon-ok">
+                                    <div class="alert alert-danger">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <asp:Literal runat="server" ID="WarningMessageLiteral" />
+                                    </div>
+                                </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" ID="LogInButton" OnClick="LogInButton_Click" Text="Logga in" CssClass="btn btn-default" />
                         </div>

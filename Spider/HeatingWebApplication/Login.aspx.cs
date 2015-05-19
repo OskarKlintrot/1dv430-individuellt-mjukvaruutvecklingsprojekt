@@ -11,7 +11,8 @@ namespace HeatingWebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            WarningMessageLiteral.Text = Page.GetTempData("WarningMessage") as string;
+            WarningMessagePanel.Visible = !String.IsNullOrWhiteSpace(WarningMessageLiteral.Text);
         }
 
         protected void LogInButton_Click(object sender, EventArgs e)
@@ -25,7 +26,16 @@ namespace HeatingWebApplication
                 {
                     Response.Redirect("~/");
                 }
-                Response.Redirect(Request.QueryString["ReturnURL"]);
+                else
+                {
+                    Response.Redirect(Request.QueryString["ReturnURL"]);
+                }
+            }
+            else
+            {
+                Page.SetTempData("WarningMessage", "Felaktigt användarnamn eller lösenord.");
+                Response.Redirect(Request.RawUrl);
+                Context.ApplicationInstance.CompleteRequest();
             }
         }
     }
