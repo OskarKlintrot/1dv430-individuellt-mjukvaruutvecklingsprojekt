@@ -57,13 +57,13 @@
                         <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOnLinkButton" CommandName="Update"
-                                    CssClass="btn btn-success" Text="Sätt på värmen &raquo;" runat="server" />
+                                    CssClass="btn btn-default" Text="Sätt på värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="PlaceHolder2" Visible='<%# Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOffLinkButton" CommandName="Update"
-                                    CssClass="btn btn-danger" Text="Stäng av värmen &raquo;" runat="server" />
+                                    CssClass="btn btn-default" Text="Stäng av värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                     </div>
