@@ -44,16 +44,16 @@
                         <%--Heating on or off label--%>
                         <asp:PlaceHolder ID="HeatingOnPlaceHolder" Visible='<%# Item.Heating %>' runat="server">
                             <h3>
-                                <img title="Värme på" alt="Värme på" src="Pics/On-LED.png" />
+                                <img title="Värmen är på" alt="Värmen är på" src="Pics/On-LED.png" />
                                 <br />
-                                <asp:Label ID="HeatingOnLabel" CssClass="label label-success" runat="server" Text="Värme på"></asp:Label>
+                                <asp:Label ID="HeatingOnLabel" CssClass="label label-success" runat="server" Text="Värmen är på"></asp:Label>
                             </h3>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="HeatingOffPlaceHolder" Visible='<%# !Item.Heating %>' runat="server">
                             <h3>    
-                                <img title="Värme av" alt="Värme av" src="Pics/Off-LED.png" />
+                                <img title="Värmen är av" alt="Värmen är av" src="Pics/Off-LED.png" />
                                 <br />
-                                <asp:Label ID="HeatingOffLabel" CssClass="label label-danger" runat="server" Text="Värme av"></asp:Label>
+                                <asp:Label ID="HeatingOffLabel" CssClass="label label-danger" runat="server" Text="Värmen är av"></asp:Label>
                             </h3>
                         </asp:PlaceHolder>
                     </div>
