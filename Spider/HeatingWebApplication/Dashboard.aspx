@@ -29,41 +29,46 @@
                 </p>
             </EmptyDataTemplate>
             <ItemTemplate>
-                <div class="col-sm-6 col-md-4 text-center panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">
-                            <asp:Label ID="RoomLabel" runat="server" Text='<%# Item.RoomDescription %>'></asp:Label>
-                        </h2>
-                    </div>
-                    <%--Heating on or off label--%>
-                    <div>
+                <div class="col-sm-6 col-md-4 text-center">
+                    <div >
+                        <%-- Room Description --%>
+                            <h3 class="well">
+                                <asp:Label ID="RoomLabel" runat="server" Text='<%# Item.RoomDescription %>'></asp:Label>
+                            </h3>
+                        <%--Temperature--%>
+                        <div>
+                            <h3>
+                                <asp:Label class="label label-info" ID="TemperatureLabel" runat="server">Aktuell temperatur: <%# Item.LastTemperature %>&deg;C</asp:Label>
+                            </h3>
+                        </div>
+                        <%--Heating on or off label--%>
                         <asp:PlaceHolder ID="HeatingOnPlaceHolder" Visible='<%# Item.Heating %>' runat="server">
                             <h3>
+                                <img title="Värme på" alt="Värme på" src="Pics/On-LED.png" />
+                                <br />
                                 <asp:Label ID="HeatingOnLabel" CssClass="label label-success" runat="server" Text="Värme på"></asp:Label>
                             </h3>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="HeatingOffPlaceHolder" Visible='<%# !Item.Heating %>' runat="server">
-                            <h3>
+                            <h3>    
+                                <img title="Värme av" alt="Värme av" src="Pics/Off-LED.png" />
+                                <br />
                                 <asp:Label ID="HeatingOffLabel" CssClass="label label-danger" runat="server" Text="Värme av"></asp:Label>
                             </h3>
                         </asp:PlaceHolder>
-                    </div>
-                    <%--Temperature--%>
-                    <div>
-                        <asp:Label ID="TemperatureLabel" runat="server" >Aktuell temperatur: <%# Item.LastTemperature %>&deg;C</asp:Label>
                     </div>
                     <%--Turn heating on or off--%>
                     <div>
                         <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOnLinkButton" CommandName="Update"
-                                    CssClass="btn btn-default" Text="Sätt på värmen &raquo;" runat="server" />
+                                    CssClass="heating btn btn-default" Text="Sätt på värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="PlaceHolder2" Visible='<%# Item.Heating %>' runat="server">
                             <p>
                                 <asp:LinkButton ID="HeatOffLinkButton" CommandName="Update"
-                                    CssClass="btn btn-default" Text="Stäng av värmen &raquo;" runat="server" />
+                                    CssClass="heating btn btn-default" Text="Stäng av värmen &raquo;" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                     </div>

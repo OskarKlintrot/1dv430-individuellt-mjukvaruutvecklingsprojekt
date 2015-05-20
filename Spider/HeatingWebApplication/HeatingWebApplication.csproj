@@ -150,6 +150,7 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="error.aspx" />
@@ -160,10 +161,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Pics\Lampa.ai" />
     <None Include="Properties\PublishProfiles\heating - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\heating - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pics\ajax-loader.gif" />
+    <Content Include="Pics\Off-LED.png" />
+    <Content Include="Pics\On-LED.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
