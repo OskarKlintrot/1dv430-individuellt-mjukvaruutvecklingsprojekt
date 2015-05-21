@@ -13,6 +13,15 @@ namespace HeatingWebApplication
         {
             WarningMessageLiteral.Text = Page.GetTempData("WarningMessage") as string;
             WarningMessagePanel.Visible = !String.IsNullOrWhiteSpace(WarningMessageLiteral.Text);
+
+            if (Session["loginSuccess"] != null)
+            {
+                loginDiv.Visible = false;
+            }
+            else
+            {
+                logoutDiv.Visible = false;
+            }
         }
 
         protected void LogInButton_Click(object sender, EventArgs e)
@@ -37,6 +46,12 @@ namespace HeatingWebApplication
                 Response.Redirect(Request.RawUrl);
                 Context.ApplicationInstance.CompleteRequest();
             }
+        }
+
+        protected void LogOutButton_Click(object sender, EventArgs e)
+        {
+            Session.Remove("loginSuccess");
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -6,7 +6,18 @@
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
-                <div class="form-horizontal">
+                <div id="logoutDiv" runat="server">
+                        <div>
+                            <p>
+                                Du är redan inloggad, vill du logga ut?
+                            </p>
+                        </div>
+                        <div class="col-md-offset-2 col-md-10">
+                                <asp:Button runat="server" ID="LogOutButton" OnClick="LogOutButton_Click" Text="Logga ut" CssClass="btn btn-default" />
+                        </div>
+                    </div>
+
+                <div id="loginDiv" runat="server" class="form-horizontal">
                     <h4>Skriv in användarnamn och lösenord.</h4>
                     <hr />
                       <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
@@ -24,24 +35,27 @@
                                 </asp:Panel>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="UsernameTextBox" CssClass="col-md-2 control-label">Användarnamn</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="UsernameTextBox" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UsernameTextBox"
-                                CssClass="text-danger" ErrorMessage="Du måste ange ett användarnamn." />
+
+                    <div>
+                        <div class="form-group">
+                            <asp:Label runat="server" AssociatedControlID="UsernameTextBox" CssClass="col-md-2 control-label">Användarnamn</asp:Label>
+                            <div class="col-md-10">
+                                <asp:TextBox runat="server" ID="UsernameTextBox" CssClass="form-control" TextMode="SingleLine" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="UsernameTextBox"
+                                    CssClass="text-danger" ErrorMessage="Du måste ange ett användarnamn." />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="PasswordTextBox" CssClass="col-md-2 control-label">Lösenord</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="PasswordTextBox" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordTextBox" CssClass="text-danger" ErrorMessage="Du måste ange ett lösenord." />
+                        <div class="form-group">
+                            <asp:Label runat="server" AssociatedControlID="PasswordTextBox" CssClass="col-md-2 control-label">Lösenord</asp:Label>
+                            <div class="col-md-10">
+                                <asp:TextBox runat="server" ID="PasswordTextBox" TextMode="Password" CssClass="form-control" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordTextBox" CssClass="text-danger" ErrorMessage="Du måste ange ett lösenord." />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" ID="LogInButton" OnClick="LogInButton_Click" Text="Logga in" CssClass="btn btn-default" />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <asp:Button runat="server" ID="LogInButton" OnClick="LogInButton_Click" Text="Logga in" CssClass="btn btn-default" />
+                            </div>
                         </div>
                     </div>
                 </div>
