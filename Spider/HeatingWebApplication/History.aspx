@@ -36,7 +36,7 @@
         </LayoutTemplate>
         <EmptyDataTemplate>
             <p>
-                Det fanns ingen data att hämta från databasen.
+                Tyvärr, databasen verkar ligga nere. Hör gärna av dig till oss och <a href="Contact">meddela felet</a>.
             </p>
         </EmptyDataTemplate>
         <ItemTemplate>
