@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <h1><%: Title %></h1>
         <p class="lead">
-            Välkommen till hemsidan som styr värmen i vår kyrklokal. Här kan du sätta på och av värmen i olika rum, kontrollera aktuella temperaturer och kolla tidigare temperaturer för de olika rummen.
+            Välkommen till hemsidan som styr värmen i vår kyrklokal. Här kan du sätta på och av värmen i olika rum, se aktuella temperaturer och se tidigare temperaturer för rummen.
         </p>
         <p>
             <asp:HyperLink ID="HyperLink1" class="btn btn-primary btn-lg" runat="server" NavigateUrl="Dashboard">Värmeregleringen &raquo;</asp:HyperLink>
@@ -34,7 +34,7 @@
         <div class="col-md-4">
             <h2>Kontakt</h2>
             <p>
-                Har du frågor eller funderingar kring den här webbapplikationen? Kontakta oss i så fall!
+                Har du frågor eller funderingar kring den här webbapplikationen? Tveka isåfall in att kontakta oss som driver sidan!
             </p>
             <p>
                 <asp:HyperLink ID="HyperLink4" class="btn btn-default" runat="server" NavigateUrl="Contact">Kontakta oss &raquo;</asp:HyperLink>
