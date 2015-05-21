@@ -12,12 +12,11 @@
         ItemType="Domain.Model.BLL.Room"
         SelectMethod="AvailableRoomsListView_GetData">
         <LayoutTemplate>
-            <div id="ChartsToDisplay" class="col-md-10 col-md-offset-1 well">
+            <div id="ChartsToDisplay" class="well col-md-offset-1 col-md-10">
                 <div >
                     <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
                 </div>
-                <br />
-                <div>
+                <div class="clearme">
                     <label>
                         Startdatum: <br />
                     <asp:TextBox ID="StartDateTextBox" type="date" OnLoad="StartDateTextBox_Load" runat="server" />
@@ -47,7 +46,7 @@
             </label>
         </ItemTemplate>
     </asp:ListView>
-    <div id="errorDiv" class="col-md-offset-1 col-md-10"></div>
-    <div id="chartDiv" class="col-md-12 clearme"></div>
+    <div id="errorDiv" class="clearme col-md-offset-1 col-md-10"></div>
+    <div id="chartDiv" class="clearme"></div>
     <div id="helpTextDiv"><p><em></em></p></div>
 </asp:Content>
