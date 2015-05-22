@@ -76,6 +76,8 @@ namespace SpiderServerSideWPFApp
             LightOffButton.IsEnabled = false;
             DataTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
+            DataTextBox.Text = Service.GetEvents();
+
             // Run application, if run at start up enabled
             if (Properties.Settings.Default.runAtStartupSetting)
             {

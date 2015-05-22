@@ -23,7 +23,6 @@ namespace CalendarQuickstart
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Calendar API Quickstart";
 
-
         static void Main(string[] args)
         {
             UserCredential credential;
@@ -42,7 +41,7 @@ namespace CalendarQuickstart
                   CancellationToken.None,
                   new FileDataStore(credPath, true)).Result;
 
-                Console.WriteLine("Credential file saved to: " + credPath);
+                //Console.WriteLine("Credential file saved to: " + credPath);
             }
 
             // Create Calendar Service.

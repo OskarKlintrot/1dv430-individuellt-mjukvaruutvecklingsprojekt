@@ -92,5 +92,21 @@ namespace SpiderServerSideWPFApp.Model
         }
 
         #endregion
+
+        #region Google Calendar
+
+        private GoogleCalendar _googleCalendar;
+
+        private GoogleCalendar GoogleCalendar
+        {
+            get { return _googleCalendar ?? (_googleCalendar = new GoogleCalendar()); }
+        }
+
+        public string GetEvents()
+        {
+            return GoogleCalendar.GetEvents();
+        }
+
+        #endregion
     }
 }
