@@ -10,10 +10,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%-- Start Scripts --%>
-    <script src="Components/fullcalendar-2.3.1/lib/moment.min.js"></script>
-    <script src="Components/fullcalendar-2.3.1/fullcalendar.js"></script>
-    <script src="Components/fullcalendar-2.3.1/lang/sv.js"></script>
-    <script src="Scripts/FullCalendarIO.js"></script>
+    <script type='text/javascript' src="Components/fullcalendar-2.3.1/lib/moment.min.js"></script>
+    <script type='text/javascript' src="Components/fullcalendar-2.3.1/fullcalendar.js"></script>
+    <script type='text/javascript' src="Components/fullcalendar-2.3.1/lang/sv.js"></script>
+    <script type='text/javascript' src='Components/fullcalendar-2.3.1/gcal.js'></script>
+    <script type='text/javascript' src="Scripts/FullCalendarIO.js"></script>
     <%-- End Scripts --%>
 
     <div id="calendar"></div>
