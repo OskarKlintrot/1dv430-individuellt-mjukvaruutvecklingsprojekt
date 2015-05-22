@@ -1,6 +1,6 @@
 ﻿$(document).ready(function(){
 
-    var defaultViewBasedOnWindowsWidth = function () {
+    var defaultViewBasedOnWindowWidth = function () {
         if ($(window).width() < 480) {
             return "agendaDay";
         }
@@ -21,9 +21,9 @@
         },
 
         // Responsive
-        defaultView: defaultViewBasedOnWindowsWidth(),
+        defaultView: defaultViewBasedOnWindowWidth(),
         windowResize: function (view) {
-            $('#calendar').fullCalendar('changeView', defaultViewBasedOnWindowsWidth());
+            $('#calendar').fullCalendar('changeView', defaultViewBasedOnWindowWidth());
         },
 
         // Language
