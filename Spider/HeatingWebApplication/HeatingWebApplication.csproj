@@ -382,6 +382,8 @@
     <Content Include="Scripts\FullCalendarIO.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\renderChart.js" />
     <Content Include="Scripts\respond.js" />

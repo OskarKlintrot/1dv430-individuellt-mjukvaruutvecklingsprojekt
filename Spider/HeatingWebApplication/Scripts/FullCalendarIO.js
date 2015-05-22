@@ -12,6 +12,17 @@
         };
     };
 
+    // Get correct ordinal
+    moment.locale('sv', {
+        ordinal : function (number, token) {
+            var b = number % 10;
+            var output = (~~ (number % 100 / 10) === 1) ? ':e' :
+                (b === 1) ? ':a' :
+                (b === 2) ? ':a' : ':e';
+            return number + output;
+        }
+    });
+
     $("#calendar").fullCalendar({
         // View
         header: {
@@ -41,6 +52,31 @@
                 googleCalendarId: 'kalender@missionskyrkorna.se'
             }
         ],
+
+        // Modal
+        eventRender: function (event, element) {
+            element.attr('href', 'javascript:void(0);');
+        },
+        eventClick: function (event, jsEvent, view) {
+            // Remove old info
+            $('#modalTitle').html('');
+            $('#modalBody').html('');
+            $('#eventUrl').attr('href','');
+            $('#fullCalModal').modal();
+
+            // Add new info
+            $('#modalTitle').html(event.title);
+            $('#modalBody').html("<strong>Starttid:</strong> " + moment(event.start).format('Do MMM HH:mm') +  "<br />");
+            $('#modalBody').append("<strong>Sluttid:</strong> " + moment(event.end).format('Do MMM HH:mm') + "<br />");
+            if (event.location) {
+                $('#modalBody').append("<strong>Plats:</strong> " + event.location + "<br />");
+            }
+            if (event.description) {
+                $('#modalBody').append("<br />" + event.description);
+            }
+            $('#eventUrl').attr('href',event.url);
+            $('#fullCalModal').modal();
+        }
     });
 
 });
