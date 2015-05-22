@@ -13,6 +13,7 @@
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="Content/Custom.css" rel="stylesheet" />
+    <asp:contentplaceholder id="ExtraStylesAndScripts" runat="server" />
     
     <%-- region Favicon --%>
     <link rel="apple-touch-icon" sizes="57x57" href="/Pics/Favicon/apple-touch-icon-57x57.png">
@@ -73,6 +74,7 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Dashboard">Reglering av värmen</a></li>
                         <li><a runat="server" href="~/History">Historiska temperaturer</a></li>
+                        <li><a runat="server" href="~/Calendar">Kalender</a></li>
                         <li><a runat="server" href="~/About">Om sidan</a></li>
                         <li><a runat="server" href="~/Contact">Kontakt</a></li>
                     </ul>

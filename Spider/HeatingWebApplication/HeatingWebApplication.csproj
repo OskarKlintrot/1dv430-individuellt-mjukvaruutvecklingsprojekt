@@ -147,6 +147,94 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Calendar.aspx" />
+    <Content Include="Components\fullcalendar-2.3.1\changelog.txt" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\agenda-views.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\background-events.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\basic-views.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\default.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\external-dragging.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\gcal.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\json.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\languages.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\selectable.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\theme.html" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\timezones.html" />
+    <Content Include="Components\fullcalendar-2.3.1\fullcalendar.css" />
+    <Content Include="Components\fullcalendar-2.3.1\fullcalendar.js" />
+    <Content Include="Components\fullcalendar-2.3.1\fullcalendar.min.css" />
+    <Content Include="Components\fullcalendar-2.3.1\fullcalendar.min.js" />
+    <Content Include="Components\fullcalendar-2.3.1\fullcalendar.print.css" />
+    <Content Include="Components\fullcalendar-2.3.1\gcal.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang-all.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ar-ma.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ar-sa.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ar-tn.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ar.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\bg.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ca.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\cs.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\da.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\de-at.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\de.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\el.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\en-au.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\en-ca.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\en-gb.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\es.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\fa.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\fi.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\fr-ca.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\fr.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\he.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\hi.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\hr.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\hu.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\id.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\is.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\it.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ja.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ko.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\lt.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\lv.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\nb.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\nl.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\pl.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\pt-br.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\pt.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ro.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\ru.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\sk.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\sl.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\sr-cyrl.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\sr.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\sv.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\th.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\tr.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\uk.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\vi.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\zh-cn.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lang\zh-tw.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\jquery-ui.custom.min.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\jquery.min.js" />
+    <Content Include="Components\fullcalendar-2.3.1\lib\moment.min.js" />
+    <Content Include="Components\fullcalendar-2.3.1\license.txt" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -200,6 +288,10 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\json\events.json" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\php\get-events.php" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\php\get-timezones.php" />
+    <Content Include="Components\fullcalendar-2.3.1\demos\php\utils.php" />
     <None Include="Content\bootstrap\wells.less" />
     <None Include="Content\bootstrap\variables.less" />
     <None Include="Content\bootstrap\utilities.less" />
@@ -287,6 +379,7 @@
     <Content Include="Pics\On-LED_big.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\FullCalendarIO.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -347,6 +440,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

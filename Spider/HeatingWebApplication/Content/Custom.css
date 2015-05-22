@@ -10,3 +10,7 @@
 .clearme {
     clear: both;
 }
+
+#calendar {
+    margin-top: 15px;
+}
