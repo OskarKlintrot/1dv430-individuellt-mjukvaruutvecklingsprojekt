@@ -46,6 +46,7 @@ namespace SpiderServerSideWPFApp
         {
             get { return _readUpdateData ?? (_readUpdateData = new ReadUpdateData()); }
         }
+        private CalendarEvent[] CalendarEvents { get; set; }
         #endregion
 
         public MainWindow()
@@ -74,15 +75,22 @@ namespace SpiderServerSideWPFApp
             StopButton.IsEnabled = false;
             LightOnButton.IsEnabled = false;
             LightOffButton.IsEnabled = false;
+            LoadingEventsLabel.Visibility = Visibility.Hidden;
+            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
             DataTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
-            var events = Service.GetEvents();
+            //var events = Service.GetEvents();
 
-            foreach (var item in events)
-            {
-                DataTextBox.AppendText(item.Summary + ",\r" + item.Location + "\r(" + item.Start.ToShortDateString() + " " + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
-                DataTextBox.ScrollToEnd();
-            }
+            //CalendarTextBox.Clear();
+            CalendarTextBox.IsReadOnly = true;
+            CalendarTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            //foreach (var item in events)
+            //{
+            //    CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location + 
+            //        "\r(" + item.Start.ToShortDateString() + " " 
+            //        + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+            //    CalendarTextBox.ScrollToEnd();
+            //}
 
             //DataTextBox.Text = Service.GetEvents();
 
@@ -210,6 +218,76 @@ namespace SpiderServerSideWPFApp
         #region Methods
         private void RunApplication()
         {
+            SetupConnectionToArduino();
+            ListeningForCalendarEvents();
+        }
+
+        private void ListeningForCalendarEvents()
+        {
+            // Set up the UI
+            LoadingEventsLabel.Visibility = Visibility.Visible;
+            LoadingEventsProgressBar.Visibility = Visibility.Visible;
+            LoadingEventsLabel.Content = "Laddar kalenderhändelser...";
+            LoadingEventsProgressBar.Value = 100;
+
+            // Start a background worker
+            var worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
+        }
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
+            LoadingEventsLabel.Content = "Senast uppdaterad: " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
+            CalendarTextBox.Clear();
+
+            CalendarEvents = e.UserState as CalendarEvent[];
+
+            foreach (var item in CalendarEvents)
+            {
+                CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
+                    "\r(" + item.Start.ToShortDateString() + " "
+                    + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+            }
+        }
+
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
+            LoadingEventsLabel.Content = "Senast uppdaterad: " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
+            //CalendarTextBox.Clear();
+
+            //CalendarEvents = e.Result as CalendarEvent[];
+
+            //foreach (var item in CalendarEvents)
+            //{
+            //    CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
+            //        "\r(" + item.Start.ToShortDateString() + " "
+            //        + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+            //}
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)sender;
+            while (Service.SC_ConnectionOpen)
+            {
+                e.Result = Service.GetEvents();
+                worker.ReportProgress(0, e.Result);
+                Thread.Sleep(10000);
+            }
+        }
+
+        private void SetupConnectionToArduino()
+        {
             string port = PortComboBox.Text;
             int intBaudrate;
             int baudrate;
@@ -239,6 +317,8 @@ namespace SpiderServerSideWPFApp
                     Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
                     Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
                 }
+
+
             }
             catch (Exception ex)
             {
