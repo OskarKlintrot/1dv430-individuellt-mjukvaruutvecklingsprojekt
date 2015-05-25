@@ -16,7 +16,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
     public class GoogleCalendar
     {
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
-        static string ApplicationName = "Calendar API Quickstart";
+        static string ApplicationName = "Varmeregleringen i kyrkan";
         
 
         public static string GetEvents()
@@ -36,7 +36,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
             });
 
             // Define parameters of request.
-            EventsResource.ListRequest request = service.Events.List("primary");
+            EventsResource.ListRequest request = service.Events.List("kalender@missionskyrkorna.se");
             request.TimeMin = DateTime.Now;
             request.ShowDeleted = false;
             request.SingleEvents = true;
@@ -45,25 +45,28 @@ namespace SpiderServerSideWPFApp.Model.DAL
 
             Console.WriteLine("Upcoming events:");
             Events events = request.Execute();
-
-            string stringWithEvents = "";
             if (events.Items.Count > 0)
             {
                 foreach (var eventItem in events.Items)
                 {
                     string when = eventItem.Start.DateTime.ToString();
+                    string where = eventItem.Location;
                     if (String.IsNullOrEmpty(when))
                     {
-                        when = eventItem.Start.DateTime.ToString();
+                        when = eventItem.Start.Date;
                     }
-                    stringWithEvents += "{0} ({1})" + eventItem.Summary + eventItem.Start.DateTime.ToString();
+                    if (String.IsNullOrEmpty(where))
+                    {
+                        where = eventItem.Location;
+                    }
+                    Console.WriteLine("{0}, {1} ({2})", eventItem.Summary, where, when);
                 }
             }
             else
             {
-                return "No upcoming events found.";
+                Console.WriteLine("No upcoming events found.");
             }
-            return stringWithEvents;
+            return "See console log for upcoming events";
         }
 
         static UserCredential Login()
