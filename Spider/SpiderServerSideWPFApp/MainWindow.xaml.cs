@@ -76,7 +76,15 @@ namespace SpiderServerSideWPFApp
             LightOffButton.IsEnabled = false;
             DataTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
-            DataTextBox.Text = Service.GetEvents();
+            var events = Service.GetEvents();
+
+            foreach (var item in events)
+            {
+                DataTextBox.AppendText(item.Summary + ",\r" + item.Location + "\r(" + item.Start.ToShortDateString() + " " + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+                DataTextBox.ScrollToEnd();
+            }
+
+            //DataTextBox.Text = Service.GetEvents();
 
             // Run application, if run at start up enabled
             if (Properties.Settings.Default.runAtStartupSetting)

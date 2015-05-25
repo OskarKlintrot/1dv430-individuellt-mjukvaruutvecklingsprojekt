@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using SpiderServerSideWPFApp.Model.DAL;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using SpiderServerSideWPFApp.Model.BLL;
 
 namespace SpiderServerSideWPFApp.Model
 {
@@ -102,7 +103,7 @@ namespace SpiderServerSideWPFApp.Model
             get { return _googleCalendar ?? (_googleCalendar = new GoogleCalendar()); }
         }
 
-        public string GetEvents()
+        public CalendarEvent[] GetEvents()
         {
             return GoogleCalendar.GetEvents();
         }
