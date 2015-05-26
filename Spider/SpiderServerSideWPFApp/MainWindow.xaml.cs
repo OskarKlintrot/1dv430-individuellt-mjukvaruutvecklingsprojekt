@@ -224,48 +224,7 @@ namespace SpiderServerSideWPFApp
             databaseWorker.WorkerReportsProgress = true;
             databaseWorker.DoWork += databaseWorker_DoWork;
             databaseWorker.ProgressChanged += databaseWorker_ProgressChanged;
-            databaseWorker.RunWorkerCompleted += databaseWorker_RunWorkerCompleted;
             databaseWorker.RunWorkerAsync();
-        }
-
-        private void databaseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void databaseWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            SerialConnectionProgressBar.Visibility = Visibility.Hidden;
-            SerialConnectionLabel.Content = "Kontrollerad mot databasen senast: " +
-                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-
-            var room = e.UserState as Room[];
-            
-            if (room[0].Heating)
-            {
-                LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = false), DispatcherPriority.Normal, null);
-                LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = true), DispatcherPriority.Normal, null);
-            }
-            else
-            {
-                LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = true), DispatcherPriority.Normal, null);
-                LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
-            }
-        }
-
-        private void databaseWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = (BackgroundWorker)sender;
-            int numberOfRooms = 6;
-            int updateEvery = 10000;
-
-            while (Service.SC_ConnectionOpen)
-            {
-                Room[] room = ReadUpdateData.ReadDataFromDatabase(numberOfRooms);
-                e.Result = room;
-                worker.ReportProgress(0, e.Result);
-                Thread.Sleep(updateEvery);
-            }
         }
 
         private void ListeningForCalendarEvents()
@@ -281,57 +240,7 @@ namespace SpiderServerSideWPFApp
             calendarWorker.WorkerReportsProgress = true;
             calendarWorker.DoWork += calendarWorker_DoWork;
             calendarWorker.ProgressChanged += calendarWorker_ProgressChanged;
-            calendarWorker.RunWorkerCompleted += calendarWorker_RunWorkerCompleted;
             calendarWorker.RunWorkerAsync();
-        }
-
-        void calendarWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
-            LoadingEventsLabel.Content = "Senast uppdaterad: " +
-                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-
-            CalendarTextBox.Clear();
-
-            CalendarEvents = e.UserState as CalendarEvent[];
-
-            foreach (var item in CalendarEvents)
-            {
-                CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
-                    "\r(" + item.Start.ToShortDateString() + " "
-                    + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
-            }
-        }
-
-        void calendarWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
-            LoadingEventsLabel.Content = "Senast uppdaterad: " +
-                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-
-            CalendarTextBox.Clear();
-
-            CalendarEvents = e.Result as CalendarEvent[];
-
-            foreach (var item in CalendarEvents)
-            {
-                CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
-                    "\r(" + item.Start.ToShortDateString() + " "
-                    + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
-            }
-        }
-
-        void calendarWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = (BackgroundWorker)sender;
-            int updateEvery = 10000;
-
-            while (Service.SC_ConnectionOpen)
-            {
-                e.Result = Service.GetEvents();
-                worker.ReportProgress(0, e.Result);
-                Thread.Sleep(updateEvery);
-            }
         }
 
         private void SetupConnectionToArduino()
@@ -363,7 +272,6 @@ namespace SpiderServerSideWPFApp
                     BaudrateLabel.Content = BaudRateComboBox.Text;
 
                     Service.PropertyChanged += UpdateData;
-                    //Service.PropertyChanged += ReadData;
                 }
 
 
@@ -450,22 +358,71 @@ namespace SpiderServerSideWPFApp
         #endregion
 
         #region Events
-        //private void ReadData(object sender, PropertyChangedEventArgs e)
-        //{
-        //    int numberOfRooms = 6;
-        //    Room[] room = ReadUpdateData.ReadDataFromDatabase(numberOfRooms);
+        private void databaseWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            SerialConnectionProgressBar.Visibility = Visibility.Hidden;
+            SerialConnectionLabel.Content = "Kontrollerad mot databasen senast: " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
-        //    if (room[0].Heating)
-        //    {
-        //        LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = false), DispatcherPriority.Normal, null);
-        //        LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = true), DispatcherPriority.Normal, null);
-        //    }
-        //    else
-        //    {
-        //        LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = true), DispatcherPriority.Normal, null);
-        //        LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
-        //    }
-        //}
+            var room = e.UserState as Room[];
+
+            if (room[0].Heating)
+            {
+                LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = false), DispatcherPriority.Normal, null);
+                LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = true), DispatcherPriority.Normal, null);
+            }
+            else
+            {
+                LightOnButton.Dispatcher.Invoke(new Action(() => LightOnButton.IsEnabled = true), DispatcherPriority.Normal, null);
+                LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
+            }
+        }
+
+        private void databaseWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)sender;
+            int numberOfRooms = 6;
+            int updateEvery = 10000;
+
+            while (Service.SC_ConnectionOpen)
+            {
+                Room[] room = ReadUpdateData.ReadDataFromDatabase(numberOfRooms);
+                e.Result = room;
+                worker.ReportProgress(0, e.Result);
+                Thread.Sleep(updateEvery);
+            }
+        }
+
+        void calendarWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LoadingEventsProgressBar.Visibility = Visibility.Hidden;
+            LoadingEventsLabel.Content = "Senast uppdaterad: " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
+            CalendarTextBox.Clear();
+
+            CalendarEvents = e.UserState as CalendarEvent[];
+
+            foreach (var item in CalendarEvents)
+            {
+                CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
+                    "\r(" + item.Start.ToShortDateString() + " "
+                    + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+            }
+        }
+
+        void calendarWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)sender;
+            int updateEvery = 10000;
+
+            while (Service.SC_ConnectionOpen)
+            {
+                e.Result = Service.GetEvents();
+                worker.ReportProgress(0, e.Result);
+                Thread.Sleep(updateEvery);
+            }
+        }
         
         /// <summary>
         /// 
