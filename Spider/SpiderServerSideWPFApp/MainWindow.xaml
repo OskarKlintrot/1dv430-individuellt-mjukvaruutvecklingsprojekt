@@ -56,7 +56,7 @@
         </ComboBox>
         <Label Content="timmar" HorizontalAlignment="Left" Margin="411,93,0,0" VerticalAlignment="Top" Width="50"/>
         <Label Content="minuter" HorizontalAlignment="Left" Margin="413,140,0,0" VerticalAlignment="Top" Width="50"/>
-        <Label Content="Uppdatera var:" HorizontalAlignment="Left" Margin="330,257,0,0" VerticalAlignment="Top"/>
+        <Label Content="Uppdatera varje:" HorizontalAlignment="Left" Margin="330,257,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="updateFrequencyComboBox" HorizontalAlignment="Left" Margin="345,283,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1">
             <ComboBoxItem>1</ComboBoxItem>
             <ComboBoxItem>5</ComboBoxItem>
@@ -66,6 +66,6 @@
             <ComboBoxItem>25</ComboBoxItem>
             <ComboBoxItem>30</ComboBoxItem>
         </ComboBox>
-        <Label Content="minuter" HorizontalAlignment="Left" Margin="411,281,0,0" VerticalAlignment="Top" Width="52"/>
+        <Label Content="sekund" HorizontalAlignment="Left" Margin="411,281,0,0" VerticalAlignment="Top" Width="60"/>
     </Grid>
 </Window>

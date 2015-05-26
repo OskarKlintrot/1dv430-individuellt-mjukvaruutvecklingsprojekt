@@ -70,7 +70,8 @@ namespace SpiderServerSideWPFApp
         {
             get
             {
-                return int.Parse(updateFrequencyComboBox.Text) * 60000;
+                //return int.Parse(updateFrequencyComboBox.Text) * 60000; // Minutes
+                return int.Parse(updateFrequencyComboBox.Text) * 1000; // Seconds
             }
         }
         #endregion
