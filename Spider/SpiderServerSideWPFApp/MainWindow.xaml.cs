@@ -35,6 +35,7 @@ namespace SpiderServerSideWPFApp
         private DateTime dateTime;
         private Service _service;
         private ReadUpdateData _readUpdateData;
+        private CalendarFunctionality _calendarFunctionality;
         #endregion
 
         #region Properties
@@ -46,20 +47,37 @@ namespace SpiderServerSideWPFApp
         {
             get { return _readUpdateData ?? (_readUpdateData = new ReadUpdateData()); }
         }
+        private CalendarFunctionality CalendarFunctionality
+        {
+            get { return _calendarFunctionality ?? (_calendarFunctionality = new CalendarFunctionality()); }
+        }
         private CalendarEvent[] CalendarEvents { get; set; }
+        private int StartHeatingInAdvancedHours
+        {
+            get
+            {
+                return int.Parse(startHourComboBox.Text);
+            }
+        }
+        private int StopHeatingMinutes
+        {
+            get
+            {
+                return int.Parse(stopMinutesComboBox.Text);
+            }
+        }
+        private int RunBackgroundWorkerEvery
+        {
+            get
+            {
+                return int.Parse(updateFrequencyComboBox.Text) * 60000;
+            }
+        }
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-
-            List<string> baudRateList = new List<string> { "300", "600", "1200", "2400", "4800", "9600", 
-                "14400", "19200", "28800", "38400", "57600", "115200"};
-
-            foreach (var baudRate in baudRateList)
-            {
-                BaudRateComboBox.Items.Add(baudRate);
-            }
 
             addSerialPorts();
 
@@ -377,31 +395,43 @@ namespace SpiderServerSideWPFApp
                 LightOffButton.Dispatcher.Invoke(new Action(() => LightOffButton.IsEnabled = false), DispatcherPriority.Normal, null);
             }
         }
-
+        /// <summary>
+        /// While serial port is open, get heating true/false from the DB 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void databaseWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
-            int numberOfRooms = 6;
-            int updateEvery = 10000;
+            int updateEvery = RunBackgroundWorkerEvery;
 
             while (Service.SC_ConnectionOpen)
             {
-                Room[] room = ReadUpdateData.ReadDataFromDatabase(numberOfRooms);
+                Room[] room = ReadUpdateData.ReadDataFromDatabase();
                 e.Result = room;
                 worker.ReportProgress(0, e.Result);
                 Thread.Sleep(updateEvery);
             }
         }
-
+        /// <summary>
+        /// Update the UI and the DB with the events from calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void calendarWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            // Get the calendars event
+            CalendarEvents = e.UserState as CalendarEvent[];
+
+            // Update DB
+            CalendarFunctionality.UpdateDbWithCalendarEvents(CalendarEvents, StartHeatingInAdvancedHours, StopHeatingMinutes);
+
+            // Update UI
             LoadingEventsProgressBar.Visibility = Visibility.Hidden;
             LoadingEventsLabel.Content = "Senast uppdaterad: " +
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
             CalendarTextBox.Clear();
-
-            CalendarEvents = e.UserState as CalendarEvent[];
 
             foreach (var item in CalendarEvents)
             {
@@ -410,11 +440,15 @@ namespace SpiderServerSideWPFApp
                     + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
             }
         }
-
+        /// <summary>
+        /// While serial port is open, get ongoing and upcoming calendar events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void calendarWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
-            int updateEvery = 10000;
+            int updateEvery = RunBackgroundWorkerEvery;
 
             while (Service.SC_ConnectionOpen)
             {
@@ -425,12 +459,13 @@ namespace SpiderServerSideWPFApp
         }
         
         /// <summary>
-        /// 
+        /// Recieve data from serial port and update UI and DB
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UpdateData(object sender, PropertyChangedEventArgs e)
         {
+            // Get the received data
             string ReceivedData = Service.SC_ReceivedData;
 
             // Update the DataTextBox
@@ -440,6 +475,7 @@ namespace SpiderServerSideWPFApp
             DataTextBox.Dispatcher.Invoke(new Action(() => DataTextBox.AppendText(stringToInsert)), DispatcherPriority.Normal, null);
             DataTextBox.Dispatcher.Invoke(new Action(() => DataTextBox.ScrollToEnd()), DispatcherPriority.Normal, null);
 
+            // Update the database
             ReadUpdateData.UpdateDatabase(ReceivedData);
         }
         #endregion

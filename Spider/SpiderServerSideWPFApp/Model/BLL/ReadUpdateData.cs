@@ -78,9 +78,8 @@ namespace SpiderServerSideWPFApp.Model.BLL
         /// Reads data from database and sends the new value to
         /// the Arduino as a string
         /// </summary>
-        /// <param name="numberOfRooms"></param>
         /// <returns></returns>
-        public Room[] ReadDataFromDatabase(int numberOfRooms)
+        public Room[] ReadDataFromDatabase()
         {
             Room[] room = new Room[6];
             bool[] newHeating = new bool[room.Length];

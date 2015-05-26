@@ -51,7 +51,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
             List<CalendarEvent> EventsList = new List<CalendarEvent>(10);
 
             // Process the events
-            Console.WriteLine("Upcoming events:");
+            //Console.WriteLine("Upcoming events:");
             Events events = request.Execute();
             if (events.Items.Count > 0)
             {
@@ -79,7 +79,7 @@ namespace SpiderServerSideWPFApp.Model.DAL
 
                     CalendarEvent ev = new CalendarEvent(summary, location, start, end);
                     EventsList.Add(ev);
-                    Console.WriteLine("{0}, {1} ({2} - {3})", ev.Summary, ev.Location, ev.Start, ev.End);
+                    //Console.WriteLine("{0}, {1} ({2} - {3})", ev.Summary, ev.Location, ev.Start, ev.End);
                 }
             }
             else

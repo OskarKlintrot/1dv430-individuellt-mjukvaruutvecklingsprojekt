@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\BLL\CalendarEvent.cs" />
+    <Compile Include="Model\BLL\CalendarFunctionality.cs" />
     <Compile Include="Model\BLL\ReadUpdateData.cs" />
     <Compile Include="Model\DAL\GoogleCalendar.cs" />
     <Compile Include="Model\DAL\SingletonSerialCommunicationDAL.cs" />
