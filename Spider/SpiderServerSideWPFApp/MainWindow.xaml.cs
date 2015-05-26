@@ -381,7 +381,17 @@ namespace SpiderServerSideWPFApp
             {
                 MessageBox.Show(ex.Message, "Could not send data.");
             }
-        } 
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.portSetting = PortComboBox.Text;
+            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
+            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
+            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
+            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
         #endregion
 
         #region Events
@@ -487,15 +497,5 @@ namespace SpiderServerSideWPFApp
             ReadUpdateData.UpdateDatabase(ReceivedData);
         }
         #endregion
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            Properties.Settings.Default.portSetting = PortComboBox.Text;
-            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
-            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
-            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
-            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
     }
 }
