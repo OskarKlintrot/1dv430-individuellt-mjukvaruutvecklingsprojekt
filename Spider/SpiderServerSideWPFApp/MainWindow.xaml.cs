@@ -160,12 +160,7 @@ namespace SpiderServerSideWPFApp
             stopMinutesComboBox.SelectedIndex = 1;
             updateFrequencyComboBox.SelectedIndex = 2;
 
-            Properties.Settings.Default.portSetting = PortComboBox.Text;
-            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
-            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
-            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
-            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
-            Properties.Settings.Default.Save();
+
 
             try
             {
@@ -224,35 +219,6 @@ namespace SpiderServerSideWPFApp
             }
         }
 
-        private void BaudRateComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void PortComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.portSetting = PortComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void startHourComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void stopMinutesComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void updateFrequencyComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
-            Properties.Settings.Default.Save();
-        }
         #endregion
 
         #region Methods
@@ -521,5 +487,15 @@ namespace SpiderServerSideWPFApp
             ReadUpdateData.UpdateDatabase(ReceivedData);
         }
         #endregion
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.portSetting = PortComboBox.Text;
+            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
+            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
+            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
+            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
     }
 }
