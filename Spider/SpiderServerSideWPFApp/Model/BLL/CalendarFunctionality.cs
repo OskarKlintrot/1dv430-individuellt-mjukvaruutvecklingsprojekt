@@ -28,21 +28,15 @@ namespace SpiderServerSideWPFApp.Model.BLL
             IEnumerable<Room> Rooms = Service.GetRooms();
             Room[] RoomArray = Rooms.ToArray();
 
-            // Make location and room description lower case
-            for (int i = 0; i < RoomArray.Length; i++)
-            {
-                RoomArray[i].RoomDescription = RoomArray[i].RoomDescription.ToLower();
-            }
-            for (int i = 0; i < CalendarEvents.Length; i++)
-            {
-                CalendarEvents[i].Location = CalendarEvents[i].Location.ToLower();
-            }
-
             foreach (var item in RoomArray)
             {
                 for (int i = 0; i < CalendarEvents.Length; i++)
                 {
-                    if (CalendarEvents[i].Location.Contains(item.RoomDescription))
+                    // Make location and room description lower case
+                    string tempEventLocation = CalendarEvents[i].Location.ToLower();
+                    string tempRoomDescription = item.RoomDescription.ToLower();
+
+                    if (tempEventLocation.Contains(tempRoomDescription))
                     {
                         bool oldHeating = item.Heating;
                         
