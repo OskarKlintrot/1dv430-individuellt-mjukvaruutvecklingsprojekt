@@ -49,9 +49,10 @@ $(document).ready(function () {
                 $("#errorDiv").addClass("alert alert-danger");
                 var err = JSON.parse(response.responseText);
                 var closeErrorMessage = "<a href=\"#\" class=\"close\" id=\"closeErrorDiv\">&times;</a>";
+                var errorMessage = "Tyvärr, ett fel uppstod. Var vänlig <a href=\"Contact\">kontakta oss</a>";
                 $("#errorDiv").empty();
                 $("#errorDiv").append(closeErrorMessage);
-                $("#errorDiv").append(err.Message);
+                $("#errorDiv").append(errorMessage);
                 $('#closeErrorDiv').click(function () {
                     $("#errorDiv").removeClass("alert alert-danger");
                     $("#errorDiv").empty();
@@ -112,7 +113,7 @@ $(document).ready(function () {
                     units: {
                         days: { format: ["yyyy-MM-dd"] },
                         hours: { format: ["HH:mm"] },
-                        minutes: { format: ["HH:mm", ":mm"] },
+                        minutes: { format: ["HH:mm"] },
                     }
                 },
             },
