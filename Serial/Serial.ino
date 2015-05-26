@@ -7,7 +7,7 @@ String incomingSerial;
 //Delay
 bool sendState = LOW;
 unsigned long previousMillis = 0;
-const long interval = 1000;           // interval at which to blink (milliseconds)
+const long interval = 5*60000;           // interval at which to blink (milliseconds)
 
 //Random
 long randNumber1;
@@ -42,7 +42,7 @@ void setup(){
 
 void loop() {
 
-  // send data only when you receive data:
+  // send answer only when you receive data:
   if (Serial.available() > 0) {
     incomingSerial = Serial.readStringUntil('#');
     
