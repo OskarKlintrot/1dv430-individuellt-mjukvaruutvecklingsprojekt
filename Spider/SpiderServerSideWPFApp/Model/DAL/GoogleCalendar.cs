@@ -37,8 +37,9 @@ namespace SpiderServerSideWPFApp.Model.DAL
             });
 
             // Define parameters of request.
-            var calendarID = "kalender@missionskyrkorna.se";
+            //var calendarID = "kalender@missionskyrkorna.se";
             //var calendarID = "primary";
+            var calendarID = "ns3cluso7rngshk929nekqbllc@group.calendar.google.com";
             EventsResource.ListRequest request = service.Events.List(calendarID);
             request.TimeMin = DateTime.Now;
             request.ShowDeleted = false;
