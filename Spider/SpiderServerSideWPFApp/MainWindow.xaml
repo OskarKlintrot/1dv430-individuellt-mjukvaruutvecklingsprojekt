@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SpiderServerSideWPFApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="352" Width="444">
+        Title="MainWindow" Height="375" Width="444">
     <Grid>
         <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Left" Margin="345,20,0,0" VerticalAlignment="Top" Width="75" Click="StartButton_Click"/>
         <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="345,47,0,0" VerticalAlignment="Top" Width="75" Click="StopButton_Click"/>
@@ -16,11 +16,13 @@
         <Label x:Name="BaudrateLabel" Content="Baudrate" Margin="0,21,113,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         <ComboBox x:Name="PortComboBox" HorizontalAlignment="Left" Margin="345,172,0,0" VerticalAlignment="Top" Width="75" DropDownOpened="PortComboBox_DropDownOpened" DropDownClosed="PortComboBox_DropDownClosed"/>
         <ComboBox x:Name="BaudRateComboBox" HorizontalAlignment="Left" Margin="345,211,0,0" VerticalAlignment="Top" Width="75" SelectedIndex="5" DropDownClosed="BaudRateComboBox_DropDownClosed"/>
-        <CheckBox x:Name="runAtStartupCheckBox" Content="Starta automatiskt" HorizontalAlignment="Left" Margin="19,291,0,0" VerticalAlignment="Top" ToolTip="Starta applikationen automatiskt vid start av Windows" Click="runAtStartupCheckBox_Click"/>
-        <TextBox x:Name="CalendarTextBox" HorizontalAlignment="Left" Height="62" Margin="19,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" IsReadOnlyCaretVisible="True"/>
-        <Label Content="Kalenderhändelser&#xD;&#xA;" HorizontalAlignment="Left" Margin="19,174,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LoadingEventsLabel" Content="Laddar kalenderhändelser...&#xD;&#xA;" HorizontalAlignment="Left" Margin="19,262,0,0" VerticalAlignment="Top"/>
-        <ProgressBar x:Name="LoadingEventsProgressBar" HorizontalAlignment="Left" Height="10" Margin="185,271,0,0" VerticalAlignment="Top" Width="138"/>
+        <CheckBox x:Name="runAtStartupCheckBox" Content="Starta automatiskt" HorizontalAlignment="Left" Margin="19,316,0,0" VerticalAlignment="Top" ToolTip="Starta applikationen automatiskt vid start av Windows" Click="runAtStartupCheckBox_Click"/>
+        <TextBox x:Name="CalendarTextBox" HorizontalAlignment="Left" Height="62" Margin="19,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" IsReadOnlyCaretVisible="True"/>
+        <Label Content="Kalenderhändelser&#xD;&#xA;" HorizontalAlignment="Left" Margin="19,199,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LoadingEventsLabel" Content="Laddar kalenderhändelser..." HorizontalAlignment="Left" Margin="19,287,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="LoadingEventsProgressBar" HorizontalAlignment="Left" Height="10" Margin="185,296,0,0" VerticalAlignment="Top" Width="138"/>
+        <Label x:Name="SerialConnectionLabel" Content="Tar emot data..." HorizontalAlignment="Left" Margin="19,163,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="SerialConnectionProgressBar" HorizontalAlignment="Left" Height="10" Margin="185,172,0,0" VerticalAlignment="Top" Width="138"/>
 
     </Grid>
 </Window>

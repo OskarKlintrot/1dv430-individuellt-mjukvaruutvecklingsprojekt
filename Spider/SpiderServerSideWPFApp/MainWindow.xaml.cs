@@ -77,22 +77,12 @@ namespace SpiderServerSideWPFApp
             LightOffButton.IsEnabled = false;
             LoadingEventsLabel.Visibility = Visibility.Hidden;
             LoadingEventsProgressBar.Visibility = Visibility.Hidden;
+            SerialConnectionLabel.Visibility = Visibility.Hidden;
+            SerialConnectionProgressBar.Visibility = Visibility.Hidden;
             DataTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
-            //var events = Service.GetEvents();
-
-            //CalendarTextBox.Clear();
             CalendarTextBox.IsReadOnly = true;
             CalendarTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            //foreach (var item in events)
-            //{
-            //    CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location + 
-            //        "\r(" + item.Start.ToShortDateString() + " " 
-            //        + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
-            //    CalendarTextBox.ScrollToEnd();
-            //}
-
-            //DataTextBox.Text = Service.GetEvents();
 
             // Run application, if run at start up enabled
             if (Properties.Settings.Default.runAtStartupSetting)
@@ -225,6 +215,10 @@ namespace SpiderServerSideWPFApp
 
         private void ListeningForChangesInDatabase()
         {
+            // Set the UI
+            SerialConnectionProgressBar.Visibility = Visibility.Visible;
+            SerialConnectionLabel.Visibility = Visibility.Visible;
+
             // Start a background worker
             var databaseWorker = new BackgroundWorker();
             databaseWorker.WorkerReportsProgress = true;
@@ -241,6 +235,10 @@ namespace SpiderServerSideWPFApp
 
         private void databaseWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            SerialConnectionProgressBar.Visibility = Visibility.Hidden;
+            SerialConnectionLabel.Content = "Kontrollerad mot databasen senast: " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
             var room = e.UserState as Room[];
             
             if (room[0].Heating)
