@@ -40,14 +40,14 @@
         <Label x:Name="LoadingEventsLabel" Content="Laddar kalenderhändelser..." HorizontalAlignment="Left" Margin="14,312,0,0" VerticalAlignment="Top" Width="296"/>
         <Label Content="Inställningar" HorizontalAlignment="Left" Margin="328,46,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="Värme från före avslut: " HorizontalAlignment="Left" Margin="330,116,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="stopMinutesComboBox" HorizontalAlignment="Left" Margin="347,142,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1">
+        <ComboBox x:Name="stopMinutesComboBox" HorizontalAlignment="Left" Margin="347,142,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1" DropDownClosed="stopMinutesComboBox_DropDownClosed">
             <ComboBoxItem>15</ComboBoxItem>
             <ComboBoxItem>30</ComboBoxItem>
             <ComboBoxItem>45</ComboBoxItem>
             <ComboBoxItem>60</ComboBoxItem>
         </ComboBox>
         <Label Content="Värme till före händelse: " HorizontalAlignment="Left" Margin="330,69,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="startHourComboBox" HorizontalAlignment="Left" Margin="345,95,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1">
+        <ComboBox x:Name="startHourComboBox" HorizontalAlignment="Left" Margin="345,95,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1" DropDownClosed="startHourComboBox_DropDownClosed">
             <ComboBoxItem>4</ComboBoxItem>
             <ComboBoxItem>8</ComboBoxItem>
             <ComboBoxItem>12</ComboBoxItem>
@@ -58,19 +58,14 @@
         <Label Content="timmar" HorizontalAlignment="Left" Margin="411,93,0,0" VerticalAlignment="Top" Width="50"/>
         <Label Content="minuter" HorizontalAlignment="Left" Margin="413,140,0,0" VerticalAlignment="Top" Width="50"/>
         <Label Content="Uppdatera var:" HorizontalAlignment="Left" Margin="330,257,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="updateFrequencyComboBox" HorizontalAlignment="Left" Margin="345,283,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1">
-            <ComboBox.BindingGroup
-            >
-                <BindingGroup
-        />
-            </ComboBox.BindingGroup>
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="5"/>
-            <ComboBoxItem Content="10"/>
-            <ComboBoxItem Content="15"/>
-            <ComboBoxItem Content="20"/>
-            <ComboBoxItem Content="25"/>
-            <ComboBoxItem Content="30"/>
+        <ComboBox x:Name="updateFrequencyComboBox" HorizontalAlignment="Left" Margin="345,283,0,0" VerticalAlignment="Top" Width="66" SelectedIndex="1" DropDownClosed="updateFrequencyComboBox_DropDownClosed">
+            <ComboBoxItem>1</ComboBoxItem>
+            <ComboBoxItem>5</ComboBoxItem>
+            <ComboBoxItem>10</ComboBoxItem>
+            <ComboBoxItem>15</ComboBoxItem>
+            <ComboBoxItem>20</ComboBoxItem>
+            <ComboBoxItem>25</ComboBoxItem>
+            <ComboBoxItem>30</ComboBoxItem>
         </ComboBox>
         <Label Content="minuter" HorizontalAlignment="Left" Margin="411,281,0,0" VerticalAlignment="Top" Width="52"/>
 

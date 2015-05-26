@@ -58,5 +58,41 @@ namespace SpiderServerSideWPFApp.Properties {
                 this["portSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public string startHeatingSetting {
+            get {
+                return ((string)(this["startHeatingSetting"]));
+            }
+            set {
+                this["startHeatingSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public string stopHeatingSetting {
+            get {
+                return ((string)(this["stopHeatingSetting"]));
+            }
+            set {
+                this["stopHeatingSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public string updateFrequencySetting {
+            get {
+                return ((string)(this["updateFrequencySetting"]));
+            }
+            set {
+                this["updateFrequencySetting"] = value;
+            }
+        }
     }
 }

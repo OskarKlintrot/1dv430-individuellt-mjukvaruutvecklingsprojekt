@@ -84,6 +84,10 @@ namespace SpiderServerSideWPFApp
             // Set settings
             runAtStartupCheckBox.IsChecked = Properties.Settings.Default.runAtStartupSetting;
             BaudRateComboBox.Text = Properties.Settings.Default.baudRateSetting;
+            startHourComboBox.Text = Properties.Settings.Default.startHeatingSetting;
+            stopMinutesComboBox.Text = Properties.Settings.Default.stopHeatingSetting;
+            updateFrequencyComboBox.Text = Properties.Settings.Default.updateFrequencySetting;
+            // Check if serial port is avalible before using it
             if (Service.SC_IsThisSerialPortAvailable(Properties.Settings.Default.portSetting))
             {
                 PortComboBox.Text = Properties.Settings.Default.portSetting;
@@ -151,7 +155,10 @@ namespace SpiderServerSideWPFApp
             BaudrateLabel.Content = "Baudrate";
 
             PortComboBox.SelectedIndex = -1;
-            BaudRateComboBox.Text = "9600";
+            BaudRateComboBox.SelectedIndex = 5;
+            startHourComboBox.SelectedIndex = 1;
+            stopMinutesComboBox.SelectedIndex = 1;
+            updateFrequencyComboBox.SelectedIndex = 2;
 
             try
             {
@@ -221,14 +228,37 @@ namespace SpiderServerSideWPFApp
             Properties.Settings.Default.portSetting = PortComboBox.Text;
             Properties.Settings.Default.Save();
         }
+
+        private void startHourComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void stopMinutesComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void updateFrequencyComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
+            Properties.Settings.Default.Save();
+        }
         #endregion
 
         #region Methods
         private void RunApplication()
         {
             SetupConnectionToArduino();
-            ListeningForCalendarEvents();
-            ListeningForChangesInDatabase();
+
+            // If connection works then listning for events and changes in DB
+            if (Service.SC_ConnectionOpen)
+            {
+                ListeningForCalendarEvents();
+                ListeningForChangesInDatabase(); 
+            }
         }
 
         private void ListeningForChangesInDatabase()
@@ -242,7 +272,7 @@ namespace SpiderServerSideWPFApp
             databaseWorker.WorkerReportsProgress = true;
             databaseWorker.DoWork += databaseWorker_DoWork;
             databaseWorker.ProgressChanged += databaseWorker_ProgressChanged;
-            databaseWorker.RunWorkerAsync();
+            databaseWorker.RunWorkerAsync(RunBackgroundWorkerEvery);
         }
 
         private void ListeningForCalendarEvents()
@@ -258,7 +288,7 @@ namespace SpiderServerSideWPFApp
             calendarWorker.WorkerReportsProgress = true;
             calendarWorker.DoWork += calendarWorker_DoWork;
             calendarWorker.ProgressChanged += calendarWorker_ProgressChanged;
-            calendarWorker.RunWorkerAsync();
+            calendarWorker.RunWorkerAsync(RunBackgroundWorkerEvery);
         }
 
         private void SetupConnectionToArduino()
@@ -332,6 +362,9 @@ namespace SpiderServerSideWPFApp
             LightOffButton.IsEnabled = false;
             PortComboBox.IsEnabled = true;
             BaudRateComboBox.IsEnabled = true;
+            startHourComboBox.IsEnabled = true;
+            stopMinutesComboBox.IsEnabled = true;
+            updateFrequencyComboBox.IsEnabled = true;
         }
 
         private void ButtonSetToStop()
@@ -342,6 +375,9 @@ namespace SpiderServerSideWPFApp
             LightOffButton.IsEnabled = false;
             PortComboBox.IsEnabled = false;
             BaudRateComboBox.IsEnabled = false;
+            startHourComboBox.IsEnabled = false;
+            stopMinutesComboBox.IsEnabled = false;
+            updateFrequencyComboBox.IsEnabled = false;
         }
 
         private void TurnHeatingOn()
@@ -403,7 +439,7 @@ namespace SpiderServerSideWPFApp
         private void databaseWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
-            int updateEvery = RunBackgroundWorkerEvery;
+            int updateEvery = (int)e.Argument;
 
             while (Service.SC_ConnectionOpen)
             {
@@ -448,7 +484,7 @@ namespace SpiderServerSideWPFApp
         void calendarWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
-            int updateEvery = RunBackgroundWorkerEvery;
+            int updateEvery = (int)e.Argument;
 
             while (Service.SC_ConnectionOpen)
             {
@@ -457,7 +493,6 @@ namespace SpiderServerSideWPFApp
                 Thread.Sleep(updateEvery);
             }
         }
-        
         /// <summary>
         /// Recieve data from serial port and update UI and DB
         /// </summary>
