@@ -160,6 +160,13 @@ namespace SpiderServerSideWPFApp
             stopMinutesComboBox.SelectedIndex = 1;
             updateFrequencyComboBox.SelectedIndex = 2;
 
+            Properties.Settings.Default.portSetting = PortComboBox.Text;
+            Properties.Settings.Default.baudRateSetting = BaudRateComboBox.Text;
+            Properties.Settings.Default.startHeatingSetting = startHourComboBox.Text;
+            Properties.Settings.Default.stopHeatingSetting = stopMinutesComboBox.Text;
+            Properties.Settings.Default.updateFrequencySetting = updateFrequencyComboBox.Text;
+            Properties.Settings.Default.Save();
+
             try
             {
                 if (Service.SC_ConnectionOpen)
