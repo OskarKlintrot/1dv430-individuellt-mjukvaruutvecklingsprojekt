@@ -20,10 +20,11 @@ namespace SpiderServerSideWPFApp.Model.BLL
         }
 
         /// <summary>
-        /// 
+        /// Updates the database
         /// </summary>
-        /// <param name="ReceivedData"></param>
-        public void UpdateData(string ReceivedData)
+        /// <param name="ReceivedData">The data received and 
+        /// to be stored in the database</param>
+        public void UpdateDatabase(string ReceivedData)
         {
             // Split recived port into array and "clean" it
             string[] tempStringArray = ReceivedData.Split('#');
@@ -74,11 +75,12 @@ namespace SpiderServerSideWPFApp.Model.BLL
         }
 
         /// <summary>
-        /// 
+        /// Reads data from database and sends the new value to
+        /// the Arduino as a string
         /// </summary>
         /// <param name="numberOfRooms"></param>
         /// <returns></returns>
-        public Room[] ReadData(int numberOfRooms)
+        public Room[] ReadDataFromDatabase(int numberOfRooms)
         {
             Room[] room = new Room[6];
             bool[] newHeating = new bool[room.Length];
