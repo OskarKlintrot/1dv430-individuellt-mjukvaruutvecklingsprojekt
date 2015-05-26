@@ -13,7 +13,7 @@
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="345,284,0,0" VerticalAlignment="Top" Width="75" Click="ExitButton_Click"/>
         <TextBox x:Name="DataTextBox" HorizontalAlignment="Left" Height="114" Margin="19,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" IsReadOnly="True"/>
         <Label x:Name="PortLabel" Content="Port" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="BaudrateLabel" Content="Baudrate" Margin="0,21,144,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Label x:Name="BaudrateLabel" Content="Baudrate" Margin="0,21,113,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         <ComboBox x:Name="PortComboBox" HorizontalAlignment="Left" Margin="345,172,0,0" VerticalAlignment="Top" Width="75" DropDownOpened="PortComboBox_DropDownOpened" DropDownClosed="PortComboBox_DropDownClosed"/>
         <ComboBox x:Name="BaudRateComboBox" HorizontalAlignment="Left" Margin="345,211,0,0" VerticalAlignment="Top" Width="75" SelectedIndex="5" DropDownClosed="BaudRateComboBox_DropDownClosed"/>
         <CheckBox x:Name="runAtStartupCheckBox" Content="Starta automatiskt" HorizontalAlignment="Left" Margin="19,291,0,0" VerticalAlignment="Top" ToolTip="Starta applikationen automatiskt vid start av Windows" Click="runAtStartupCheckBox_Click"/>
