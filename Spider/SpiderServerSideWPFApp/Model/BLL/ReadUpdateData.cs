@@ -18,6 +18,11 @@ namespace SpiderServerSideWPFApp.Model.BLL
         {
             get { return _service ?? (_service = new Service()); }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ReceivedData"></param>
         public void UpdateData(string ReceivedData)
         {
             // Split recived port into array and "clean" it
@@ -68,6 +73,11 @@ namespace SpiderServerSideWPFApp.Model.BLL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numberOfRooms"></param>
+        /// <returns></returns>
         public Room[] ReadData(int numberOfRooms)
         {
             Room[] room = new Room[6];

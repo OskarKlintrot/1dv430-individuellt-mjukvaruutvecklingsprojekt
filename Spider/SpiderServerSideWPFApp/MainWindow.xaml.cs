@@ -230,16 +230,16 @@ namespace SpiderServerSideWPFApp
             LoadingEventsLabel.Content = "Laddar kalenderhändelser...";
             LoadingEventsProgressBar.Value = 100;
 
-            // Start a background worker
-            var worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += worker_DoWork;
-            worker.ProgressChanged += worker_ProgressChanged;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.RunWorkerAsync();
+            // Start a background calendarWorker
+            var calendarWorker = new BackgroundWorker();
+            calendarWorker.WorkerReportsProgress = true;
+            calendarWorker.DoWork += calendarWorker_DoWork;
+            calendarWorker.ProgressChanged += calendarWorker_ProgressChanged;
+            calendarWorker.RunWorkerCompleted += calendarWorker_RunWorkerCompleted;
+            calendarWorker.RunWorkerAsync();
         }
 
-        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void calendarWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             LoadingEventsProgressBar.Visibility = Visibility.Hidden;
             LoadingEventsLabel.Content = "Senast uppdaterad: " +
@@ -257,25 +257,25 @@ namespace SpiderServerSideWPFApp
             }
         }
 
-        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void calendarWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             LoadingEventsProgressBar.Visibility = Visibility.Hidden;
             LoadingEventsLabel.Content = "Senast uppdaterad: " +
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
-            //CalendarTextBox.Clear();
+            CalendarTextBox.Clear();
 
-            //CalendarEvents = e.Result as CalendarEvent[];
+            CalendarEvents = e.Result as CalendarEvent[];
 
-            //foreach (var item in CalendarEvents)
-            //{
-            //    CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
-            //        "\r(" + item.Start.ToShortDateString() + " "
-            //        + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
-            //}
+            foreach (var item in CalendarEvents)
+            {
+                CalendarTextBox.AppendText(item.Summary + ",\r" + item.Location +
+                    "\r(" + item.Start.ToShortDateString() + " "
+                    + item.Start.ToShortTimeString() + " - " + item.End.ToShortTimeString() + ") \r\r");
+            }
         }
 
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        void calendarWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
             while (Service.SC_ConnectionOpen)
@@ -314,8 +314,8 @@ namespace SpiderServerSideWPFApp
                     PortLabel.Content = PortComboBox.Text;
                     BaudrateLabel.Content = BaudRateComboBox.Text;
 
-                    Service.PropertyChanged += new PropertyChangedEventHandler(UpdateData);
-                    Service.PropertyChanged += new PropertyChangedEventHandler(ReadData);
+                    Service.PropertyChanged += UpdateData;
+                    Service.PropertyChanged += ReadData;
                 }
 
 
@@ -404,7 +404,8 @@ namespace SpiderServerSideWPFApp
         #region Events
         private void ReadData(object sender, PropertyChangedEventArgs e)
         {
-            Room[] room = ReadUpdateData.ReadData(6);
+            int numberOfRooms = 6;
+            Room[] room = ReadUpdateData.ReadData(numberOfRooms);
 
             if (room[0].Heating)
             {
@@ -418,6 +419,11 @@ namespace SpiderServerSideWPFApp
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateData(object sender, PropertyChangedEventArgs e)
         {
             string ReceivedData = Service.SC_ReceivedData;
