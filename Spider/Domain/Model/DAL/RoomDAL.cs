@@ -37,6 +37,7 @@ namespace Domain.Model.DAL
                         var roomDescriptionIndex = reader.GetOrdinal("RoomDescription");
                         var heatingIndex = reader.GetOrdinal("Heating");
                         var lastTemperatureIndex = reader.GetOrdinal("LastTemperature");
+                        var automaticControlIndex = reader.GetOrdinal("AutomaticControl");
 
                         while (reader.Read())
                         {
@@ -45,7 +46,8 @@ namespace Domain.Model.DAL
                                 RoomID = reader.GetByte(roomIDIndex),
                                 RoomDescription = reader.GetString(roomDescriptionIndex),
                                 Heating = reader.GetBoolean(heatingIndex),
-                                LastTemperature = reader.GetInt32(lastTemperatureIndex)
+                                LastTemperature = reader.GetInt32(lastTemperatureIndex),
+                                AutomaticControl = reader.GetBoolean(automaticControlIndex)
                             });
                         }
                     }
@@ -80,6 +82,7 @@ namespace Domain.Model.DAL
                         var roomDescriptionIndex = reader.GetOrdinal("RoomDescription");
                         var heatingIndex = reader.GetOrdinal("Heating");
                         var lastTemperatureIndex = reader.GetOrdinal("LastTemperature");
+                        var automaticControlIndex = reader.GetOrdinal("AutomaticControl");
 
                         if (reader.Read())
                         {
@@ -88,7 +91,8 @@ namespace Domain.Model.DAL
                                 RoomID = reader.GetByte(roomIDIndex),
                                 RoomDescription = reader.GetString(roomDescriptionIndex),
                                 Heating = reader.GetBoolean(heatingIndex),
-                                LastTemperature = reader.GetInt32(lastTemperatureIndex)
+                                LastTemperature = reader.GetInt32(lastTemperatureIndex),
+                                AutomaticControl = reader.GetBoolean(automaticControlIndex)
                             };
                         }
                     }
@@ -114,6 +118,7 @@ namespace Domain.Model.DAL
                     cmd.Parameters.Add("@Heating", SqlDbType.Bit, 1).Value = room.Heating;
                     cmd.Parameters.Add("@RoomDescription", SqlDbType.VarChar, 50).Value = room.RoomDescription;
                     cmd.Parameters.Add("@LastTemperature", SqlDbType.Int, 4).Value = room.LastTemperature;
+                    cmd.Parameters.Add("@AutomaticControl", SqlDbType.Bit, 1).Value = room.AutomaticControl;
 
                     conn.Open();
 
