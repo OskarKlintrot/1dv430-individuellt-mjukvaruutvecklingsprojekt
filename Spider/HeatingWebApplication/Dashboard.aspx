@@ -57,7 +57,7 @@
                             </h3>
                         </asp:PlaceHolder>
                     </div>
-                    <%--Turn automatic controll on or off--%>
+                    <%--Turn automatic control on or off--%>
                     <div>
                         <asp:PlaceHolder ID="PlaceHolder3" Visible='<%# !Item.AutomaticControl %>' runat="server">
                             <p>
