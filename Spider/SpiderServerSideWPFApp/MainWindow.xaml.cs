@@ -203,20 +203,27 @@ namespace SpiderServerSideWPFApp
             }
 
             // Register in startup; http://stackoverflow.com/questions/11065139/launch-window-on-windows-startup
-            string applicationPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
-            string applicationName = "HeatingSpiderApp";
-            if (bool.TryParse(checkBox.IsChecked.ToString(), out value))
+            try
             {
-                if (value)
+                string applicationPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+                string applicationName = "HeatingSpiderApp";
+                if (bool.TryParse(checkBox.IsChecked.ToString(), out value))
                 {
-                    key.SetValue(applicationName, applicationPath);
+                    if (value)
+                    {
+                        key.SetValue(applicationName, applicationPath);
+                    }
+                    else
+                    {
+                        key.DeleteValue(applicationName, false);
+                    }
                 }
-                else
-                {
-                    key.DeleteValue(applicationName, false);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ett fel inträffade");
             }
         }
 
