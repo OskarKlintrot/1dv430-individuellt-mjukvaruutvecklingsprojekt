@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Reglering av värmen" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="HeatingWebApplication.Dashboard" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="Scripts/Dashboard.js"></script>
     <div>
             <h1><%: Title %></h1>
     </div>
@@ -57,33 +58,20 @@
                             </h3>
                         </asp:PlaceHolder>
                     </div>
-                    <%--Turn automatic control on or off--%>
+                    <%-- Buttons --%>
                     <div>
-                        <asp:PlaceHolder ID="PlaceHolder3" Visible='<%# !Item.AutomaticControl %>' runat="server">
+                        <asp:PlaceHolder ID="ButtonsPlaceHolder" runat="server">
                             <p>
-                                <asp:LinkButton ID="AutoLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click"
-                                    CssClass="heating btn btn-default" Text="Ändra till auto &raquo;" runat="server" />
-                            </p>
-                        </asp:PlaceHolder>
-                        <asp:PlaceHolder ID="PlaceHolder4" Visible='<%# Item.AutomaticControl %>' runat="server">
-                            <p>
-                                <asp:LinkButton ID="ManLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click"
-                                    CssClass="heating btn btn-default" Text="Ändra till man &raquo;" runat="server" />
-                            </p>
-                        </asp:PlaceHolder>
-                    </div>
-                    <%--Turn heating on or off--%>
-                    <div>
-                        <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
-                            <p>
-                                <asp:LinkButton ID="HeatOnLinkButton" CommandName="Update"
-                                    CssClass="heating btn btn-default" Text="Sätt på värmen &raquo;" runat="server" />
-                            </p>
-                        </asp:PlaceHolder>
-                        <asp:PlaceHolder ID="PlaceHolder2" Visible='<%# Item.Heating %>' runat="server">
-                            <p>
-                                <asp:LinkButton ID="HeatOffLinkButton" CommandName="Update"
-                                    CssClass="heating btn btn-default" Text="Stäng av värmen &raquo;" runat="server" />
+                                <%--Turn automatic control on or off--%>
+                                <asp:LinkButton ID="AutoLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click" Visible='<%# !Item.AutomaticControl %>'
+                                    CssClass="heating btn btn-default col-md-5 col-sm-5" Text="Ändra till auto" runat="server" />
+                                <asp:LinkButton ID="ManLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click" Visible='<%# Item.AutomaticControl %>'
+                                    CssClass="heating btn btn-default col-md-5 col-sm-5" Text="Ändra till man" runat="server" />
+                                <%--Turn heating on or off--%>
+                                <asp:LinkButton ID="HeatOnControlLinkButton" CommandName="Update" Visible='<%# !Item.Heating %>'
+                                    CssClass="heating btn btn-default col-md-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" Text="Sätt på värmen" runat="server" />
+                                <asp:LinkButton ID="HeatOffControlLinkButton" CommandName="Update" Visible='<%# Item.Heating %>'
+                                    CssClass="heating btn btn-default col-md-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" Text="Stäng av värmen" runat="server" />
                             </p>
                         </asp:PlaceHolder>
                     </div>
