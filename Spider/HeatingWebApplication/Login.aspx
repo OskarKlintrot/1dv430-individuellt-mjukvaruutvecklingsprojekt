@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <p><em>Glömt lösenordet? <a href="Contact">Kontakta oss</a> i så fall!</em></p>
+                                <p><em>Glömt lösenordet? <a href="/Contact">Kontakta oss</a> i så fall!</em></p>
                             </div>
                         </div>
                     </div>
