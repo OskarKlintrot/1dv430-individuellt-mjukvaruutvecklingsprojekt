@@ -36,7 +36,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
                     string tempEventLocation = CalendarEvents[i].Location.ToLower();
                     string tempRoomDescription = item.RoomDescription.ToLower();
 
-                    if (tempEventLocation.Contains(tempRoomDescription))
+                    if (tempEventLocation.Contains(tempRoomDescription) && item.AutomaticControl)
                     {
                         bool oldHeating = item.Heating;
                         
