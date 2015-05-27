@@ -90,5 +90,57 @@ namespace HeatingWebApplication
                 ModelState.AddModelError(String.Empty, "Fel inträffade då värmen på rummet skulle uppdateras.");
             }
         }
+
+        protected void AutoManLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var button = (LinkButton)sender;
+                int RoomID = Convert.ToInt32(button.CommandArgument.ToString());
+
+                var room = Service.GetRoomByID(RoomID);
+
+                if (room == null)
+                {
+                    Response.Clear();
+                    Response.StatusCode = 404;
+                    Response.StatusDescription = "Room not found.";
+                    Response.End();
+                }
+
+                room.AutomaticControl = !room.AutomaticControl;
+
+                var tempBool = false;
+                var tempInt = 0;
+
+                // Validate the room object
+                if (!bool.TryParse(room.Heating.ToString(), out tempBool))
+                {
+                    throw new Exception();
+                }
+                if (!bool.TryParse(room.AutomaticControl.ToString(), out tempBool))
+                {
+                    throw new Exception();
+                }
+                if (!int.TryParse(room.RoomID.ToString(), out tempInt))
+                {
+                    throw new Exception();
+                }
+                if (string.IsNullOrEmpty(room.RoomDescription))
+                {
+                    throw new Exception();
+                }
+
+                Service.UpdateRoom(room);
+
+                Page.SetTempData("SuccessMessage", "Regleringen för " + room.RoomDescription + " ändrades.");
+                Response.Redirect("~/Dashboard.aspx");
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Fel inträffade då regleringen för rummet skulle uppdateras.");
+            }
+        }
     }
 }

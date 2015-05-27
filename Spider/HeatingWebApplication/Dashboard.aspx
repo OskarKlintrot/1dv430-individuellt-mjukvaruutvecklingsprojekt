@@ -57,6 +57,21 @@
                             </h3>
                         </asp:PlaceHolder>
                     </div>
+                    <%--Turn automatic controll on or off--%>
+                    <div>
+                        <asp:PlaceHolder ID="PlaceHolder3" Visible='<%# !Item.AutomaticControl %>' runat="server">
+                            <p>
+                                <asp:LinkButton ID="AutoLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click"
+                                    CssClass="heating btn btn-default" Text="Ändra till auto &raquo;" runat="server" />
+                            </p>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="PlaceHolder4" Visible='<%# Item.AutomaticControl %>' runat="server">
+                            <p>
+                                <asp:LinkButton ID="ManLinkButton" CommandArgument='<%# Item.RoomID %>' OnClick="AutoManLinkButton_Click"
+                                    CssClass="heating btn btn-default" Text="Ändra till man &raquo;" runat="server" />
+                            </p>
+                        </asp:PlaceHolder>
+                    </div>
                     <%--Turn heating on or off--%>
                     <div>
                         <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# !Item.Heating %>' runat="server">
