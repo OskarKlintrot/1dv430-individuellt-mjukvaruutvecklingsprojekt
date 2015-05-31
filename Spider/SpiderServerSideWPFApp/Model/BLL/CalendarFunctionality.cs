@@ -30,6 +30,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
 
             foreach (var item in RoomArray)
             {
+                bool roomInUse = false;
                 for (int i = 0; i < CalendarEvents.Length; i++)
                 {
                     // Make location and room description lower case
@@ -39,7 +40,7 @@ namespace SpiderServerSideWPFApp.Model.BLL
                     if (tempEventLocation.Contains(tempRoomDescription) && item.AutomaticControl)
                     {
                         bool oldHeating = item.Heating;
-                        
+                                                
                         // See if heating should be on or off
                         if (CalendarEvents[i].End < stopHeating)
                         {
@@ -49,15 +50,28 @@ namespace SpiderServerSideWPFApp.Model.BLL
                         {
                             item.Heating = true;
                         }
-
-                        // See if heating needs to be changed
-                        if (item.Heating != oldHeating)
+                        else if (!roomInUse)
                         {
-                            // Update heating in DB
-                            Service.UpdateRoom(item);
+                            item.Heating = false;
                         }
+
+                        // Make sure we only set the heating according to the first and thereby the earliest event
+                        roomInUse = true;
+
+                        UpdateRoom(oldHeating, item.Heating, item);
                     }
                 }
+            }
+        }
+
+        private void UpdateRoom(bool oldHeating, bool newHeating, Room room)
+        {
+            // See if heating needs to be changed
+            if (newHeating != oldHeating)
+            {
+                // Update heating in DB
+                Service.UpdateRoom(room);
+                Console.WriteLine("{0} updaterat till {1}", room.RoomDescription, room.Heating);
             }
         }
         #endregion
