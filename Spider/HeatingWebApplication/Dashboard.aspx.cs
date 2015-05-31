@@ -80,7 +80,7 @@ namespace HeatingWebApplication
                 {
                     Service.UpdateRoom(room);
 
-                    Page.SetTempData("SuccessMessage", "Värmen i " + room.RoomDescription + " ändrades.");
+                    Page.SetTempData("SuccessMessage", "Värmen i " + room.RoomDescription.ToLower() + " ändrades.");
                     Response.Redirect("~/Dashboard.aspx");
                     Context.ApplicationInstance.CompleteRequest();
                 }
@@ -133,7 +133,7 @@ namespace HeatingWebApplication
 
                 Service.UpdateRoom(room);
 
-                Page.SetTempData("SuccessMessage", "Regleringen för " + room.RoomDescription + " ändrades.");
+                Page.SetTempData("SuccessMessage", "Regleringen för " + room.RoomDescription.ToLower() + " ändrades.");
                 Response.Redirect("~/Dashboard.aspx");
                 Context.ApplicationInstance.CompleteRequest();
             }
