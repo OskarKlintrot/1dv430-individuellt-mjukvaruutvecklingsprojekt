@@ -31,35 +31,46 @@ namespace SpiderServerSideWPFApp.Model.BLL
             foreach (var item in RoomArray)
             {
                 bool roomInUse = false;
-                for (int i = 0; i < CalendarEvents.Length; i++)
+                if (CalendarEvents.Length > 0)
                 {
-                    // Make location and room description lower case
-                    string tempEventLocation = CalendarEvents[i].Location.ToLower();
-                    string tempRoomDescription = item.RoomDescription.ToLower();
-
-                    if (tempEventLocation.Contains(tempRoomDescription) && item.AutomaticControl)
+                    for (int i = 0; i < CalendarEvents.Length; i++)
                     {
-                        bool oldHeating = item.Heating;
-                                                
-                        // See if heating should be on or off
-                        if (CalendarEvents[i].End < stopHeating)
+                        // Make location and room description lower case
+                        string tempEventLocation = CalendarEvents[i].Location.ToLower();
+                        string tempRoomDescription = item.RoomDescription.ToLower();
+
+                        if (tempEventLocation.Contains(tempRoomDescription) && item.AutomaticControl)
                         {
-                            item.Heating = false;
-                        }
-                        else if (CalendarEvents[i].Start < startHeating)
-                        {
-                            item.Heating = true;
+                            bool oldHeating = item.Heating;
+
+                            // See if heating should be on or off
+                            if (CalendarEvents[i].End < stopHeating)
+                            {
+                                item.Heating = false;
+                            }
+                            else if (CalendarEvents[i].Start < startHeating)
+                            {
+                                item.Heating = true;
+                            }
+                            else if (!roomInUse)
+                            {
+                                item.Heating = false;
+                            }
+                            // Make sure we only set the heating according to the first and thereby the earliest event
+                            roomInUse = true;
+
+                            UpdateRoom(oldHeating, item.Heating, item);
                         }
                         else if (!roomInUse)
                         {
-                            item.Heating = false;
+                            TurnHeatingOff(item);
                         }
-
-                        // Make sure we only set the heating according to the first and thereby the earliest event
-                        roomInUse = true;
-
-                        UpdateRoom(oldHeating, item.Heating, item);
-                    }
+                    } 
+                }
+                else
+                {
+                    // If no events, turn all rooms off
+                    TurnHeatingOff(item);
                 }
             }
         }
@@ -73,6 +84,13 @@ namespace SpiderServerSideWPFApp.Model.BLL
                 Service.UpdateRoom(room);
                 Console.WriteLine("{0} updaterat till {1}", room.RoomDescription, room.Heating);
             }
+        }
+
+        private void TurnHeatingOff(Room room)
+        {
+            var oldHeating = room.Heating;
+            room.Heating = false;
+            UpdateRoom(oldHeating, room.Heating, room);
         }
         #endregion
     }
