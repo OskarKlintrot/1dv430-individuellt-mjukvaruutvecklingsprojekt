@@ -45,14 +45,14 @@
                         <%--Heating on or off label--%>
                         <asp:PlaceHolder ID="HeatingOnPlaceHolder" Visible='<%# Item.Heating %>' runat="server">
                             <h3>
-                                <asp:LinkButton CommandName="Update" runat="server"><img title="Värmen är på" alt="Värmen är på" src="Pics/On-LED.png" /></asp:LinkButton>
+                                <asp:LinkButton ID="OnHeatingLinkButton" CommandName="Update" runat="server"><img title="Värmen är på" alt="Värmen är på" src="Pics/On-LED.png" /></asp:LinkButton>
                                 <br />
                                 <asp:Label ID="HeatingOnLabel" CssClass="label label-success" runat="server" Text="Värmen är på"></asp:Label>
                             </h3>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="HeatingOffPlaceHolder" Visible='<%# !Item.Heating %>' runat="server">
                             <h3>    
-                                <asp:LinkButton CommandName="Update" runat="server"><img title="Värmen är av" alt="Värmen är av" src="Pics/Off-LED.png" /></asp:LinkButton>
+                                <asp:LinkButton ID="OffHeatingLinkButton" CommandName="Update" runat="server"><img title="Värmen är av" alt="Värmen är av" src="Pics/Off-LED.png" /></asp:LinkButton>
                                 <br />
                                 <asp:Label ID="HeatingOffLabel" CssClass="label label-danger" runat="server" Text="Värmen är av"></asp:Label>
                             </h3>
