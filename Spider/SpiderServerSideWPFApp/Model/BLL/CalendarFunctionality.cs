@@ -61,15 +61,11 @@ namespace SpiderServerSideWPFApp.Model.BLL
 
                             UpdateRoom(oldHeating, item.Heating, item);
                         }
-                        else if (!roomInUse)
-                        {
-                            TurnHeatingOff(item);
-                        }
                     } 
                 }
-                else
+                else if (item.AutomaticControl)
                 {
-                    // If no events, turn all rooms off
+                    // If no events and in auto, turn room off
                     TurnHeatingOff(item);
                 }
             }
