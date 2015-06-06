@@ -30,6 +30,8 @@
 			    center: 'title',
 			    right: 'month,agendaWeek,agendaDay'
         },
+        eventColor: "#337ab7",
+        eventBorderColor: "#2e6da4",
 
         // Responsive
         defaultView: defaultViewBasedOnWindowWidth(),
